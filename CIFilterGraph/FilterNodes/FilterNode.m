@@ -8,13 +8,51 @@
 
 #import "FilterNode.h"
 
+
+#pragma mark - Input Keys
+
+NSString* const kFilterInputKeyInputImageNode	= @"imageInputNode";
+NSString* const kFilterInputKeyFileURL			= @"imageFileURLInput";
+
+#pragma mark - Output Keys
+
+NSString* const kFilterOutputKeyImage			= @"imageOutput";
+
+
 @implementation FilterNode
 
-
-- (CIImage*) outputImage
+- (id)init
 {
-	NSAssert(0, @"FilterNode superclass implementation of outputImage called - please override!");
-	return nil;
+    self = [super init];
+    if (self) {
+        _inputValues		= [[NSMutableDictionary alloc] init];
+		_outputValues	= [[NSMutableDictionary alloc] init];
+
+		self.verboseUpdate = UPDATE_VERBOSE_DEFAULT;
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [_inputValues release];
+	[_outputValues release];
+    [super dealloc];
+}
+
+- (NSMutableDictionary*) inputValues
+{
+	return _inputValues;
+}
+
+- (NSMutableDictionary*) outputValues
+{
+	return _outputValues;
+}
+
+- (void) update
+{
+	if(self.verboseUpdate) NSLog(@"%@ called update", self);
 }
 
 @end

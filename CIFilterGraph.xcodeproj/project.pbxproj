@@ -16,6 +16,7 @@
 		CAF14CBB1784344A008DC169 /* FilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CB71784344A008DC169 /* FilterNode.m */; };
 		CAF14CBC1784344A008DC169 /* RawImageInputFilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */; };
 		CAF14CBF1784346A008DC169 /* OutputViewingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CBE1784346A008DC169 /* OutputViewingNode.m */; };
+		CAF14CE817847479008DC169 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14CE717847479008DC169 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawImageInputFilterNode.m; sourceTree = "<group>"; };
 		CAF14CBD1784346A008DC169 /* OutputViewingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputViewingNode.h; sourceTree = "<group>"; };
 		CAF14CBE1784346A008DC169 /* OutputViewingNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputViewingNode.m; sourceTree = "<group>"; };
+		CAF14CE717847479008DC169 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF14CE817847479008DC169 /* QuartzCore.framework in Frameworks */,
 				CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +76,7 @@
 		CAF14C9717843411008DC169 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CAF14CE717847479008DC169 /* QuartzCore.framework */,
 				CAF14C9817843411008DC169 /* Cocoa.framework */,
 				CAF14C9A17843411008DC169 /* Other Frameworks */,
 			);

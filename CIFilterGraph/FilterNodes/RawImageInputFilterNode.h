@@ -14,5 +14,15 @@
 #import "FilterNodeSeenInOutputPane.h"
 
 @interface RawImageInputFilterNode : FilterNode <FilterNodeSeenInOutputPane>
+{
+	
+}
+
+// convenience methods
+
+/**
+ * Set the input file URL key in the inputValues dictionary easily.
+ */
+- (void) setFileInputURL:(NSURL*) inputFileURL;
 
 @end

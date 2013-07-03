@@ -6,8 +6,13 @@
 //  Copyright (c) 2013 Mete Cakman. All rights reserved.
 //
 
-#import "FilterNode.h"
+//	This node does nothing but allow viewing of an image it picks up from a single input node. It conforms to
+//	the FilterNodeSeenInOutputPane protocol, which tags it for being shown in the output pane of the GUI.
 
-@interface OutputViewingNode : FilterNode
+#import "FilterNode.h"
+#import "FilterNodeSeenInOutputPane.h"
+
+
+@interface OutputViewingNode : FilterNode <FilterNodeSeenInOutputPane>
 
 @end

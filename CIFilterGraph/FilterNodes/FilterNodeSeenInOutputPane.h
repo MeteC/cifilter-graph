@@ -14,6 +14,6 @@
 @protocol FilterNodeSeenInOutputPane <NSObject>
 
 @required
-- (CIImage*) outputImage;
+- (NSMutableDictionary*) outputValues; // ensure it's a FilterNode
 
 @end
