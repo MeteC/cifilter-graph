@@ -1,0 +1,308 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
+		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
+		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
+		CAF14CA917843411008DC169 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA717843411008DC169 /* Credits.rtf */; };
+		CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CAB17843411008DC169 /* AppDelegate.m */; };
+		CAF14CAF17843411008DC169 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CAD17843411008DC169 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		CAF14C9C17843411008DC169 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CAF14C9D17843411008DC169 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CAF14CA017843411008DC169 /* CIFilterGraph-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CIFilterGraph-Info.plist"; sourceTree = "<group>"; };
+		CAF14CA217843411008DC169 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CAF14CA417843411008DC169 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CAF14CA617843411008DC169 /* CIFilterGraph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CIFilterGraph-Prefix.pch"; sourceTree = "<group>"; };
+		CAF14CA817843411008DC169 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		CAF14CAA17843411008DC169 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CAF14CAB17843411008DC169 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CAF14CAE17843411008DC169 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAF14C9217843411008DC169 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAF14C8C17843410008DC169 = {
+			isa = PBXGroup;
+			children = (
+				CAF14C9E17843411008DC169 /* CIFilterGraph */,
+				CAF14C9717843411008DC169 /* Frameworks */,
+				CAF14C9617843411008DC169 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAF14C9617843411008DC169 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAF14C9517843411008DC169 /* CIFilterGraph.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAF14C9717843411008DC169 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAF14C9817843411008DC169 /* Cocoa.framework */,
+				CAF14C9A17843411008DC169 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAF14C9A17843411008DC169 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CAF14C9B17843411008DC169 /* AppKit.framework */,
+				CAF14C9C17843411008DC169 /* CoreData.framework */,
+				CAF14C9D17843411008DC169 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		CAF14C9E17843411008DC169 /* CIFilterGraph */ = {
+			isa = PBXGroup;
+			children = (
+				CAF14CAA17843411008DC169 /* AppDelegate.h */,
+				CAF14CAB17843411008DC169 /* AppDelegate.m */,
+				CAF14CAD17843411008DC169 /* MainMenu.xib */,
+				CAF14C9F17843411008DC169 /* Supporting Files */,
+			);
+			path = CIFilterGraph;
+			sourceTree = "<group>";
+		};
+		CAF14C9F17843411008DC169 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAF14CA017843411008DC169 /* CIFilterGraph-Info.plist */,
+				CAF14CA117843411008DC169 /* InfoPlist.strings */,
+				CAF14CA417843411008DC169 /* main.m */,
+				CAF14CA617843411008DC169 /* CIFilterGraph-Prefix.pch */,
+				CAF14CA717843411008DC169 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAF14C9417843411008DC169 /* CIFilterGraph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAF14CB217843411008DC169 /* Build configuration list for PBXNativeTarget "CIFilterGraph" */;
+			buildPhases = (
+				CAF14C9117843411008DC169 /* Sources */,
+				CAF14C9217843411008DC169 /* Frameworks */,
+				CAF14C9317843411008DC169 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CIFilterGraph;
+			productName = CIFilterGraph;
+			productReference = CAF14C9517843411008DC169 /* CIFilterGraph.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAF14C8D17843410008DC169 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Mete Cakman";
+			};
+			buildConfigurationList = CAF14C9017843410008DC169 /* Build configuration list for PBXProject "CIFilterGraph" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CAF14C8C17843410008DC169;
+			productRefGroup = CAF14C9617843411008DC169 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAF14C9417843411008DC169 /* CIFilterGraph */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAF14C9317843411008DC169 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */,
+				CAF14CA917843411008DC169 /* Credits.rtf in Resources */,
+				CAF14CAF17843411008DC169 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAF14C9117843411008DC169 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAF14CA517843411008DC169 /* main.m in Sources */,
+				CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CAF14CA117843411008DC169 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAF14CA217843411008DC169 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CAF14CA717843411008DC169 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAF14CA817843411008DC169 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		CAF14CAD17843411008DC169 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAF14CAE17843411008DC169 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CAF14CB017843411008DC169 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CAF14CB117843411008DC169 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CAF14CB317843411008DC169 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CIFilterGraph/CIFilterGraph-Prefix.pch";
+				INFOPLIST_FILE = "CIFilterGraph/CIFilterGraph-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CAF14CB417843411008DC169 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CIFilterGraph/CIFilterGraph-Prefix.pch";
+				INFOPLIST_FILE = "CIFilterGraph/CIFilterGraph-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAF14C9017843410008DC169 /* Build configuration list for PBXProject "CIFilterGraph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAF14CB017843411008DC169 /* Debug */,
+				CAF14CB117843411008DC169 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAF14CB217843411008DC169 /* Build configuration list for PBXNativeTarget "CIFilterGraph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAF14CB317843411008DC169 /* Debug */,
+				CAF14CB417843411008DC169 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAF14C8D17843410008DC169 /* Project object */;
+}
