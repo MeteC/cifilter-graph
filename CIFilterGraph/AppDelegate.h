@@ -11,5 +11,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSScrollView *graphScrollView;
+@property (assign) IBOutlet NSView *graphScrollGuts;
 
 @end

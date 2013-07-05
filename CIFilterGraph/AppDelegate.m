@@ -11,6 +11,7 @@
 #import "FilterNode.h"
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
+#import "FilterGraphView.h"
 
 @interface AppDelegate ()
 {
@@ -47,6 +48,12 @@
 	
 	[testNodeOut update];
 	NSLog(@"Test output dict: %@", testNodeOut.outputValues);
+	
+	
+	// graphic
+	FilterGraphView* testGraphView = [[FilterGraphView alloc] init];
+	testGraphView.parentNode = testNodeIn;
+	[_graphScrollGuts addSubview:testGraphView];
 }
 
 

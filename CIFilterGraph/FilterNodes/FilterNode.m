@@ -18,6 +18,7 @@ NSString* const kFilterInputKeyFileURL			= @"imageFileURLInput";
 
 NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
+#pragma mark - Filter Node
 
 @implementation FilterNode
 
@@ -25,7 +26,7 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 {
     self = [super init];
     if (self) {
-        _inputValues		= [[NSMutableDictionary alloc] init];
+        _inputValues	= [[NSMutableDictionary alloc] init];
 		_outputValues	= [[NSMutableDictionary alloc] init];
 
 		self.verboseUpdate = UPDATE_VERBOSE_DEFAULT;

@@ -21,6 +21,12 @@
 @property (nonatomic, assign) BOOL verboseUpdate; // print stuff on each update
 
 /**
+ * Each FilterNode has an associated graph view with which it can be configured graphically.
+ * If a subclass doesn't have it's own custom one, this will default to a basic rectangle with textual info. 
+ */
+@property (nonatomic, readonly) NSView *graphView;
+
+/**
  * Each node has a dictionary of potential output values. Image filters will have an output image,
  * data filters will have vectors, numbers, etc
  */

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* FilterGraphView.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
 		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
@@ -20,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeSeenInOutputPane.h; sourceTree = "<group>"; };
+		CA2861FB1787057D0024346C /* FilterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterGraphView.h; sourceTree = "<group>"; };
+		CA2861FC1787057D0024346C /* FilterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterGraphView.m; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -35,7 +39,6 @@
 		CAF14CAE17843411008DC169 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CAF14CB61784344A008DC169 /* FilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNode.h; sourceTree = "<group>"; };
 		CAF14CB71784344A008DC169 /* FilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNode.m; sourceTree = "<group>"; };
-		CAF14CB81784344A008DC169 /* FilterNodeSeenInOutputPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeSeenInOutputPane.h; sourceTree = "<group>"; };
 		CAF14CB91784344A008DC169 /* RawImageInputFilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawImageInputFilterNode.h; sourceTree = "<group>"; };
 		CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawImageInputFilterNode.m; sourceTree = "<group>"; };
 		CAF14CBD1784346A008DC169 /* OutputViewingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputViewingNode.h; sourceTree = "<group>"; };
@@ -56,6 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA2861F81787022C0024346C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CA2861FA178704960024346C /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				CA2861FB1787057D0024346C /* FilterGraphView.h */,
+				CA2861FC1787057D0024346C /* FilterGraphView.m */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
 		CAF14C8C17843410008DC169 = {
 			isa = PBXGroup;
 			children = (
@@ -120,9 +140,10 @@
 		CAF14CB51784344A008DC169 /* FilterNodes */ = {
 			isa = PBXGroup;
 			children = (
+				CA2861FA178704960024346C /* Graph */,
+				CA2861F81787022C0024346C /* Protocols */,
 				CAF14CB61784344A008DC169 /* FilterNode.h */,
 				CAF14CB71784344A008DC169 /* FilterNode.m */,
-				CAF14CB81784344A008DC169 /* FilterNodeSeenInOutputPane.h */,
 				CAF14CB91784344A008DC169 /* RawImageInputFilterNode.h */,
 				CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */,
 				CAF14CBD1784346A008DC169 /* OutputViewingNode.h */,
@@ -200,6 +221,7 @@
 				CAF14CBB1784344A008DC169 /* FilterNode.m in Sources */,
 				CAF14CBC1784344A008DC169 /* RawImageInputFilterNode.m in Sources */,
 				CAF14CBF1784346A008DC169 /* OutputViewingNode.m in Sources */,
+				CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +355,7 @@
 				CAF14CB417843411008DC169 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
