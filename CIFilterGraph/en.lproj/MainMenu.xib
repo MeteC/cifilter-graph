@@ -1522,7 +1522,7 @@
 															<string key="NSFrameSize">{200, 259}</string>
 															<reference key="NSSuperview" ref="619359479"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="805301955"/>
+															<reference key="NSNextKeyView" ref="326007328"/>
 															<string key="NSReuseIdentifierKey">_NS:13</string>
 															<object class="NSTextContainer" key="NSTextContainer" id="825517667">
 																<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1645,7 +1645,7 @@
 											<string key="NSFrame">{{797, 6}, {217, 261}}</string>
 											<reference key="NSSuperview" ref="571380957"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="326007328"/>
+											<reference key="NSNextKeyView" ref="619359479"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSsFlags">133138</int>
 											<reference key="NSVScroller" ref="805301955"/>
@@ -2413,14 +2413,6 @@
 						<reference key="destination" ref="891669279"/>
 					</object>
 					<int key="connectionID">609</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">graphScrollGuts</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="46227998"/>
-					</object>
-					<int key="connectionID">610</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -3711,15 +3703,10 @@
 					<string key="className">AppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="graphScrollGuts">NSView</string>
 						<string key="graphScrollView">NSScrollView</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="graphScrollGuts">
-							<string key="name">graphScrollGuts</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="graphScrollView">
 							<string key="name">graphScrollView</string>
 							<string key="candidateClassName">NSScrollView</string>

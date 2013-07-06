@@ -51,9 +51,14 @@
 	
 	
 	// graphic
-	FilterGraphView* testGraphView = [[FilterGraphView alloc] init];
-	testGraphView.parentNode = testNodeIn;
-	[_graphScrollGuts addSubview:testGraphView];
+	FilterGraphView* testGraphViewIn = [[FilterGraphView alloc] init];
+	testGraphViewIn.parentNode = testNodeIn;
+	[_graphScrollView.documentView addSubview:testGraphViewIn];
+	
+	FilterGraphView* testGraphViewOut = [[FilterGraphView alloc] init];
+	testGraphViewOut.parentNode = testNodeOut;
+	[testGraphViewOut setFrame:NSOffsetRect(testGraphViewOut.frame, 200, 200)];
+	[_graphScrollView.documentView addSubview:testGraphViewOut];
 }
 
 

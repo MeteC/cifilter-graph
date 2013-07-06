@@ -17,4 +17,10 @@
 	
 }
 @property (nonatomic, assign) FilterNode* parentNode;
+
+/**
+ * Sets up a default filter graph view with variable number of input and output connections
+ */
+- (id) initWithInputCount:(uint) inputCount outputCount:(uint) outputCount;
+
 @end
