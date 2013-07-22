@@ -7,6 +7,8 @@
 //
 
 #import "FilterGraphView.h"
+#import "CustomisedScrollView.h"
+
 
 // Might need refactoring later but I'm gonna have distinct types of mouse-drag for moving and
 // connecting nodes.
@@ -17,6 +19,14 @@ typedef enum
 	FilterGraphViewDragTypeConnect
 	
 } FilterGraphViewDragType;
+
+
+// This is funny.. I can change the property settings for another class in here, to hack them..
+// But this way I can lock parentNode and graphView together.. Note the message has been defined
+// privately in FilterNode.m, and specified as existing here.
+@interface FilterNode ()
+@property (nonatomic, readwrite) FilterGraphView *graphView;
+@end
 
 
 @interface FilterGraphView ()
@@ -63,6 +73,13 @@ typedef enum
     self.backgroundColour = nil;
 	[trackingArea release];
     [super dealloc];
+}
+
+// Ensure parentNode and graphView are synced
+- (void) setParentNode:(FilterNode *)parentNode
+{
+	_parentNode = parentNode;
+	parentNode.graphView = self;
 }
 
 /**
@@ -163,17 +180,24 @@ typedef enum
 			NSPoint currentMousePointer = [NSEvent mouseLocation];
 			NSPoint thisOrigin = NSMakePoint(originAtStart.x + (currentMousePointer.x - mousePointerAtDragStart.x), originAtStart.y + (currentMousePointer.y - mousePointerAtDragStart.y));
 			
+			// no negatives (i.e. not off the left/bottom
+			thisOrigin.x = MAX(0, thisOrigin.x);
+			thisOrigin.y = MAX(0, thisOrigin.y);
+			
 			[self setFrameOrigin:thisOrigin];
-			/*	
-			 // if (as) parent is scrollview, might need to resize it's content etc?
-			 id predictedScroller = self.superview.superview.superview; // there's probably a neater way..
-			 if([predictedScroller isKindOfClass:[NSScrollView class]])
-			 {
-			 // TODO: Scroller should have it's own autosizing method based on all it's children..
-			 [[predictedScroller documentView] setFrame:NSMakeRect(0, 0, self.frame.origin.x + self.frame.size.width, self.frame.origin.y + self.frame.size.height)];
-			 
-			 }
-			 */	
+			
+			// traverse parental hierarchy til we get the parent scroller
+			// ???: Do this here or on mouseUp? 
+			id parentScroller = self;
+			while(parentScroller != nil)
+			{
+				parentScroller = [parentScroller superview];
+				if([parentScroller isKindOfClass:[CustomisedScrollView class]])
+				{
+					[parentScroller autoResizeContentView];
+					break;
+				}
+			}
 		}
 			break;
 			

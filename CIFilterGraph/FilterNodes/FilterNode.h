@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class FilterGraphView;
+
 #define UPDATE_VERBOSE_DEFAULT YES // change this to NO eventually
 
 @interface FilterNode : NSObject
@@ -23,8 +25,9 @@
 /**
  * Each FilterNode has an associated graph view with which it can be configured graphically.
  * If a subclass doesn't have it's own custom one, this will default to a basic rectangle with textual info. 
+ * This is set when you set this node as parentNode to a graphView object.
  */
-@property (nonatomic, readonly) NSView *graphView;
+@property (nonatomic, readonly) FilterGraphView *graphView;
 
 /**
  * Each node has a dictionary of potential output values. Image filters will have an output image,

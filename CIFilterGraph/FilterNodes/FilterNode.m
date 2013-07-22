@@ -8,7 +8,6 @@
 
 #import "FilterNode.h"
 
-
 #pragma mark - Input Keys
 
 NSString* const kFilterInputKeyInputImageNode	= @"imageInputNode";
@@ -32,6 +31,13 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 		self.verboseUpdate = UPDATE_VERBOSE_DEFAULT;
     }
     return self;
+}
+
+
+// Ensure parentNode and graphView are synced
+- (void) setGraphView:(FilterGraphView *)graphView
+{
+	_graphView = graphView;
 }
 
 - (void)dealloc

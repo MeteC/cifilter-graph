@@ -1522,7 +1522,7 @@
 															<string key="NSFrameSize">{200, 259}</string>
 															<reference key="NSSuperview" ref="619359479"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="326007328"/>
+															<reference key="NSNextKeyView" ref="805301955"/>
 															<string key="NSReuseIdentifierKey">_NS:13</string>
 															<object class="NSTextContainer" key="NSTextContainer" id="825517667">
 																<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1619,6 +1619,7 @@
 													<string key="NSFrame">{{201, 1}, {15, 259}}</string>
 													<reference key="NSSuperview" ref="148967468"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:83</string>
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 													<reference key="NSTarget" ref="148967468"/>
@@ -1645,7 +1646,7 @@
 											<string key="NSFrame">{{797, 6}, {217, 261}}</string>
 											<reference key="NSSuperview" ref="571380957"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="619359479"/>
+											<reference key="NSNextKeyView" ref="326007328"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSsFlags">133138</int>
 											<reference key="NSVScroller" ref="805301955"/>
@@ -3675,6 +3676,7 @@
 				<string key="599.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="601.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="602.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="605.CustomClassName">CustomisedScrollView</string>
 				<string key="605.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="606.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="607.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3719,6 +3721,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/AppDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CustomisedScrollView</string>
+					<string key="superclassName">NSScrollView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CustomisedScrollView.h</string>
 					</object>
 				</object>
 			</array>

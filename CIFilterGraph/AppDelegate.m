@@ -35,7 +35,7 @@
 	RawImageInputFilterNode* testNodeIn = [[RawImageInputFilterNode alloc] init];
 	
 	// add image file and update
-	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screen Shot 2013-06-28 at 2.01.47 PM.png"]];
+	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/5055546_700b_v2.jpg"]];
 	
 	[testNodeIn update];
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
