@@ -12,5 +12,11 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSScrollView *graphScrollView;
+@property (assign) IBOutlet NSTextView *messageLog;
+
+/**
+ * Log a string to GUI. Can be class method as there's only one AppDelegate instance per app.
+ */
++ (void) log:(NSString*) string;
 
 @end

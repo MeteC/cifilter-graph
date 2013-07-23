@@ -29,7 +29,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	// Insert code here to initialize your application
-	
+	[_messageLog setEditable:NO];
 	
 	// Testing input
 	RawImageInputFilterNode* testNodeIn = [[RawImageInputFilterNode alloc] init];
@@ -61,7 +61,11 @@
 	[_graphScrollView.documentView addSubview:testGraphViewOut];
 }
 
-
++ (void) log:(NSString *)string
+{
+	AppDelegate* this = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+	[this.messageLog setString:[NSString stringWithFormat:@"%@%@\n", this.messageLog.string, string]];
+}
 
 #pragma mark - Delegate Methods
 
