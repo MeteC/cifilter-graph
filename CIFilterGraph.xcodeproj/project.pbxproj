@@ -13,6 +13,7 @@
 		CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */; };
 		CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */; };
 		CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C7179EA924002A0BF5 /* FilterNode.m */; };
+		CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
 		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
@@ -36,6 +37,8 @@
 		CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawImageInputFilterNode.m; sourceTree = "<group>"; };
 		CA9461C6179EA924002A0BF5 /* FilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNode.h; sourceTree = "<group>"; };
 		CA9461C7179EA924002A0BF5 /* FilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNode.m; sourceTree = "<group>"; };
+		CA9461C9179EA964002A0BF5 /* ColorInvertNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorInvertNode.h; sourceTree = "<group>"; };
+		CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorInvertNode.m; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -93,6 +96,8 @@
 				CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */,
 				CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */,
 				CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */,
+				CA9461C9179EA964002A0BF5 /* ColorInvertNode.h */,
+				CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,
 				CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */,
 				CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */,
+				CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

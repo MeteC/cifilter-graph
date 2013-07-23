@@ -66,6 +66,12 @@
  */
 - (void) setupDefaultGraphView;
 
+/**
+ * Sets the "inputImage" provider node for this node. A convenience method really, as the same effect
+ * can be achieved using the inputValues dictionary directly, but this gets called a lot.
+ */
+- (void) attachInputImageNode:(FilterNode*) upstreamNode;
+
 
 // Keys list
 #pragma mark - Input Keys

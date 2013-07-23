@@ -19,5 +19,6 @@
 }
 @property (nonatomic, retain) NSImageView *imageOutputView;
 
+// TODO: override setupDefaultGraphView
 
 @end

@@ -43,17 +43,20 @@
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
 	// Filter Example
-	
+	FilterNode* invertNode = [FilterNodeFactory generateNodeForNodeClassName:@"ColorInvertNode"];
 	
 	// Output
 	OutputViewingNode* testNodeOut = [(OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"] retain];
 	
 	// connect and pass through data
-	[testNodeOut.inputValues setValue:testNodeIn forKey:kFilterInputKeyInputImageNode];
+	[invertNode attachInputImageNode:testNodeIn];
+	[testNodeOut attachInputImageNode:invertNode];
 	[testNodeOut update];
 	
 	// Put graphics in right places
 	[_graphScrollView.documentView addSubview:testNodeIn.graphView];
+	[invertNode.graphView setFrameOrigin:NSMakePoint(100, 100)];
+	[_graphScrollView.documentView addSubview:invertNode.graphView];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(200, 200)];
 	[_graphScrollView.documentView addSubview:testNodeOut.graphView];
 	

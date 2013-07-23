@@ -55,6 +55,11 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	return _outputValues;
 }
 
+- (void) attachInputImageNode:(FilterNode*) upstreamNode
+{
+	[self.inputValues setValue:upstreamNode forKey:kFilterInputKeyInputImageNode];
+}
+
 - (void) updateSelf
 {
 	if(self.verboseUpdate) NSLog(@"%@ called updateSelf", self);
@@ -87,5 +92,50 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	
 	[testGraphViewOut release];
 }
+
+
+#pragma mark - Templatey Stuff
+
+
+/**
+ * A general case CIFilter application from BoysNoize app (iOS). Note a few changes are required for Mac,
+ * i.e. the outputImage property doesn't exist on filters, use [filter valueForKey:@"outputImage"] instead.
+ */
+
+/*
+- (UIImage*) useCIFilterOnImage:(UIImage*) image 
+					 filterName:(NSString*) filterName 
+			filterKeysAndValues:(NSDictionary*) keysAndValues
+{
+	CIImage *beginImage = [CIImage imageWithCGImage:image.CGImage];
+	
+	CIFilter* bob = [CIFilter filterWithName:filterName];
+	[bob setDefaults];
+	
+	[bob setValue:beginImage forKey:@"inputImage"];
+	
+	for(NSString* key in keysAndValues.allKeys)
+	{
+		[bob setValue:[keysAndValues valueForKey:key] forKey:key];
+	}
+	
+	CIImage* output = bob.outputImage;
+	
+	// be sure to crop as the new image might actually be bigger
+	output =[output imageByCroppingToRect:CGRectMake(0, 0, 
+													 image.size.width * image.scale, 
+													 image.size.height * image.scale)];
+	
+	CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef cgiimage = [context createCGImage:output fromRect:output.extent];
+    UIImage *newImage = [UIImage imageWithCGImage:cgiimage 
+											scale:image.scale 
+									  orientation:UIImageOrientationUp];
+	
+    CGImageRelease(cgiimage);
+	
+    return newImage;
+}
+ */
 
 @end

@@ -26,4 +26,6 @@
  */
 - (void) setFileInputURL:(NSURL*) inputFileURL;
 
+// TODO: override setupDefaultGraphView
+
 @end
