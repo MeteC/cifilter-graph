@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "CustomisedScrollView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate>
 

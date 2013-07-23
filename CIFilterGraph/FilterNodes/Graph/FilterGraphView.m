@@ -9,6 +9,7 @@
 #import "FilterGraphView.h"
 #import "CustomisedScrollView.h"
 #import "FilterNodeSeenInOutputPane.h"
+#import "NSScrollView+AutosizeContent.h"
 
 // Might need refactoring later but I'm gonna have distinct types of mouse-drag for moving and
 // connecting nodes.

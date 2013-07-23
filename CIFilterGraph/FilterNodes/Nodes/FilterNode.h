@@ -36,7 +36,7 @@
  * Each node has a dictionary of potential output values. Image filters will have an output image,
  * data filters will have vectors, numbers, etc.
  *
- * Because of the "pull" design of the graph, output values should only ever be read externally.
+ * Because of the "pull" design of the graph, output values should only ever be read (externally).
  */
 - (NSDictionary*) outputValues;
 

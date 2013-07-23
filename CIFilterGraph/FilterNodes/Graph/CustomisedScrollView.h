@@ -17,9 +17,6 @@
 	
 }
 
-// based on it's children, set content size automatically
-- (void) autoResizeContentView;
-
 @end
 
 

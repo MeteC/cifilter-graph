@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FilterNodeFactory.h"
-
+#import "NSScrollView+AutosizeContent.h"
 
 #import "FilterNode.h"
 #import "RawImageInputFilterNode.h"
@@ -66,6 +66,7 @@
 	[testNodeOut.imageOutputView setFrame:NSOffsetRect(testNodeOut.imageOutputView.frame, xPos, 0)];
 	[_outputPaneScrollView.documentView addSubview:testNodeOut.imageOutputView];
 	
+	[_outputPaneScrollView autoResizeContentView];
 }
 
 /**

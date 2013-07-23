@@ -16,6 +16,7 @@
 		CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */; };
 		CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CE179EBA37002A0BF5 /* LICENSE */; };
 		CA9461D1179EBA38002A0BF5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CF179EBA38002A0BF5 /* README.md */; };
+		CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
 		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
@@ -43,6 +44,8 @@
 		CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorInvertNode.m; sourceTree = "<group>"; };
 		CA9461CE179EBA37002A0BF5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CA9461CF179EBA38002A0BF5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+AutosizeContent.h"; sourceTree = "<group>"; };
+		CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+AutosizeContent.m"; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -87,6 +90,8 @@
 				CA2861FC1787057D0024346C /* FilterGraphView.m */,
 				CA9461B6179D5D72002A0BF5 /* CustomisedScrollView.h */,
 				CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */,
+				CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */,
+				CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */,
 				CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */,
 				CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */,
+				CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
