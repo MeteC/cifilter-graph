@@ -14,5 +14,10 @@
 
 
 @interface OutputViewingNode : FilterNode <FilterNodeSeenInOutputPane>
+{
+	
+}
+@property (nonatomic, retain) NSImageView *imageOutputView;
+
 
 @end

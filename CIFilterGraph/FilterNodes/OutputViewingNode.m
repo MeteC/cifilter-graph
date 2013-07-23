@@ -23,6 +23,17 @@
 	CIImage* inputImage = [[inputNode outputValues] valueForKey:kFilterOutputKeyImage];
 	
 	[_outputValues setValue:inputImage forKey:kFilterOutputKeyImage];
+	
+	// update output view. Use CIImage representation.
+	if(inputImage)
+	{
+		NSCIImageRep *rep = [NSCIImageRep imageRepWithCIImage:inputImage];
+		NSImage *nsImage = [[NSImage alloc] initWithSize:rep.size];
+		[nsImage addRepresentation:rep];
+		
+		[self.imageOutputView setImage:nsImage];
+		[nsImage release];
+	}
 }
 
 

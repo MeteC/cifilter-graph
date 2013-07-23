@@ -33,6 +33,7 @@
 	
 	// Testing input
 	RawImageInputFilterNode* testNodeIn = [[RawImageInputFilterNode alloc] init];
+	testNodeIn.imageOutputView = self.testImageWell;
 	
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/5055546_700b_v2.jpg"]];
@@ -61,11 +62,16 @@
 	[_graphScrollView.documentView addSubview:testGraphViewOut];
 }
 
+/**
+ * Append a string to GUI log. Can be class method as there's only one AppDelegate instance per app.
+ */
 + (void) log:(NSString *)string
 {
 	AppDelegate* this = (AppDelegate*)[[NSApplication sharedApplication] delegate];
 	[this.messageLog setString:[NSString stringWithFormat:@"%@%@\n", this.messageLog.string, string]];
 }
+
+
 
 #pragma mark - Delegate Methods
 

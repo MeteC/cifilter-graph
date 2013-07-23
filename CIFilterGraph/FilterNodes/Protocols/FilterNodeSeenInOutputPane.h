@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Mete Cakman. All rights reserved.
 //
 
-//	This protocol is empty at the moment, but used as a tag on FilterNode classes that should have their
-//	output viewed in the GUI output view pane.
+//	Used as a tag on FilterNode classes that should have their
+//	output viewed in the GUI output view pane. 
 
 #import <Foundation/Foundation.h>
 
@@ -15,5 +15,8 @@
 
 @required
 - (NSMutableDictionary*) outputValues; // ensure it's a FilterNode
+
+// does it's own updates.
+@property (nonatomic, retain) NSImageView *imageOutputView;
 
 @end

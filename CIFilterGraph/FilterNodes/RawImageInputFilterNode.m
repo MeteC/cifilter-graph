@@ -29,6 +29,14 @@
 		if(theImage)
 		{
 			[[self outputValues] setValue:theImage forKey:kFilterOutputKeyImage];
+			
+			// update output view. Use CIImage representation.
+			NSCIImageRep *rep = [NSCIImageRep imageRepWithCIImage:theImage];
+			NSImage *nsImage = [[NSImage alloc] initWithSize:rep.size];
+			[nsImage addRepresentation:rep];
+			
+			[self.imageOutputView setImage:nsImage];
+			[nsImage release];
 		}
 		else if(self.verboseUpdate)
 		{

@@ -14,8 +14,10 @@
 @property (assign) IBOutlet NSScrollView *graphScrollView;
 @property (assign) IBOutlet NSTextView *messageLog;
 
+@property (assign) IBOutlet NSImageView *testImageWell; // just for dev/debug
+
 /**
- * Log a string to GUI. Can be class method as there's only one AppDelegate instance per app.
+ * Append a string to GUI log. Can be class method as there's only one AppDelegate instance per app.
  */
 + (void) log:(NSString*) string;
 
