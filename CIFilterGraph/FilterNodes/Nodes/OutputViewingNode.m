@@ -22,9 +22,9 @@
  * For output viewing node, the only processing to do is pass through the image found in inputValues
  * to the outputValues dictionary
  */
-- (void) update
+- (void) updateSelf
 {
-	[super update];
+	[super updateSelf];
 	
 	FilterNode* inputNode = [_inputValues valueForKey:kFilterInputKeyInputImageNode];
 	CIImage* inputImage = [[inputNode outputValues] valueForKey:kFilterOutputKeyImage];

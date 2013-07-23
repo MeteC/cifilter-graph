@@ -20,9 +20,9 @@
  * RII Filter Node update takes the input file URL, loads a valid CIImage representation of it, and
  * stores that in the output dictionary.
  */
-- (void) update
+- (void) updateSelf
 {
-	[super update];
+	[super updateSelf];
 	
 	NSURL* fileURL = [[self inputValues] valueForKey:kFilterInputKeyFileURL];
 	if(fileURL)

@@ -55,9 +55,24 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	return _outputValues;
 }
 
+- (void) updateSelf
+{
+	if(self.verboseUpdate) NSLog(@"%@ called updateSelf", self);
+}
+
 - (void) update
 {
-	if(self.verboseUpdate) NSLog(@"%@ called update", self);
+	// recurse up the tree to ensure all dependencies update first
+	for(id input in self.inputValues.allValues)
+	{
+		if([input isKindOfClass:[FilterNode class]])
+		{
+			[input update];
+		}
+	}
+	
+	// once all dependencies are updated, I can do my actual update
+	[self updateSelf];
 }
 
 /**

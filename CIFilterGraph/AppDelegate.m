@@ -40,10 +40,12 @@
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/5055546_700b_v2.jpg"]];
 	
-	[testNodeIn update];
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
+	// Filter Example
 	
+	
+	// Output
 	OutputViewingNode* testNodeOut = [(OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"] retain];
 	
 	// connect and pass through data

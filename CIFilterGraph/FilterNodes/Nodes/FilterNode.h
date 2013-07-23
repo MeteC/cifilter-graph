@@ -49,8 +49,14 @@
 - (NSMutableDictionary*) inputValues;
 
 /**
- * Update the filter node, processing the input nodes through the appropriate algorithm and presenting
- * the result in outputValues.
+ * Update the filter node, processing the input values through the appropriate algorithm and presenting
+ * the result in outputValues. Only updates this node. This is what node subclasses should implement.
+ */
+- (void) updateSelf;
+
+/**
+ * Travels backwards up the hierarchy, calling update on all nodes connected as inputs to this one.
+ * i.e. an output node could call this to be sure all it's dependencies were updated as well.
  */
 - (void) update;
 

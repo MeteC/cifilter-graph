@@ -10,15 +10,15 @@
 		CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* FilterGraphView.m */; };
 		CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */; };
 		CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */; };
+		CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */; };
+		CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */; };
+		CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C7179EA924002A0BF5 /* FilterNode.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
 		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
 		CAF14CA917843411008DC169 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA717843411008DC169 /* Credits.rtf */; };
 		CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CAB17843411008DC169 /* AppDelegate.m */; };
 		CAF14CAF17843411008DC169 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CAD17843411008DC169 /* MainMenu.xib */; };
-		CAF14CBB1784344A008DC169 /* FilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CB71784344A008DC169 /* FilterNode.m */; };
-		CAF14CBC1784344A008DC169 /* RawImageInputFilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */; };
-		CAF14CBF1784346A008DC169 /* OutputViewingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CBE1784346A008DC169 /* OutputViewingNode.m */; };
 		CAF14CE817847479008DC169 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14CE717847479008DC169 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +30,12 @@
 		CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomisedScrollView.m; sourceTree = "<group>"; };
 		CA9461BC179E94C5002A0BF5 /* FilterNodeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeFactory.h; sourceTree = "<group>"; };
 		CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNodeFactory.m; sourceTree = "<group>"; };
+		CA9461C0179EA906002A0BF5 /* OutputViewingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputViewingNode.h; sourceTree = "<group>"; };
+		CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputViewingNode.m; sourceTree = "<group>"; };
+		CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawImageInputFilterNode.h; sourceTree = "<group>"; };
+		CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawImageInputFilterNode.m; sourceTree = "<group>"; };
+		CA9461C6179EA924002A0BF5 /* FilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNode.h; sourceTree = "<group>"; };
+		CA9461C7179EA924002A0BF5 /* FilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNode.m; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -43,12 +49,6 @@
 		CAF14CAA17843411008DC169 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CAF14CAB17843411008DC169 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CAF14CAE17843411008DC169 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CAF14CB61784344A008DC169 /* FilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNode.h; sourceTree = "<group>"; };
-		CAF14CB71784344A008DC169 /* FilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNode.m; sourceTree = "<group>"; };
-		CAF14CB91784344A008DC169 /* RawImageInputFilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawImageInputFilterNode.h; sourceTree = "<group>"; };
-		CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawImageInputFilterNode.m; sourceTree = "<group>"; };
-		CAF14CBD1784346A008DC169 /* OutputViewingNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputViewingNode.h; sourceTree = "<group>"; };
-		CAF14CBE1784346A008DC169 /* OutputViewingNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputViewingNode.m; sourceTree = "<group>"; };
 		CAF14CE717847479008DC169 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -82,6 +82,19 @@
 				CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */,
 			);
 			path = Graph;
+			sourceTree = "<group>";
+		};
+		CA9461BF179EA906002A0BF5 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				CA9461C6179EA924002A0BF5 /* FilterNode.h */,
+				CA9461C7179EA924002A0BF5 /* FilterNode.m */,
+				CA9461C0179EA906002A0BF5 /* OutputViewingNode.h */,
+				CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */,
+				CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */,
+				CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 		CAF14C8C17843410008DC169 = {
@@ -152,12 +165,7 @@
 				CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */,
 				CA2861FA178704960024346C /* Graph */,
 				CA2861F81787022C0024346C /* Protocols */,
-				CAF14CB61784344A008DC169 /* FilterNode.h */,
-				CAF14CB71784344A008DC169 /* FilterNode.m */,
-				CAF14CB91784344A008DC169 /* RawImageInputFilterNode.h */,
-				CAF14CBA1784344A008DC169 /* RawImageInputFilterNode.m */,
-				CAF14CBD1784346A008DC169 /* OutputViewingNode.h */,
-				CAF14CBE1784346A008DC169 /* OutputViewingNode.m */,
+				CA9461BF179EA906002A0BF5 /* Nodes */,
 			);
 			path = FilterNodes;
 			sourceTree = "<group>";
@@ -228,12 +236,12 @@
 			files = (
 				CAF14CA517843411008DC169 /* main.m in Sources */,
 				CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */,
-				CAF14CBB1784344A008DC169 /* FilterNode.m in Sources */,
-				CAF14CBC1784344A008DC169 /* RawImageInputFilterNode.m in Sources */,
-				CAF14CBF1784346A008DC169 /* OutputViewingNode.m in Sources */,
 				CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */,
 				CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */,
 				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
+				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,
+				CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */,
+				CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
