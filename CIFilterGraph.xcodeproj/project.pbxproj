@@ -14,6 +14,8 @@
 		CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */; };
 		CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C7179EA924002A0BF5 /* FilterNode.m */; };
 		CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */; };
+		CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CE179EBA37002A0BF5 /* LICENSE */; };
+		CA9461D1179EBA38002A0BF5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CF179EBA38002A0BF5 /* README.md */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
 		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
@@ -39,6 +41,8 @@
 		CA9461C7179EA924002A0BF5 /* FilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNode.m; sourceTree = "<group>"; };
 		CA9461C9179EA964002A0BF5 /* ColorInvertNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorInvertNode.h; sourceTree = "<group>"; };
 		CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorInvertNode.m; sourceTree = "<group>"; };
+		CA9461CE179EBA37002A0BF5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CA9461CF179EBA38002A0BF5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -105,6 +109,8 @@
 		CAF14C8C17843410008DC169 = {
 			isa = PBXGroup;
 			children = (
+				CA9461CE179EBA37002A0BF5 /* LICENSE */,
+				CA9461CF179EBA38002A0BF5 /* README.md */,
 				CAF14C9E17843411008DC169 /* CIFilterGraph */,
 				CAF14C9717843411008DC169 /* Frameworks */,
 				CAF14C9617843411008DC169 /* Products */,
@@ -229,6 +235,8 @@
 				CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */,
 				CAF14CA917843411008DC169 /* Credits.rtf in Resources */,
 				CAF14CAF17843411008DC169 /* MainMenu.xib in Resources */,
+				CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */,
+				CA9461D1179EBA38002A0BF5 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
