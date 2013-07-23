@@ -8,7 +8,7 @@
 
 #import "FilterGraphView.h"
 #import "CustomisedScrollView.h"
-
+#import "FilterNodeSeenInOutputPane.h"
 
 // Might need refactoring later but I'm gonna have distinct types of mouse-drag for moving and
 // connecting nodes.
@@ -19,15 +19,6 @@ typedef enum
 	FilterGraphViewDragTypeConnect
 	
 } FilterGraphViewDragType;
-
-
-// This is funny.. I can change the property settings for another class in here, to hack them..
-// But this way I can lock parentNode and graphView together.. Note the message has been defined
-// privately in FilterNode.m, and specified as existing here.
-@interface FilterNode ()
-@property (nonatomic, readwrite) FilterGraphView *graphView;
-@end
-
 
 @interface FilterGraphView ()
 {
@@ -53,7 +44,8 @@ typedef enum
 - (id)init
 {
 	// Default frame 150x50
-    return [self initWithFrame:NSMakeRect(0, 0, 150, 50)];
+	defaultSize = CGSizeMake(150, 50);
+    return [self initWithFrame:NSMakeRect(0, 0, defaultSize.width, defaultSize.height)];
 }
 
 - (id)initWithFrame:(NSRect)frame
@@ -73,13 +65,6 @@ typedef enum
     self.backgroundColour = nil;
 	[trackingArea release];
     [super dealloc];
-}
-
-// Ensure parentNode and graphView are synced
-- (void) setParentNode:(FilterNode *)parentNode
-{
-	_parentNode = parentNode;
-	parentNode.graphView = self;
 }
 
 /**
@@ -146,13 +131,32 @@ typedef enum
 
 - (void) mouseEntered:(NSEvent *)theEvent
 {
+	// indicating hover
 	self.backgroundColour = [NSColor cyanColor];
+	
+	if([self.parentNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
+	{
+		// indicating which photo frame it owns
+		NSImageView* pane = [(id<FilterNodeSeenInOutputPane>)self.parentNode imageOutputView];
+		
+		// !!!: deprectaed frame styles
+		[pane setImageFrameStyle:NSImageFrameButton];
+	}
+	
 	[self setNeedsDisplay:YES];
 }
 
 - (void) mouseExited:(NSEvent *)theEvent
 {
 	self.backgroundColour = [NSColor whiteColor];
+	
+	if([self.parentNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
+	{
+		// indicating which photo frame it owns
+		NSImageView* pane = [(id<FilterNodeSeenInOutputPane>)self.parentNode imageOutputView];
+		[pane setImageFrameStyle:NSImageFramePhoto];
+	}
+	
 	[self setNeedsDisplay:YES];
 }
 

@@ -7,11 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import "FilterNodeFactory.h"
+
 
 #import "FilterNode.h"
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
 #import "FilterGraphView.h"
+
 
 @interface AppDelegate ()
 {
@@ -31,9 +34,8 @@
 	// Insert code here to initialize your application
 	[_messageLog setEditable:NO];
 	
-	// Testing input
-	RawImageInputFilterNode* testNodeIn = [[RawImageInputFilterNode alloc] init];
-	testNodeIn.imageOutputView = self.testImageWell;
+	// Testing factory
+	RawImageInputFilterNode* testNodeIn = [(RawImageInputFilterNode*)[FilterNodeFactory generateNodeForNodeClassName:@"RawImageInputFilterNode"] retain];
 	
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/5055546_700b_v2.jpg"]];
@@ -41,25 +43,24 @@
 	[testNodeIn update];
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
-	// output
-	OutputViewingNode* testNodeOut = [[OutputViewingNode alloc] init];
 	
-	// make connection
+	OutputViewingNode* testNodeOut = [(OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"] retain];
+	
+	// connect and pass through data
 	[testNodeOut.inputValues setValue:testNodeIn forKey:kFilterInputKeyInputImageNode];
-	
 	[testNodeOut update];
-	NSLog(@"Test output dict: %@", testNodeOut.outputValues);
 	
+	// Put graphics in right places
+	[_graphScrollView.documentView addSubview:testNodeIn.graphView];
+	[testNodeOut.graphView setFrameOrigin:NSMakePoint(200, 200)];
+	[_graphScrollView.documentView addSubview:testNodeOut.graphView];
 	
-	// graphic
-	FilterGraphView* testGraphViewIn = [[FilterGraphView alloc] init];
-	testGraphViewIn.parentNode = testNodeIn;
-	[_graphScrollView.documentView addSubview:testGraphViewIn];
+	// output panes..
+	[_outputPaneScrollView.documentView addSubview:testNodeIn.imageOutputView];
+	float xPos = testNodeIn.imageOutputView.frame.size.width + 20;
+	[testNodeOut.imageOutputView setFrame:NSOffsetRect(testNodeOut.imageOutputView.frame, xPos, 0)];
+	[_outputPaneScrollView.documentView addSubview:testNodeOut.imageOutputView];
 	
-	FilterGraphView* testGraphViewOut = [[FilterGraphView alloc] init];
-	testGraphViewOut.parentNode = testNodeOut;
-	[testGraphViewOut setFrame:NSOffsetRect(testGraphViewOut.frame, 200, 200)];
-	[_graphScrollView.documentView addSubview:testGraphViewOut];
 }
 
 /**

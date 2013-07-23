@@ -25,19 +25,26 @@
 /**
  * Each FilterNode has an associated graph view with which it can be configured graphically.
  * If a subclass doesn't have it's own custom one, this will default to a basic rectangle with textual info. 
- * This is set when you set this node as parentNode to a graphView object.
+ * This is also set by the setupDefaultGraphView method.
+ *
+ * Remember - you need to set parentNode on the graphView you're assigning! Tried syncing automatically,
+ * but this brings complexity in that might not be immediately obvious in case of bugs.
  */
-@property (nonatomic, readonly) FilterGraphView *graphView;
+@property (nonatomic, retain) FilterGraphView *graphView;
 
 /**
  * Each node has a dictionary of potential output values. Image filters will have an output image,
- * data filters will have vectors, numbers, etc
+ * data filters will have vectors, numbers, etc.
+ *
+ * Because of the "pull" design of the graph, output values should only ever be read externally.
  */
-- (NSMutableDictionary*) outputValues;
+- (NSDictionary*) outputValues;
 
 /**
  * Each node has 1 or more FilterNode inputs, which it knows how to use. Dictionary keys helpfully listed
  * below as extern consts.
+ *
+ * Because the graph is implemented on a "pull" design, use inputValues to connect nodes together.
  */
 - (NSMutableDictionary*) inputValues;
 
@@ -46,6 +53,12 @@
  * the result in outputValues.
  */
 - (void) update;
+
+/**
+ * Sets up a graph view for this node, based on its default properties. If you want to you can set up your
+ * own external graph view, and attach it by setting this node as it's parent node.
+ */
+- (void) setupDefaultGraphView;
 
 
 // Keys list

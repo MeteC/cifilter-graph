@@ -10,6 +10,11 @@
 
 @implementation RawImageInputFilterNode
 
+- (void)dealloc
+{
+    self.imageOutputView = nil;
+    [super dealloc];
+}
 
 /**
  * RII Filter Node update takes the input file URL, loads a valid CIImage representation of it, and

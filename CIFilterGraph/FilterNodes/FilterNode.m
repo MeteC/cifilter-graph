@@ -7,6 +7,7 @@
 //
 
 #import "FilterNode.h"
+#import "FilterGraphView.h"
 
 #pragma mark - Input Keys
 
@@ -34,16 +35,13 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 }
 
 
-// Ensure parentNode and graphView are synced
-- (void) setGraphView:(FilterGraphView *)graphView
-{
-	_graphView = graphView;
-}
-
 - (void)dealloc
 {
     [_inputValues release];
 	[_outputValues release];
+	
+	self.graphView = nil;
+	
     [super dealloc];
 }
 
@@ -60,6 +58,19 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 - (void) update
 {
 	if(self.verboseUpdate) NSLog(@"%@ called update", self);
+}
+
+/**
+ * Should be overridden by each FilterNode subclass else they'll all end up with default FilterGraph
+ */
+- (void) setupDefaultGraphView
+{
+	FilterGraphView* testGraphViewOut = [[FilterGraphView alloc] init];
+	
+	self.graphView = testGraphViewOut; // retains
+	testGraphViewOut.parentNode = self; // assigns
+	
+	[testGraphViewOut release];
 }
 
 @end

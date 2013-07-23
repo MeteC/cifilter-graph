@@ -14,8 +14,13 @@
 
 @interface FilterGraphView : NSView
 {
-	
+	CGSize defaultSize; // each graph view will have it's own default sizing
 }
+
+/** 
+ * The node that owns this graph view. When you set this, be sure to set it going the other way too.
+ * (Automatic syncing more potentially buggy than it's worth.)
+ */
 @property (nonatomic, assign) FilterNode* parentNode;
 
 /**

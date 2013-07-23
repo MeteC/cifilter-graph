@@ -11,6 +11,13 @@
 @implementation OutputViewingNode
 
 
+- (void)dealloc
+{
+    self.imageOutputView = nil;
+    [super dealloc];
+}
+
+
 /**
  * For output viewing node, the only processing to do is pass through the image found in inputValues
  * to the outputValues dictionary

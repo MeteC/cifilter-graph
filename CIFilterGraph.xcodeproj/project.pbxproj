@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* FilterGraphView.m */; };
 		CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */; };
+		CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
 		CAF14CA517843411008DC169 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF14CA417843411008DC169 /* main.m */; };
@@ -27,6 +28,8 @@
 		CA2861FC1787057D0024346C /* FilterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterGraphView.m; sourceTree = "<group>"; };
 		CA9461B6179D5D72002A0BF5 /* CustomisedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomisedScrollView.h; sourceTree = "<group>"; };
 		CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomisedScrollView.m; sourceTree = "<group>"; };
+		CA9461BC179E94C5002A0BF5 /* FilterNodeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeFactory.h; sourceTree = "<group>"; };
+		CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNodeFactory.m; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAF14C9817843411008DC169 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		CAF14C9B17843411008DC169 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -145,6 +148,8 @@
 		CAF14CB51784344A008DC169 /* FilterNodes */ = {
 			isa = PBXGroup;
 			children = (
+				CA9461BC179E94C5002A0BF5 /* FilterNodeFactory.h */,
+				CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */,
 				CA2861FA178704960024346C /* Graph */,
 				CA2861F81787022C0024346C /* Protocols */,
 				CAF14CB61784344A008DC169 /* FilterNode.h */,
@@ -228,6 +233,7 @@
 				CAF14CBF1784346A008DC169 /* OutputViewingNode.m in Sources */,
 				CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */,
 				CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */,
+				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,13 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+
 @property (assign) IBOutlet NSScrollView *graphScrollView;
+@property (assign) IBOutlet NSScrollView *outputPaneScrollView;
+
 @property (assign) IBOutlet NSTextView *messageLog;
 
-@property (assign) IBOutlet NSImageView *testImageWell; // just for dev/debug
+
 
 /**
  * Append a string to GUI log. Can be class method as there's only one AppDelegate instance per app.
