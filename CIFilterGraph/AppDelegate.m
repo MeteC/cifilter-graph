@@ -116,13 +116,19 @@
 		if([className isEqualToString:@"NSNumber"])
 		{
 			// add a number field, with title
-			NSTextView* label = [[[NSTextView alloc] init] autorelease];
-			[label setString:key];
-			[label sizeToFit];
-		//	[label setFrameSize:CGSizeMake(100, 30)];
-			//[label setFrameOrigin:CGPointMake(margin, currentY)];
-			
+			NSTextField* label = [self makeLabelWithText:key];
+			[label setFrameOrigin:CGPointMake(margin, currentY)];
 			[_filterConfigScrollView.documentView addSubview:label];
+			
+			// add text field with number formatter
+			float currentX = margin + label.frame.size.width + margin;
+			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(currentX, currentY, 100, label.frame.size.height*1.2)];
+			[_filterConfigScrollView.documentView addSubview:input];
+			[input release];
+			
+			// TODO: all of this more generically
+			
+			currentY += 50;
 		}
 		
 		else if([className isEqualToString:@"CIImage"]) {} // does nothing
@@ -134,6 +140,19 @@
 	}
 }
 
+#pragma mark - Helpers
+
+- (NSTextField*) makeLabelWithText:(NSString*) text
+{
+	NSTextField* label = [[[NSTextField alloc] init] autorelease];
+	[label setBordered:NO];
+	[label setEditable:NO];
+	[label setBackgroundColor:[NSColor clearColor]];
+	[label setStringValue:text];
+	[label sizeToFit];
+	
+	return label;
+}
 #pragma mark - Text Field
 
 /**
@@ -149,6 +168,9 @@
 		NSLog(@"Entered command: '%@'", command);
 		
 		// Can do what I like with those commands now
+		
+		// TODO: A set command that sets, for the selected filter node, one of the input values
+		// perhaps just start with nsnumbers.. 
 		
 		// clear and return
 		fieldEditor.string = @"";
