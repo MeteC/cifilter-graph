@@ -9,6 +9,7 @@
 //	The superclass of all filter nodes. Also contains handy keys list
 
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 
 @class FilterGraphView;
 
@@ -18,6 +19,8 @@
 {
 	NSMutableDictionary* _outputValues;
 	NSMutableDictionary* _inputValues;
+	
+	NSMutableDictionary* _configurationOptions;
 }
 
 @property (nonatomic, assign) BOOL verboseUpdate; // print stuff on each update
@@ -31,6 +34,15 @@
  * but this brings complexity in that might not be immediately obvious in case of bugs.
  */
 @property (nonatomic, retain) FilterGraphView *graphView;
+
+/**
+ * Set up by each node class, reflects the configuration requirements of the node.
+ * Keys = inputValue keys, Values = classname of input.
+ * e.g. "inputRadius" : "NSNumber" , or "inputImage" : "CIImage"
+ *
+ * Primary use for this is interrogating a filter node for how to set up it's configuration panel.
+ */
+- (NSDictionary*) configurationOptions;
 
 /**
  * Each node has a dictionary of potential output values. Image filters will have an output image,

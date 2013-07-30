@@ -11,11 +11,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import "FilterNode.h"
+#import "FilterGraphViewDelegate.h"
 
 @interface FilterGraphView : NSView
 {
 	CGSize defaultSize; // each graph view will have it's own default sizing
 }
+@property (nonatomic, assign) id<FilterGraphViewDelegate> delegate;
 
 /** 
  * The node that owns this graph view. When you set this, be sure to set it going the other way too.

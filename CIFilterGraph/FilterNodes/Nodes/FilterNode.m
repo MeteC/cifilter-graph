@@ -28,6 +28,7 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
     if (self) {
         _inputValues	= [[NSMutableDictionary alloc] init];
 		_outputValues	= [[NSMutableDictionary alloc] init];
+		_configurationOptions = [[NSMutableDictionary alloc] init];
 
 		self.verboseUpdate = UPDATE_VERBOSE_DEFAULT;
     }
@@ -39,10 +40,16 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 {
     [_inputValues release];
 	[_outputValues release];
+	[_configurationOptions release];
 	
 	self.graphView = nil;
 	
     [super dealloc];
+}
+
+- (NSString*) description
+{
+	return [[self class] description];
 }
 
 - (NSMutableDictionary*) inputValues
@@ -50,9 +57,14 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	return _inputValues;
 }
 
-- (NSMutableDictionary*) outputValues
+- (NSDictionary*) outputValues
 {
 	return _outputValues;
+}
+
+- (NSDictionary*) configurationOptions
+{
+	return _configurationOptions;
 }
 
 - (void) attachInputImageNode:(FilterNode*) upstreamNode
@@ -89,6 +101,10 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	
 	self.graphView = testGraphViewOut; // retains
 	testGraphViewOut.parentNode = self; // assigns
+	
+	// set delegate to main app delegate, easily accessed as singleton.
+	id<FilterGraphViewDelegate> mainAppDelegate = (id<FilterGraphViewDelegate>)[[NSApplication sharedApplication] delegate];
+	testGraphViewOut.delegate = mainAppDelegate;
 	
 	[testGraphViewOut release];
 }

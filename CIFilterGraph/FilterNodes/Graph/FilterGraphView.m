@@ -168,6 +168,9 @@ typedef enum
 	originAtStart = self.frame.origin;
 	
 	dragMode = FilterGraphViewDragTypeMove;
+	
+	// Indicate that configuration options should be set up for this node
+	[_delegate clickedFilterGraph:self];
 }
 
 - (void) mouseUp:(NSEvent *)theEvent

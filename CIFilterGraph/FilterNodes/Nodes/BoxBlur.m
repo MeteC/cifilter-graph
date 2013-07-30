@@ -1,23 +1,25 @@
 //
-//  ColorInvertNode.m
+//  BoxBlur.m
 //  CIFilterGraph
 //
-//  Created by Mete Cakman on 23/07/13.
+//  Created by Mete Cakman on 30/07/13.
 //  Copyright (c) 2013 Mete Cakman. All rights reserved.
 //
 
-#import "ColorInvertNode.h"
+#import "BoxBlur.h"
 
-@implementation ColorInvertNode
+@implementation BoxBlur
 
 - (id)init
 {
     self = [super init];
     if (self) {
         [_configurationOptions setValue:@"CIImage" forKey:@"inputImage"];
+        [_configurationOptions setValue:@"NSNumber" forKey:@"inputRadius"];
     }
     return self;
 }
+
 
 - (void) updateSelf
 {
@@ -26,11 +28,18 @@
 	FilterNode* inputNode = [_inputValues valueForKey:kFilterInputKeyInputImageNode];
 	CIImage* inputImage = [[inputNode outputValues] valueForKey:kFilterOutputKeyImage];
 	
-	CIFilter* filter = [CIFilter filterWithName:@"CIColorInvert"];
+	CIFilter* filter = [CIFilter filterWithName:@"CIBoxBlur"];
 	[filter setDefaults];
+	
+	NSLog(@"Box Blur default radius %@", [filter valueForKey:@"inputRadius"]);
 	
 	// pass the output of the previous node as input image
 	[filter setValue:inputImage forKey:@"inputImage"];
+	
+	// other configuration
+	NSNumber* inputRadius = [_inputValues valueForKey:@"inputRadius"];
+	if(inputRadius)
+		[filter setValue:inputRadius forKey:@"inputRadius"];
 	
 	// pass on the outputImage
 	[[self outputValues] setValue:[filter valueForKey: @"outputImage"] forKey:kFilterOutputKeyImage];

@@ -8,8 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "CustomisedScrollView.h"
+#import "FilterGraphViewDelegate.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate, FilterGraphViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 
@@ -18,6 +19,8 @@
 
 @property (assign) IBOutlet NSTextView *messageLog;
 
+@property (assign) IBOutlet NSTextField *filterConfigTitle;
+@property (assign) IBOutlet NSScrollView *filterConfigScrollView;
 
 
 /**

@@ -18,7 +18,7 @@
 
 @interface AppDelegate ()
 {
-	
+	FilterNode* currentSelectedNode;
 }
 @end
 
@@ -34,6 +34,9 @@
 	// Insert code here to initialize your application
 	[_messageLog setEditable:NO];
 	
+	[_filterConfigTitle setStringValue:@""];
+	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
+	
 	// Testing factory
 	RawImageInputFilterNode* testNodeIn = [(RawImageInputFilterNode*)[FilterNodeFactory generateNodeForNodeClassName:@"RawImageInputFilterNode"] retain];
 	
@@ -43,7 +46,7 @@
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
 	// Filter Example
-	FilterNode* invertNode = [FilterNodeFactory generateNodeForNodeClassName:@"ColorInvertNode"];
+	FilterNode* invertNode = [FilterNodeFactory generateNodeForNodeClassName:@"BoxBlur"];
 	
 	// Output
 	OutputViewingNode* testNodeOut = [(OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"] retain];
@@ -81,6 +84,55 @@
 
 
 #pragma mark - Delegate Methods
+
+- (void) clickedFilterGraph:(FilterGraphView*) graphView
+{
+	NSLog(@"Clicked filter graph %@", graphView);
+	
+	// Set up the configuration panel for the graph node
+	currentSelectedNode = graphView.parentNode;
+	
+	NSString* filterTitle = [NSString stringWithFormat:@"Selected Filter: %@", currentSelectedNode];
+	[_filterConfigTitle setStringValue:filterTitle];
+	
+	// go through config options and set up edit panels
+	[self setupFilterConfigPanelForCurrentSelection];
+}
+
+/**
+ * Clears out old configuration panels, reconstructs based on currently selected node.
+ */
+- (void) setupFilterConfigPanelForCurrentSelection
+{
+	[[_filterConfigScrollView.documentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+	
+	const float margin = 10; // margin value
+	float currentY = margin; // keep track of vertical layout.
+	
+	for(NSString* key in currentSelectedNode.configurationOptions.allKeys)
+	{
+		NSString* className = [currentSelectedNode.configurationOptions valueForKey:key];
+		
+		if([className isEqualToString:@"NSNumber"])
+		{
+			// add a number field, with title
+			NSTextView* label = [[[NSTextView alloc] init] autorelease];
+			[label setString:key];
+			[label sizeToFit];
+		//	[label setFrameSize:CGSizeMake(100, 30)];
+			//[label setFrameOrigin:CGPointMake(margin, currentY)];
+			
+			[_filterConfigScrollView.documentView addSubview:label];
+		}
+		
+		else if([className isEqualToString:@"CIImage"]) {} // does nothing
+		
+		else {
+			NSString* errorMessage = [NSString stringWithFormat:@"Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", className];
+			[AppDelegate log:errorMessage];
+		}
+	}
+}
 
 #pragma mark - Text Field
 
