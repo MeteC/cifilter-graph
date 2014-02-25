@@ -5,4 +5,8 @@
 #ifdef __OBJC__
 	#import <Cocoa/Cocoa.h>
 	#import "AppDelegate.h"
+
+
+#define APP_DELEGATE ((AppDelegate*)[[NSApplication sharedApplication] delegate])
+
 #endif

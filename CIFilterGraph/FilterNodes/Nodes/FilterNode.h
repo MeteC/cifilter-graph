@@ -10,10 +10,12 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <objc/runtime.h> // using "associated objects"
 
 @class FilterGraphView;
 
 #define UPDATE_VERBOSE_DEFAULT YES // change this to NO eventually
+
 
 @interface FilterNode : NSObject
 {
@@ -33,7 +35,7 @@
  * Remember - you need to set parentNode on the graphView you're assigning! Tried syncing automatically,
  * but this brings complexity in that might not be immediately obvious in case of bugs.
  */
-@property (nonatomic, retain) FilterGraphView *graphView;
+@property (nonatomic, strong) FilterGraphView *graphView;
 
 /**
  * Set up by each node class, reflects the configuration requirements of the node.

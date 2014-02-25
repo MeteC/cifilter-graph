@@ -15,22 +15,26 @@
 #import "OutputViewingNode.h"
 #import "FilterGraphView.h"
 
+#import <objc/runtime.h> // using "associated objects"
+
+
+// UI elements have associated input key NSStrings, so that FilterNodes can respond directly
+// to UI delegation methods (e.g. NSTextFieldDelegate). This is the key to look up the association
+const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssociatedInputKey";
+
 
 @interface AppDelegate ()
 {
+	FilterNode* outputNode; // what about multiple outputs?
 	FilterNode* currentSelectedNode;
 }
 @end
 
 @implementation AppDelegate
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+{	
 	// Insert code here to initialize your application
 	[_messageLog setEditable:NO];
 	
@@ -38,28 +42,28 @@
 	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
 	
 	// Testing factory
-	RawImageInputFilterNode* testNodeIn = [(RawImageInputFilterNode*)[FilterNodeFactory generateNodeForNodeClassName:@"RawImageInputFilterNode"] retain];
+	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[FilterNodeFactory generateNodeForNodeClassName:@"RawImageInputFilterNode"];
 	
 	// add image file and update
-	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/5055546_700b_v2.jpg"]];
+	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/alien-app-icon-1024x1024.png"]];
 	
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
 	// Filter Example
-	FilterNode* invertNode = [FilterNodeFactory generateNodeForNodeClassName:@"BoxBlur"];
+	FilterNode* testModNode = [FilterNodeFactory generateNodeForNodeClassName:@"BoxBlur"];
 	
 	// Output
-	OutputViewingNode* testNodeOut = [(OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"] retain];
+	OutputViewingNode* testNodeOut = (OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"];
 	
 	// connect and pass through data
-	[invertNode attachInputImageNode:testNodeIn];
-	[testNodeOut attachInputImageNode:invertNode];
+	[testModNode attachInputImageNode:testNodeIn];
+	[testNodeOut attachInputImageNode:testModNode];
 	[testNodeOut update];
 	
 	// Put graphics in right places
 	[_graphScrollView.documentView addSubview:testNodeIn.graphView];
-	[invertNode.graphView setFrameOrigin:NSMakePoint(100, 100)];
-	[_graphScrollView.documentView addSubview:invertNode.graphView];
+	[testModNode.graphView setFrameOrigin:NSMakePoint(100, 100)];
+	[_graphScrollView.documentView addSubview:testModNode.graphView];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(200, 200)];
 	[_graphScrollView.documentView addSubview:testNodeOut.graphView];
 	
@@ -68,6 +72,8 @@
 	float xPos = testNodeIn.imageOutputView.frame.size.width + 20;
 	[testNodeOut.imageOutputView setFrame:NSOffsetRect(testNodeOut.imageOutputView.frame, xPos, 0)];
 	[_outputPaneScrollView.documentView addSubview:testNodeOut.imageOutputView];
+	
+	outputNode = testNodeOut; // keep reference to root. Since it's a pull-graph, that's the output
 	
 	[_outputPaneScrollView autoResizeContentView];
 }
@@ -109,6 +115,7 @@
 	const float margin = 10; // margin value
 	float currentY = margin; // keep track of vertical layout.
 	
+	// TODO: Add controlView method to FilterNode that constructs this? Rather than doing it here?
 	for(NSString* key in currentSelectedNode.configurationOptions.allKeys)
 	{
 		NSString* className = [currentSelectedNode.configurationOptions valueForKey:key];
@@ -124,7 +131,15 @@
 			float currentX = margin + label.frame.size.width + margin;
 			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(currentX, currentY, 100, label.frame.size.height*1.2)];
 			[_filterConfigScrollView.documentView addSubview:input];
-			[input release];
+			
+			// text field delegate is the node
+			input.delegate = self;
+			
+			// associate the input key value with the input, so the FilterNode can look it up
+			// Note: using weak references to avoid any memory loops. If there are strange crashes, try
+			// OBJC_ASSOCIATION_RETAIN..
+			objc_setAssociatedObject(input, kUIControlElementAssociatedInputKey, key,
+									 OBJC_ASSOCIATION_ASSIGN);
 			
 			// TODO: all of this more generically
 			
@@ -144,7 +159,7 @@
 
 - (NSTextField*) makeLabelWithText:(NSString*) text
 {
-	NSTextField* label = [[[NSTextField alloc] init] autorelease];
+	NSTextField* label = [[NSTextField alloc] init];
 	[label setBordered:NO];
 	[label setEditable:NO];
 	[label setBackgroundColor:[NSColor clearColor]];
@@ -161,19 +176,47 @@
  */
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
-	// Catch returns, do debug stuff with whatever has been entered
-	if([[fieldEditor string] length] != 0)
+	if(control == self.commandField)
 	{
-		NSString* command = fieldEditor.string;
-		NSLog(@"Entered command: '%@'", command);
+		// Catch returns, do debug stuff with whatever has been entered
+		if([[fieldEditor string] length] != 0)
+		{
+			NSString* command = fieldEditor.string;
+			NSLog(@"Entered command: '%@'", command);
+			
+			// Can do what I like with those commands now
+			
+			// TODO: A set command that sets, for the selected filter node, one of the input values
+			// perhaps just start with nsnumbers.. 
+			
+			// clear and return
+			fieldEditor.string = @"";
+		}
+	}
+	
+	else // it's a node input
+	{
+		NSString* inputKey = objc_getAssociatedObject(control, kUIControlElementAssociatedInputKey);
+		NSString* inputClass = [currentSelectedNode.configurationOptions valueForKey:inputKey];
 		
-		// Can do what I like with those commands now
+		if(!inputKey) NSLog(@"ERROR: Control input has no associated input key!");
+		else 
+		{
+			// pass on the input.. need to format it to the right class first!
+			if([inputClass isEqualToString:@"NSNumber"]) // is this the best way to do this?
+			{
+				NSNumber* num = [NSNumber numberWithDouble:fieldEditor.string.doubleValue];
+				[[currentSelectedNode inputValues] setValue:num forKey:inputKey];
+			}
+			
+			else // catchall - just pass the string
+			{
+				[[currentSelectedNode inputValues] setValue:fieldEditor.string forKey:inputKey];
+			}
+		}
 		
-		// TODO: A set command that sets, for the selected filter node, one of the input values
-		// perhaps just start with nsnumbers.. 
-		
-		// clear and return
-		fieldEditor.string = @"";
+		// now do an update!
+		[outputNode update];
 	}
 	
 	return YES;

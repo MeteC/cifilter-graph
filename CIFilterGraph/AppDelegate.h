@@ -10,17 +10,24 @@
 #import "CustomisedScrollView.h"
 #import "FilterGraphViewDelegate.h"
 
+// UI elements have associated input key NSStrings, so that FilterNodes can respond directly
+// to UI delegation methods (e.g. NSTextFieldDelegate). This is the key to look up the association
+//extern const char* const kUIControlElementAssociatedInputKey;
+
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate, FilterGraphViewDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSWindow *window;
 
-@property (assign) IBOutlet NSScrollView *graphScrollView;
-@property (assign) IBOutlet NSScrollView *outputPaneScrollView;
+@property (weak) IBOutlet NSScrollView *graphScrollView;
+@property (weak) IBOutlet NSScrollView *outputPaneScrollView;
 
-@property (assign) IBOutlet NSTextView *messageLog;
+@property (weak) IBOutlet NSTextField* commandField;
 
-@property (assign) IBOutlet NSTextField *filterConfigTitle;
-@property (assign) IBOutlet NSScrollView *filterConfigScrollView;
+@property (unsafe_unretained) IBOutlet NSTextView *messageLog;
+
+@property (weak) IBOutlet NSTextField *filterConfigTitle;
+@property (weak) IBOutlet NSScrollView *filterConfigScrollView;
 
 
 /**

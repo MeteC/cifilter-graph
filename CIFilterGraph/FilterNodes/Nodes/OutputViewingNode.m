@@ -11,11 +11,6 @@
 @implementation OutputViewingNode
 
 
-- (void)dealloc
-{
-    self.imageOutputView = nil;
-    [super dealloc];
-}
 
 
 /**
@@ -39,7 +34,6 @@
 		[nsImage addRepresentation:rep];
 		
 		[self.imageOutputView setImage:nsImage];
-		[nsImage release];
 	}
 }
 

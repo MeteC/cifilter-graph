@@ -31,8 +31,6 @@
 	CIFilter* filter = [CIFilter filterWithName:@"CIBoxBlur"];
 	[filter setDefaults];
 	
-	NSLog(@"Box Blur default radius %@", [filter valueForKey:@"inputRadius"]);
-	
 	// pass the output of the previous node as input image
 	[filter setValue:inputImage forKey:@"inputImage"];
 	
@@ -41,10 +39,16 @@
 	if(inputRadius)
 		[filter setValue:inputRadius forKey:@"inputRadius"];
 	
+	
+	if(self.verboseUpdate) 
+		NSLog(@"Box Blur with radius %@", [filter valueForKey:@"inputRadius"]);
+	
+	
 	// pass on the outputImage
 	[[self outputValues] setValue:[filter valueForKey: @"outputImage"] forKey:kFilterOutputKeyImage];
 }
 
 // TODO: override setupDefaultGraphView
+
 
 @end

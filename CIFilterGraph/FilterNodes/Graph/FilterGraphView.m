@@ -31,7 +31,7 @@ typedef enum
 	
 	FilterGraphViewDragType dragMode;
 }
-@property (nonatomic, retain) NSColor* backgroundColour;
+@property (nonatomic, strong) NSColor* backgroundColour;
 @end
 
 @implementation FilterGraphView
@@ -61,12 +61,6 @@ typedef enum
     return self;
 }
 
-- (void)dealloc
-{
-    self.backgroundColour = nil;
-	[trackingArea release];
-    [super dealloc];
-}
 
 /**
  * Make a tracking area for mouseovers
@@ -75,7 +69,6 @@ typedef enum
 {
     int opts = (NSTrackingMouseEnteredAndExited | NSTrackingActiveAlways);
 
-	[trackingArea release];
     trackingArea = [ [NSTrackingArea alloc] initWithRect:[self bounds]
 												 options:opts
 												   owner:self

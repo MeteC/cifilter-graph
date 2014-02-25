@@ -20,7 +20,7 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 + (FilterNode*) generateNodeForNodeClassName:(NSString*) nodeClassName
 {
 	Class nodeClass = NSClassFromString(nodeClassName);
-	id newNode = [[[nodeClass alloc] init] autorelease];
+	id newNode = [[nodeClass alloc] init];
 	NSMutableString* msg = [NSMutableString stringWithFormat:@"Generate: %@.", nodeClassName];
 	
 	if([newNode isKindOfClass:[FilterNode class]])
@@ -37,7 +37,6 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 			// !!!: Deprecated image frame style...
 			[pane setImageFrameStyle:NSImageFramePhoto];
 			[newNode setImageOutputView:pane];
-			[pane release];
 			
 			[msg appendString:@" (Has output view.)"];
 		}

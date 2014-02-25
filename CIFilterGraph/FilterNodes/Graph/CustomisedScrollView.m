@@ -41,7 +41,7 @@
 - (void) setup
 {
 	NSLog(@"Setting up custom scroll view");
-	CustomisedDocumentView* myDocView = [[[CustomisedDocumentView alloc] initWithFrame:self.bounds] autorelease];
+	CustomisedDocumentView* myDocView = [[CustomisedDocumentView alloc] initWithFrame:self.bounds];
 	[self setDocumentView:myDocView];
 }
 

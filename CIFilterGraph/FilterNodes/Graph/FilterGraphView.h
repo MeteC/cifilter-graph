@@ -17,13 +17,13 @@
 {
 	CGSize defaultSize; // each graph view will have it's own default sizing
 }
-@property (nonatomic, assign) id<FilterGraphViewDelegate> delegate;
+@property (nonatomic, weak) id<FilterGraphViewDelegate> delegate;
 
 /** 
  * The node that owns this graph view. When you set this, be sure to set it going the other way too.
  * (Automatic syncing more potentially buggy than it's worth.)
  */
-@property (nonatomic, assign) FilterNode* parentNode;
+@property (nonatomic, weak) FilterNode* parentNode;
 
 /**
  * Sets up a default filter graph view with variable number of input and output connections

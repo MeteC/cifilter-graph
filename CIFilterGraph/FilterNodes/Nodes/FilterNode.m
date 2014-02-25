@@ -35,17 +35,11 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
     return self;
 }
 
-
-- (void)dealloc
+- (void) dealloc
 {
-    [_inputValues release];
-	[_outputValues release];
-	[_configurationOptions release];
-	
-	self.graphView = nil;
-	
-    [super dealloc];
+	NSLog(@"Deallocing filter node %@", [self class]);
 }
+
 
 - (NSString*) description
 {
@@ -79,6 +73,8 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
 - (void) update
 {
+	[AppDelegate log:[NSString stringWithFormat:@"Calling update on node type '%@'", self.class]];
+	
 	// recurse up the tree to ensure all dependencies update first
 	for(id input in self.inputValues.allValues)
 	{
@@ -106,7 +102,6 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	id<FilterGraphViewDelegate> mainAppDelegate = (id<FilterGraphViewDelegate>)[[NSApplication sharedApplication] delegate];
 	testGraphViewOut.delegate = mainAppDelegate;
 	
-	[testGraphViewOut release];
 }
 
 

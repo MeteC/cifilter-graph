@@ -17,7 +17,7 @@
 {
 	
 }
-@property (nonatomic, retain) NSImageView *imageOutputView;
+@property (nonatomic, strong) NSImageView *imageOutputView;
 
 // convenience methods
 
