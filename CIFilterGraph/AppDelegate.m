@@ -41,6 +41,10 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[_filterConfigTitle setStringValue:@""];
 	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
 	
+	
+	
+	
+	
 	// Testing factory
 	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[FilterNodeFactory generateNodeForNodeClassName:@"RawImageInputFilterNode"];
 	
@@ -58,7 +62,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	// connect and pass through data
 	[testModNode attachInputImageNode:testNodeIn];
 	[testNodeOut attachInputImageNode:testModNode];
-	[testNodeOut update];
 	
 	// Put graphics in right places
 	[_graphScrollView.documentView addSubview:testNodeIn.graphView];
@@ -76,6 +79,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	outputNode = testNodeOut; // keep reference to root. Since it's a pull-graph, that's the output
 	
 	[_outputPaneScrollView autoResizeContentView];
+	
+	[self doGlobalNodeUpdate];
 }
 
 /**
@@ -93,7 +98,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 - (void) clickedFilterGraph:(FilterGraphView*) graphView
 {
-	NSLog(@"Clicked filter graph %@", graphView);
+//	NSLog(@"Clicked filter graph %@", graphView);
 	
 	// Set up the configuration panel for the graph node
 	currentSelectedNode = graphView.parentNode;
@@ -103,6 +108,14 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	// go through config options and set up edit panels
 	[self setupFilterConfigPanelForCurrentSelection];
+	
+	/*
+	// memory test
+	double delayInSeconds = 0.0001;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+		[self clickedFilterGraph:graphView];
+	});*/
 }
 
 /**
@@ -168,6 +181,15 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	return label;
 }
+
+
+- (void) doGlobalNodeUpdate
+{
+	[AppDelegate log:@"Updating Filter Graph!"];
+	[outputNode update];
+}
+
+
 #pragma mark - Text Field
 
 /**
@@ -216,10 +238,11 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		}
 		
 		// now do an update!
-		[outputNode update];
+		[self doGlobalNodeUpdate];
 	}
 	
 	return YES;
 }
+
 
 @end

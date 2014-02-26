@@ -73,8 +73,6 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
 - (void) update
 {
-	[AppDelegate log:[NSString stringWithFormat:@"Calling update on node type '%@'", self.class]];
-	
 	// recurse up the tree to ensure all dependencies update first
 	for(id input in self.inputValues.allValues)
 	{

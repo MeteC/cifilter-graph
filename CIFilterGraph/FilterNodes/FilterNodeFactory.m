@@ -35,7 +35,7 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 																			  kDefaultImageViewDim)];
 			
 			// !!!: Deprecated image frame style...
-			[pane setImageFrameStyle:NSImageFramePhoto];
+			[pane setImageFrameStyle:NSImageFrameNone];
 			[newNode setImageOutputView:pane];
 			
 			[msg appendString:@" (Has output view.)"];
