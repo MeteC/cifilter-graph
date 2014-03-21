@@ -8,8 +8,8 @@
 
 //	Implements the CIBoxBlur filter. Just has one input configuration, inputRadius
 
-#import "FilterNode.h"
+#import "GenericCIEffectNode.h"
 
-@interface BoxBlur : FilterNode
+@interface BoxBlurNode : GenericCIEffectNode
 
 @end

@@ -54,7 +54,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
 	// Filter Example
-	FilterNode* testModNode = [FilterNodeFactory generateNodeForNodeClassName:@"BoxBlur"];
+	FilterNode* testModNode = [FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
 	
 	// Output
 	OutputViewingNode* testNodeOut = (OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"];
@@ -90,6 +90,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 {
 	AppDelegate* this = (AppDelegate*)[[NSApplication sharedApplication] delegate];
 	[this.messageLog setString:[NSString stringWithFormat:@"%@%@\n", this.messageLog.string, string]];
+	printf("GUI-LOG: %s\n", string.UTF8String);
 }
 
 
@@ -145,12 +146,13 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(currentX, currentY, 100, label.frame.size.height*1.2)];
 			[_filterConfigScrollView.documentView addSubview:input];
 			
+			input.stringValue = [currentSelectedNode.inputValues valueForKey:key];
 			// text field delegate is the node
 			input.delegate = self;
 			
 			// associate the input key value with the input, so the FilterNode can look it up
 			// Note: using weak references to avoid any memory loops. If there are strange crashes, try
-			// OBJC_ASSOCIATION_RETAIN..
+			// OBJC_ASSOCIATION_RETAIN.. Or use a mutable association dictionary somewhere..
 			objc_setAssociatedObject(input, kUIControlElementAssociatedInputKey, key,
 									 OBJC_ASSOCIATION_ASSIGN);
 			
@@ -195,6 +197,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 /**
  * For my debug input field, process commands when ending editing. As I write this I have no commands,
  * but who knows when this might be a quickly useful test tool.
+ *
+ * For node inputs, (e.g. input radius value of box blur filter), we apply the control's updated value to
+ * the 
  */
 - (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor
 {
@@ -208,8 +213,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			
 			// Can do what I like with those commands now
 			
-			// TODO: A set command that sets, for the selected filter node, one of the input values
-			// perhaps just start with nsnumbers.. 
+			
 			
 			// clear and return
 			fieldEditor.string = @"";
@@ -233,6 +237,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			
 			else // catchall - just pass the string
 			{
+				NSLog(@"--> Note to self: inputClass = %@, this isn't dealt with specifically yet in textShouldEndEditing", inputClass);
 				[[currentSelectedNode inputValues] setValue:fieldEditor.string forKey:inputKey];
 			}
 		}

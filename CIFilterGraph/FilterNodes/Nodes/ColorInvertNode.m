@@ -12,13 +12,10 @@
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        [_configurationOptions setValue:@"CIImage" forKey:@"inputImage"];
-    }
-    return self;
+	return [self initWithCIFilterName:@"CIColorInvert" configOptions:nil];
 }
 
+/*
 - (void) updateSelf
 {
 	[super updateSelf];
@@ -34,7 +31,7 @@
 	
 	// pass on the outputImage
 	[[self outputValues] setValue:[filter valueForKey: @"outputImage"] forKey:kFilterOutputKeyImage];
-}
+}*/
 
 // TODO: override setupDefaultGraphView
 

@@ -8,8 +8,8 @@
 
 //	Implements the CIColorInvert filter. No input adjustments exist.
 
-#import "FilterNode.h"
+#import "GenericCIEffectNode.h"
 
-@interface ColorInvertNode : FilterNode
+@interface ColorInvertNode : GenericCIEffectNode
 
 @end

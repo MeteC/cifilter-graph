@@ -27,6 +27,7 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 	{
 		[newNode setupDefaultGraphView];
 		
+		// if we have a node that displays an image - i.e. output or input node, we give it an image pane
 		if([newNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
 		{
 			// set up the output "pane"
@@ -34,7 +35,6 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 																			  kDefaultImageViewDim, 
 																			  kDefaultImageViewDim)];
 			
-			// !!!: Deprecated image frame style...
 			[pane setImageFrameStyle:NSImageFrameNone];
 			[newNode setImageOutputView:pane];
 			
