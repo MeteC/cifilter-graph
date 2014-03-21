@@ -25,11 +25,17 @@
 		// config options
         [_configurationOptions setValue:@"CIImage" forKey:@"inputImage"];
 		
-		// TODO: test bad filter names..
-		
 		// create the filter and set it's defaults, so we can read them out
 		_filterName = mFilterName;
 		CIFilter* filter = [CIFilter filterWithName:mFilterName];
+		
+		if(filter == nil) 
+		{ 
+			NSString* crashMsg = [NSString stringWithFormat:@"Crash in %s - bad CIFilter name '%@', doesn't exist as a CIFilter!", __PRETTY_FUNCTION__, mFilterName];
+			[AppDelegate log:crashMsg];
+			assert(filter != nil);
+		}
+		
 		[filter setDefaults];
 		
 		NSEnumerator *enumerator = [mConfigOptions keyEnumerator];

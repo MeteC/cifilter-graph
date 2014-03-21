@@ -27,6 +27,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 {
 	FilterNode* outputNode; // what about multiple outputs?
 	FilterNode* currentSelectedNode;
+	
+	NSMutableArray* currentFilterList;
 }
 @end
 
@@ -37,6 +39,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 {	
 	// Insert code here to initialize your application
 	[_messageLog setEditable:NO];
+	
+	currentFilterList = [NSMutableArray array];
 	
 	[_filterConfigTitle setStringValue:@""];
 	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
@@ -172,6 +176,27 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 #pragma mark - Helpers
 
+/**
+ * Create a node from it's class name, put it in the scene unattached to anything.
+ */
+- (void) createNodeForNodeClassName:(NSString*) nodeClassName
+{
+	FilterNode* newNode = [FilterNodeFactory generateNodeForNodeClassName:nodeClassName];
+	
+	if(newNode)
+	{
+		[currentFilterList addObject:newNode];
+		
+		[_graphScrollView.documentView addSubview:newNode.graphView];
+		
+		// TODO: find a smart place to put the new node
+		[newNode.graphView setFrameOrigin:NSMakePoint(_graphScrollView.frame.size.width/2, _graphScrollView.frame.size.height/2)];
+	}
+}
+
+/**
+ * Code sugar to make a simple label, like a UILabel on iOS.
+ */
 - (NSTextField*) makeLabelWithText:(NSString*) text
 {
 	NSTextField* label = [[NSTextField alloc] init];
@@ -184,7 +209,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	return label;
 }
 
-
+/**
+ * Perform full update on node graph
+ */
 - (void) doGlobalNodeUpdate
 {
 	[AppDelegate log:@"Updating Filter Graph!"];
@@ -213,6 +240,12 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			
 			// Can do what I like with those commands now
 			
+			// 1. create a node using 'create NodeClassName'
+			if([command hasPrefix:@"create "])
+			{
+				NSString* nodeClassName = [command substringFromIndex:@"create ".length];
+				[self createNodeForNodeClassName:nodeClassName];
+			}
 			
 			
 			// clear and return
