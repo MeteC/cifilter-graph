@@ -25,7 +25,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 @interface AppDelegate ()
 {
-	FilterNode* outputNode; // what about multiple outputs?
+	FilterNode* outputNode; // TODO: what about multiple outputs?
 	FilterNode* currentSelectedNode;
 	
 	NSMutableArray* currentFilterList;
@@ -69,9 +69,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	// Put graphics in right places
 	[_graphScrollView.documentView addSubview:testNodeIn.graphView];
-	[testModNode.graphView setFrameOrigin:NSMakePoint(100, 100)];
+	[testModNode.graphView setFrameOrigin:NSMakePoint(200, 100)];
 	[_graphScrollView.documentView addSubview:testModNode.graphView];
-	[testNodeOut.graphView setFrameOrigin:NSMakePoint(200, 200)];
+	[testNodeOut.graphView setFrameOrigin:NSMakePoint(400, 200)];
 	[_graphScrollView.documentView addSubview:testNodeOut.graphView];
 	
 	// output panes..

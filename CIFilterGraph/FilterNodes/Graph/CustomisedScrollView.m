@@ -57,6 +57,7 @@
  * Just quick and dirty for now - lines from center to center. 
  * Will make this look nice at some point! Good to get some functionality in first.
  */
+/*
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
@@ -106,7 +107,7 @@
 			}
 		}
 	}
-}
+}*/
 
 
 @end
