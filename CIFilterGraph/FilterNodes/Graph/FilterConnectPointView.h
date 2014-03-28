@@ -13,4 +13,10 @@
 
 @interface FilterConnectPointView : NSView
 
+/**
+ * Gives you a friendly end point you can use, relative to the superview of this connect point's
+ * graph view.
+ */
+- (NSPoint) connectEndPoint;
+
 @end

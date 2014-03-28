@@ -12,15 +12,15 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class FilterGraphView;
+@class FilterConnectPointView;
 
 
 @interface FilterConnectionView : NSView
 
 
 // Graph views connected. strong retention by each graph view, weak pointers from here.
-@property (weak) FilterGraphView* startGraphView;
-@property (weak) FilterGraphView* endGraphView;
+@property (weak) FilterConnectPointView* outputGraphConnect;
+@property (weak) FilterConnectPointView* inputGraphConnect; 
 
 /**
  * When a related filter graph redraws itself, this is called to ensure the connection is updated too.

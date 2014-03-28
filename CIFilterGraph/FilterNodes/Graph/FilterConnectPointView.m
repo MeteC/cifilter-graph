@@ -78,6 +78,18 @@
     [super updateTrackingAreas]; // Needed, according to the NSView documentation
 }
 
+#pragma mark - Point stuff
+
+- (NSPoint) connectEndPoint
+{
+	// this is now relative to the superview (ie the Graph View)
+	NSPoint thePoint = [self.superview convertPoint:self.frame.origin fromView:self];
+	
+	// and now it's relative to the superview of that
+	thePoint = [self.superview.superview convertPoint:thePoint fromView:self.superview];
+	
+	return thePoint;
+}
 
 #pragma mark - Drawing
 

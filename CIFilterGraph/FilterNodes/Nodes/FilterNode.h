@@ -86,6 +86,11 @@
  */
 - (void) attachInputImageNode:(FilterNode*) upstreamNode;
 
+/**
+ * Comparable convenience method to get inputImage provider
+ */
+- (FilterNode*) inputImageNode;
+
 
 // Keys list
 #pragma mark - Input Keys
@@ -99,7 +104,7 @@ extern NSString* const kFilterInputKeyFileURL;
 
 #pragma mark - Output Keys
 
-// the fundamental output image
+// the fundamental output image (CIImage)
 extern NSString* const kFilterOutputKeyImage;
 
 

@@ -66,6 +66,11 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	[self.inputValues setValue:upstreamNode forKey:kFilterInputKeyInputImageNode];
 }
 
+- (FilterNode*) inputImageNode
+{
+	return [self.inputValues valueForKey:kFilterInputKeyInputImageNode];
+}
+
 - (void) updateSelf
 {
 	if(self.verboseUpdate) NSLog(@"%@ called updateSelf", self);

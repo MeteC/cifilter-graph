@@ -59,6 +59,8 @@
 {
 	[super updateSelf];
 	
+	// Grab the input image. We know all dependencies have been updated thanks to FilterNode's update
+	// structure, so this is good.
 	FilterNode* inputNode = [_inputValues valueForKey:kFilterInputKeyInputImageNode];
 	CIImage* inputImage = [[inputNode outputValues] valueForKey:kFilterOutputKeyImage];
 	
@@ -75,9 +77,21 @@
 	while ((key = [enumerator nextObject])) 
 	{
 		id inputVal = [_inputValues valueForKey:key];
-		if(inputVal)
+		
+		// note, inputImage key returns nil from _inputValues, so the case we've already dealt with
+		// doesn't get dealt with again (i.e. we don't apply FilterNode inputNode to filter key inputImage!)
+		if(inputVal) 
 		{
-			[filter setValue:inputVal forKey:key];
+			if([inputVal isKindOfClass:[FilterNode class]])
+			{
+				// it's a FilterNode, so the CIFilter will want it's output CIImage
+				[filter setValue:[[inputVal outputValues] valueForKey:kFilterOutputKeyImage] 
+					  forKeyPath:key];
+			}
+			else // not a FilterNode so apply direct to CIFilter
+			{
+				[filter setValue:inputVal forKey:key];
+			}
 		}
 	}
 		

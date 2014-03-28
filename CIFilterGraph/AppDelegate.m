@@ -84,6 +84,11 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	[_outputPaneScrollView autoResizeContentView];
 	
+	// changed node connections so we need to update the graphs manually
+	[testNodeIn.graphView resetGraphConnects];
+	[testModNode.graphView resetGraphConnects];
+	[testNodeOut.graphView resetGraphConnects];
+	
 	[self doGlobalNodeUpdate];
 }
 

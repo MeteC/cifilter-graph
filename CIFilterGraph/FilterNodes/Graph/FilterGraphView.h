@@ -32,13 +32,20 @@
  */
 @property (nonatomic, weak) FilterNode* parentNode;
 
+/**
+ * (Re)set up connect points. call this after the node has been configured with its actual connections.
+ */
+- (void) resetGraphConnects;
 
 /**
- * Sets up a default filter graph view with variable number of input and output connections
+ * Dictionary of output connect points, keyed the same as the parent node's outputValues (FilterNodes only)
  */
-- (id) initWithInputCount:(uint) inputCount outputCount:(uint) outputCount;
+- (NSDictionary*) outputConnectPoints;
 
-
+/**
+ * Dictionary of input connect points, keyed the same as the parent node's inputValues (FilterNodes only)
+ */
+- (NSDictionary*) inputConnectPoints;
 
 
 /**

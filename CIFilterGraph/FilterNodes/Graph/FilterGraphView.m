@@ -11,13 +11,21 @@
 #import "FilterNodeSeenInOutputPane.h"
 #import "NSScrollView+AutosizeContent.h"
 #import "FilterConnectPointView.h"
-
+#import "FilterConnectionView.h"
 
 
 @interface FilterGraphView ()
 {
 	// Determined on init, how many connection points do we need to graphically represent?
 	int mInputCount, mOutputCount;
+	
+	NSMutableDictionary* _inputConnectPoints;
+	NSMutableDictionary* _outputConnectPoints;
+	
+	// array of input connections. the output connection would be owned and presented by the downstream graph
+	
+	// !!!: Starting to think that FilterGraphView should know nothing about connections, just connect points!
+	//NSArray* inputConnections;
 	
 	NSPoint mousePointerAtDragStart;
 	NSPoint originAtStart;
@@ -33,15 +41,21 @@
 @implementation FilterGraphView
 
 
-- (id) initWithInputCount:(uint) inputCount outputCount:(uint) outputCount
+- (NSDictionary*) outputConnectPoints
 {
-	// 
+	return _outputConnectPoints;
 }
 
-- (id)init
+- (NSDictionary*) inputConnectPoints
+{
+	return _inputConnectPoints;
+}
+
+
+- (instancetype) init
 {
 	// Default frame 150x50
-	defaultSize = CGSizeMake(150, 50);
+	defaultSize		= CGSizeMake(150, 50);
     return [self initWithFrame:NSMakeRect(0, 0, defaultSize.width, defaultSize.height)];
 }
 
@@ -53,21 +67,75 @@
 		self.backgroundColour = [NSColor whiteColor];
 		[self createTrackingArea];
 		
-		
+		// Set some defaults
 		defaultConnectionSize = CGSizeMake(10, 10);
-		mInputCount = mOutputCount = 1;
-		
-		FilterConnectPointView* outputConnectPoint = [[FilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
-		[self addSubview:outputConnectPoint];
-		
-		for(int i = 0; i < mInputCount; i++)
-		{
-			FilterConnectPointView* inputConnectPoint = [[FilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i]];
-			[self addSubview:inputConnectPoint];
-		}
     }
     
     return self;
+}
+
+
+- (void) resetGraphConnects
+{
+	// clear old ones
+	[_outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[obj removeFromSuperview];
+	}];
+	
+	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[obj removeFromSuperview];
+	}];
+	
+	
+	// Set up the connect point views...
+	_outputConnectPoints = [NSMutableDictionary dictionary];
+	FilterConnectPointView* outputConnectPoint = [[FilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
+	[self addSubview:outputConnectPoint];
+	
+	// just the one entry for now, using the one "image" output key
+	// ???: Is this the right key to use?? It actually corresponds to a CIImage, not a FilterNode.
+	[_outputConnectPoints setValue:outputConnectPoint forKey:kFilterOutputKeyImage];
+	mOutputCount = 1;
+	
+	
+	
+	// For inputs, go through the parent node's input values, and make a connect point for each
+	// FilterNode found there
+	_inputConnectPoints = [NSMutableDictionary dictionary];
+	
+	// first pass to count up all FilterNode input values
+	mInputCount = 0;
+	[self.parentNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		
+		if([obj isKindOfClass:[FilterNode class]])
+		{
+			mInputCount++;
+		}
+	}];
+	
+	// second pass to create connect points
+	__block int i = 0;
+	[self.parentNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		
+		if([obj isKindOfClass:[FilterNode class]])
+		{
+			FilterConnectPointView* inputConnectPoint = [[FilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i++]];
+			[self addSubview:inputConnectPoint];
+			
+			[_inputConnectPoints setValue:inputConnectPoint forKey:key];
+			NSLog(@"Added input point for %@, that's at key '%@'", self.parentNode.class, key);
+			
+			// TESTING: Remove this!!
+			// adding a connection to each output connect point.. just to see something
+			FilterConnectionView* connection = [[FilterConnectionView alloc] initWithFrame:NSZeroRect];
+			connection.outputGraphConnect = inputConnectPoint;
+			connection.inputGraphConnect = [self.parentNode.inputImageNode.graphView.outputConnectPoints valueForKey:kFilterOutputKeyImage]; // blimey!
+			
+			[connection updateConnection];
+			[self.superview addSubview:connection];
+		}
+	}];
+	
 }
 
 
@@ -114,7 +182,7 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
-	NSLog(@"Drawing %@ (%@)", self, self.parentNode.class);
+	//NSLog(@"Drawing %@ (%@)", self, self.parentNode.class);
 
 	// fill it with a colour
 	[self.backgroundColour set];
@@ -135,6 +203,50 @@
 	NSString* outputName = [NSString stringWithFormat:@"%@", self.parentNode.class];
 	[outputName drawInRect:mainFillRect withAttributes:nil];
 
+	// Check connections
+///	[self updateConnections];
+}
+
+// NOPE: no longer have connections owned by FilterGraphView, rather by FilterConnectPoints.
+- (void) updateConnections
+{
+	// Just dealing with the 1 input case for now, to see how things sit together.
+	/*
+	FilterNode* inputNode = [self.parentNode inputImageNode];
+	FilterConnectionView* connect = inputConnections[0];
+	
+	if(inputNode)
+	{
+		connect.inputGraphConnect = inputNode.graphView.out;
+		[connect updateConnection];
+	}
+	else // no input node! better hide the connection
+	{
+		[connect setHidden:YES];
+	}*/
+	
+	
+	/*
+	// TODO: Case with more than 1 input!
+	// loop all node inputs, to make a list of inputs that are FilterNodes (and therefore need arrows)
+	
+	// loop all input connections..
+	
+	for(int i = 0; i < inputConnections.count; i++)
+	{
+		FilterConnectionView* connection = inputConnections[i];
+		self.parentNode.inputValues... urp
+		
+		if(connection.inputGraphView)
+		{
+			// we got a full connection
+			
+		}
+		else 
+		{
+			[connection setHidden:YES];
+		}
+	}*/
 }
 
 /**
