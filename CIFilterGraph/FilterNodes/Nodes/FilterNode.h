@@ -55,8 +55,10 @@
 - (NSDictionary*) outputValues;
 
 /**
- * Each node has 1 or more FilterNode inputs, which it knows how to use. Dictionary keys helpfully listed
+ * Each node has 1 or more input values, which it knows how to use. Dictionary keys helpfully listed
  * below as extern consts.
+ *
+ * These values may be of any class, including e.g. FilterNode, NSNumber, NSURL, etc.
  *
  * Because the graph is implemented on a "pull" design, use inputValues to connect nodes together.
  */

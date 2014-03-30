@@ -124,7 +124,8 @@
 			
 			[_inputConnectPoints setValue:inputConnectPoint forKey:key];
 			NSLog(@"Added input point for %@, that's at key '%@'", self.parentNode.class, key);
-			
+		
+			/*
 			// TESTING: Remove this!!
 			// adding a connection to each output connect point.. just to see something
 			FilterConnectionView* connection = [[FilterConnectionView alloc] initWithFrame:NSZeroRect];
@@ -132,7 +133,7 @@
 			connection.inputGraphConnect = [self.parentNode.inputImageNode.graphView.outputConnectPoints valueForKey:kFilterOutputKeyImage]; // blimey!
 			
 			[connection updateConnection];
-			[self.superview addSubview:connection];
+			[self.superview addSubview:connection];*/
 		}
 	}];
 	
