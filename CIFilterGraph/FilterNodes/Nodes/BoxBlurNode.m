@@ -12,7 +12,7 @@
 
 - (id)init
 {
-    return [self initWithCIFilterName:@"CIBoxBlur" configOptions:@{@"inputRadius": @"NSNumber"}];
+    return [self initWithCIFilterName:@"CIBoxBlur" configOptions:@[@"inputRadius"]];
 }
 
 // TODO: override setupDefaultGraphView

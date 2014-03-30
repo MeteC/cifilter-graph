@@ -15,7 +15,7 @@
 //extern const char* const kUIControlElementAssociatedInputKey;
 
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate, FilterGraphViewDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate, UXFilterGraphViewDelegate>
 
 @property (weak) IBOutlet NSWindow *window;
 

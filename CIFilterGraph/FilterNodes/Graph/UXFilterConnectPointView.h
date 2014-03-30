@@ -11,7 +11,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface FilterConnectPointView : NSView
+@interface UXFilterConnectPointView : NSView
 
 /**
  * Gives you a friendly end point you can use, relative to the superview of this connect point's

@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 Mete Cakman. All rights reserved.
 //
 
-#import "FilterGraphView.h"
+#import "UXFilterGraphView.h"
 #import "CustomisedScrollView.h"
 #import "FilterNodeSeenInOutputPane.h"
 #import "NSScrollView+AutosizeContent.h"
-#import "FilterConnectPointView.h"
-#import "FilterConnectionView.h"
+#import "UXFilterConnectPointView.h"
+#import "UXFilterConnectionView.h"
 
 
-@interface FilterGraphView ()
+@interface UXFilterGraphView ()
 {
 	// Determined on init, how many connection points do we need to graphically represent?
 	int mInputCount, mOutputCount;
@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSColor* backgroundColour;
 @end
 
-@implementation FilterGraphView
+@implementation UXFilterGraphView
 
 
 - (NSDictionary*) outputConnectPoints
@@ -89,7 +89,7 @@
 	
 	// Set up the connect point views...
 	_outputConnectPoints = [NSMutableDictionary dictionary];
-	FilterConnectPointView* outputConnectPoint = [[FilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
+	UXFilterConnectPointView* outputConnectPoint = [[UXFilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
 	[self addSubview:outputConnectPoint];
 	
 	// just the one entry for now, using the one "image" output key
@@ -119,7 +119,7 @@
 		
 		if([obj isKindOfClass:[FilterNode class]])
 		{
-			FilterConnectPointView* inputConnectPoint = [[FilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i++]];
+			UXFilterConnectPointView* inputConnectPoint = [[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i++]];
 			[self addSubview:inputConnectPoint];
 			
 			[_inputConnectPoints setValue:inputConnectPoint forKey:key];

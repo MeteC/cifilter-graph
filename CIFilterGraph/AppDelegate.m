@@ -13,7 +13,7 @@
 #import "FilterNode.h"
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
-#import "FilterGraphView.h"
+#import "UXFilterGraphView.h"
 
 #import <objc/runtime.h> // using "associated objects"
 
@@ -106,7 +106,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 #pragma mark - Delegate Methods
 
-- (void) clickedFilterGraph:(FilterGraphView*) graphView
+- (void) clickedFilterGraph:(UXFilterGraphView*) graphView
 {
 //	NSLog(@"Clicked filter graph %@", graphView);
 	
@@ -136,14 +136,12 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[[_filterConfigScrollView.documentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	
 	const float margin = 10; // margin value
-	float currentY = margin; // keep track of vertical layout.
+	__block float currentY = margin; // keep track of vertical layout.
 	
 	// TODO: Add controlView method to FilterNode that constructs this? Rather than doing it here?
-	for(NSString* key in currentSelectedNode.configurationOptions.allKeys)
-	{
-		NSString* className = [currentSelectedNode.configurationOptions valueForKey:key];
+	[currentSelectedNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		
-		if([className isEqualToString:@"NSNumber"])
+		if([obj isKindOfClass:[NSNumber class]])
 		{
 			// add a number field, with title
 			NSTextField* label = [self makeLabelWithText:key];
@@ -170,13 +168,15 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			currentY += 50;
 		}
 		
-		else if([className isEqualToString:@"CIImage"]) {} // does nothing
+		else if([obj isKindOfClass:[FilterNode class]]) {} // does nothing
 		
 		else {
-			NSString* errorMessage = [NSString stringWithFormat:@"Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", className];
+			NSString* errorMessage = [NSString stringWithFormat:@"Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]];
 			[AppDelegate log:errorMessage];
 		}
-	}
+		
+	}];
+	
 }
 
 #pragma mark - Helpers
@@ -261,13 +261,13 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	else // it's a node input
 	{
 		NSString* inputKey = objc_getAssociatedObject(control, kUIControlElementAssociatedInputKey);
-		NSString* inputClass = [currentSelectedNode.configurationOptions valueForKey:inputKey];
+		id obj = [currentSelectedNode.inputValues objectForKey:inputKey];
 		
 		if(!inputKey) NSLog(@"ERROR: Control input has no associated input key!");
 		else 
 		{
 			// pass on the input.. need to format it to the right class first!
-			if([inputClass isEqualToString:@"NSNumber"]) // is this the best way to do this?
+			if([obj isKindOfClass:[NSNumber class]]) // is this the best way to do this?
 			{
 				NSNumber* num = [NSNumber numberWithDouble:fieldEditor.string.doubleValue];
 				[[currentSelectedNode inputValues] setValue:num forKey:inputKey];
@@ -275,7 +275,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			
 			else // catchall - just pass the string
 			{
-				NSLog(@"--> Note to self: inputClass = %@, this isn't dealt with specifically yet in textShouldEndEditing", inputClass);
+				NSLog(@"--> Note to self: inputClass = %@, this isn't dealt with specifically yet in textShouldEndEditing", [obj className]);
 				[[currentSelectedNode inputValues] setValue:fieldEditor.string forKey:inputKey];
 			}
 		}

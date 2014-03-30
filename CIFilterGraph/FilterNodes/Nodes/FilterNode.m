@@ -7,7 +7,7 @@
 //
 
 #import "FilterNode.h"
-#import "FilterGraphView.h"
+#import "UXFilterGraphView.h"
 
 #pragma mark - Input Keys
 
@@ -28,7 +28,6 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
     if (self) {
         _inputValues	= [[NSMutableDictionary alloc] init];
 		_outputValues	= [[NSMutableDictionary alloc] init];
-		_configurationOptions = [[NSMutableDictionary alloc] init];
 
 		self.verboseUpdate = UPDATE_VERBOSE_DEFAULT;
     }
@@ -56,10 +55,6 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	return _outputValues;
 }
 
-- (NSDictionary*) configurationOptions
-{
-	return _configurationOptions;
-}
 
 - (void) attachInputImageNode:(FilterNode*) upstreamNode
 {
@@ -96,13 +91,13 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
  */
 - (void) setupDefaultGraphView
 {
-	FilterGraphView* testGraphViewOut = [[FilterGraphView alloc] init];
+	UXFilterGraphView* testGraphViewOut = [[UXFilterGraphView alloc] init];
 	
-	self.graphView = testGraphViewOut; // retains
-	testGraphViewOut.parentNode = self; // assigns
+	self.graphView = testGraphViewOut; // strong
+	testGraphViewOut.parentNode = self; // weak
 	
 	// set delegate to main app delegate, easily accessed as singleton.
-	id<FilterGraphViewDelegate> mainAppDelegate = (id<FilterGraphViewDelegate>)[[NSApplication sharedApplication] delegate];
+	id<UXFilterGraphViewDelegate> mainAppDelegate = (id<UXFilterGraphViewDelegate>)[[NSApplication sharedApplication] delegate];
 	testGraphViewOut.delegate = mainAppDelegate;
 	
 }

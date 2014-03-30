@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Mete Cakman. All rights reserved.
 //
 
-#import "FilterConnectPointView.h"
-#import "FilterGraphView.h"
+#import "UXFilterConnectPointView.h"
+#import "UXFilterGraphView.h"
 
 
-@interface FilterConnectPointView ()
+@interface UXFilterConnectPointView ()
 {
 	BOOL isDragging;
 	
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation FilterConnectPointView
+@implementation UXFilterConnectPointView
 
 - (id)initWithFrame:(NSRect)frame
 {

@@ -7,7 +7,7 @@
 //
 
 #import "CustomisedScrollView.h"
-#import "FilterGraphView.h"
+#import "UXFilterGraphView.h"
 
 @implementation CustomisedScrollView
 

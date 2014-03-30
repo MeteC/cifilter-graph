@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* FilterGraphView.m */; };
+		CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* UXFilterGraphView.m */; };
 		CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */; };
-		CA8C9D7818E4DF11005B682A /* FilterConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7718E4DF11005B682A /* FilterConnectionView.m */; };
-		CA8C9D7B18E50BA9005B682A /* FilterConnectPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7A18E50BA9005B682A /* FilterConnectPointView.m */; };
+		CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */; };
+		CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */; };
 		CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */; };
 		CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */; };
 		CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */; };
@@ -31,14 +31,14 @@
 
 /* Begin PBXFileReference section */
 		CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeSeenInOutputPane.h; sourceTree = "<group>"; };
-		CA2861FB1787057D0024346C /* FilterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterGraphView.h; sourceTree = "<group>"; };
-		CA2861FC1787057D0024346C /* FilterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterGraphView.m; sourceTree = "<group>"; };
+		CA2861FB1787057D0024346C /* UXFilterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterGraphView.h; sourceTree = "<group>"; };
+		CA2861FC1787057D0024346C /* UXFilterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterGraphView.m; sourceTree = "<group>"; };
 		CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCIEffectNode.h; sourceTree = "<group>"; };
 		CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCIEffectNode.m; sourceTree = "<group>"; };
-		CA8C9D7618E4DF11005B682A /* FilterConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConnectionView.h; sourceTree = "<group>"; };
-		CA8C9D7718E4DF11005B682A /* FilterConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterConnectionView.m; sourceTree = "<group>"; };
-		CA8C9D7918E50BA9005B682A /* FilterConnectPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterConnectPointView.h; sourceTree = "<group>"; };
-		CA8C9D7A18E50BA9005B682A /* FilterConnectPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterConnectPointView.m; sourceTree = "<group>"; };
+		CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectionView.h; sourceTree = "<group>"; };
+		CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterConnectionView.m; sourceTree = "<group>"; };
+		CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectPointView.h; sourceTree = "<group>"; };
+		CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterConnectPointView.m; sourceTree = "<group>"; };
 		CA9461B6179D5D72002A0BF5 /* CustomisedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomisedScrollView.h; sourceTree = "<group>"; };
 		CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomisedScrollView.m; sourceTree = "<group>"; };
 		CA9461BC179E94C5002A0BF5 /* FilterNodeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeFactory.h; sourceTree = "<group>"; };
@@ -97,12 +97,12 @@
 		CA2861FA178704960024346C /* Graph */ = {
 			isa = PBXGroup;
 			children = (
-				CA2861FB1787057D0024346C /* FilterGraphView.h */,
-				CA2861FC1787057D0024346C /* FilterGraphView.m */,
-				CA8C9D7918E50BA9005B682A /* FilterConnectPointView.h */,
-				CA8C9D7A18E50BA9005B682A /* FilterConnectPointView.m */,
-				CA8C9D7618E4DF11005B682A /* FilterConnectionView.h */,
-				CA8C9D7718E4DF11005B682A /* FilterConnectionView.m */,
+				CA2861FB1787057D0024346C /* UXFilterGraphView.h */,
+				CA2861FC1787057D0024346C /* UXFilterGraphView.m */,
+				CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */,
+				CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */,
+				CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */,
+				CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */,
 				CAA3953D17A7CC4E009690A9 /* FilterGraphViewDelegate.h */,
 				CA9461B6179D5D72002A0BF5 /* CustomisedScrollView.h */,
 				CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */,
@@ -231,7 +231,7 @@
 		CAF14C8D17843410008DC169 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Mete Cakman";
 			};
 			buildConfigurationList = CAF14C9017843410008DC169 /* Build configuration list for PBXProject "CIFilterGraph" */;
@@ -272,9 +272,9 @@
 			files = (
 				CAF14CA517843411008DC169 /* main.m in Sources */,
 				CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */,
-				CA8C9D7818E4DF11005B682A /* FilterConnectionView.m in Sources */,
+				CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */,
 				CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */,
-				CA2861FD1787057D0024346C /* FilterGraphView.m in Sources */,
+				CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */,
 				CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */,
 				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
 				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,
@@ -282,7 +282,7 @@
 				CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */,
 				CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */,
 				CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */,
-				CA8C9D7B18E50BA9005B682A /* FilterConnectPointView.m in Sources */,
+				CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */,
 				CAA3953C17A7C7FE009690A9 /* BoxBlurNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +313,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -345,7 +344,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;

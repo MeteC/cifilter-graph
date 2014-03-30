@@ -12,7 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h> // using "associated objects"
 
-@class FilterGraphView;
+@class UXFilterGraphView;
 
 #define UPDATE_VERBOSE_DEFAULT YES // change this to NO eventually
 
@@ -21,8 +21,6 @@
 {
 	NSMutableDictionary* _outputValues;
 	NSMutableDictionary* _inputValues;
-	
-	NSMutableDictionary* _configurationOptions;
 }
 
 @property (nonatomic, assign) BOOL verboseUpdate; // print stuff on each update
@@ -35,16 +33,8 @@
  * Remember - you need to set parentNode on the graphView you're assigning! Tried syncing automatically,
  * but this brings complexity in that might not be immediately obvious in case of bugs.
  */
-@property (nonatomic, strong) FilterGraphView *graphView;
+@property (nonatomic, strong) UXFilterGraphView *graphView;
 
-/**
- * Set up by each node class, reflects the configuration requirements of the node.
- * Keys = inputValue keys, Values = classname of input.
- * e.g. "inputRadius" : "NSNumber" , or "inputImage" : "CIImage"
- *
- * Primary use for this is interrogating a filter node for how to set up it's configuration panel.
- */
-- (NSDictionary*) configurationOptions;
 
 /**
  * Each node has a dictionary of potential output values. Image filters will have an output image,
@@ -58,7 +48,9 @@
  * Each node has 1 or more input values, which it knows how to use. Dictionary keys helpfully listed
  * below as extern consts.
  *
- * These values may be of any class, including e.g. FilterNode, NSNumber, NSURL, etc.
+ * These values may be of any class, including e.g. FilterNode, NSNumber, NSURL, etc. 
+ * Very important - the value must be defaulted to something! So no NSNulls!! GUI Config panels
+ * will need to use this to see how to configure a node, so all required object forms must be here.
  *
  * Because the graph is implemented on a "pull" design, use inputValues to connect nodes together.
  */

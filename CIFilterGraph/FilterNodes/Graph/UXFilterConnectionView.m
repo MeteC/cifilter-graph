@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Mete Cakman. All rights reserved.
 //
 
-#import "FilterConnectionView.h"
-#import "FilterConnectPointView.h"
+#import "UXFilterConnectionView.h"
+#import "UXFilterConnectPointView.h"
 
-@implementation FilterConnectionView
+@implementation UXFilterConnectionView
 
 
 // Note - far from done, all I'm doing now is highlighting the rect that this connection will take..

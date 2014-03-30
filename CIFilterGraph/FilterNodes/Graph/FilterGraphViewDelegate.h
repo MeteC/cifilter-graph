@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class FilterGraphView;
+@class UXFilterGraphView;
 
-@protocol FilterGraphViewDelegate <NSObject>
+@protocol UXFilterGraphViewDelegate <NSObject>
 
 /**
  * Indicate that this filter graph view was clicked, for further processing in the GUI
  */
-- (void) clickedFilterGraph:(FilterGraphView*) graphView;
+- (void) clickedFilterGraph:(UXFilterGraphView*) graphView;
 
 @end

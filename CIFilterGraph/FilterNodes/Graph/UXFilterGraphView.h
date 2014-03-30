@@ -19,12 +19,12 @@
 @class FilterGraphViewConnection;
 
 
-@interface FilterGraphView : NSView
+@interface UXFilterGraphView : NSView
 {
 	CGSize defaultSize;				// each graph view will have it's own default sizing
 	CGSize defaultConnectionSize;	// and default connection tag sizing
 }
-@property (nonatomic, weak) id<FilterGraphViewDelegate> delegate;
+@property (nonatomic, weak) id<UXFilterGraphViewDelegate> delegate;
 
 /** 
  * The node that owns this graph view. When you set this, be sure to set it going the other way too.
