@@ -144,7 +144,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	// defaults set up on initialisation!
 	[currentSelectedNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		
-		if([obj isKindOfClass:[NSNumber class]] || [obj isKindOfClass:[NSURL class]])
+		if([obj isKindOfClass:[NSNumber class]])
 		{
 			// add a number field, with title
 			NSTextField* label = [self makeLabelWithText:key];
@@ -154,6 +154,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			// add text field 
 			// TODO: add number formatter?
 			float currentX = margin + label.frame.size.width + margin;
+			
+			// !!!: Yucky magic numbers that don't move with the GUI!
 			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(currentX, currentY, 100, label.frame.size.height*1.2)];
 			[_filterConfigScrollView.documentView addSubview:input];
 			
@@ -169,21 +171,53 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			
 			// TODO: all of this more generically
 			
-			currentY += 50;
+			currentY += input.frame.size.height + margin;
 		}
 		
-	//	else if([obj isKindOfClass:[NSURL class]])
-	//	{
+		// TODO: NSURL as string input but with button for opening File Selector
+		else if([obj isKindOfClass:[NSURL class]])
+		{
 			// add a string field
+			NSTextField* label = [self makeLabelWithText:key];
+			[label setFrameOrigin:CGPointMake(margin, currentY)];
+			[_filterConfigScrollView.documentView addSubview:label];
+			currentY += label.frame.size.height;
 			
-	//	}
+			// add text field 
+			// !!!: Yucky magic numbers that don't move with the GUI!
+			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(margin, currentY, 300, label.frame.size.height*1.2)];
+			[_filterConfigScrollView.documentView addSubview:input];
+			currentY += input.frame.size.height + margin;
+			
+			input.stringValue = [currentSelectedNode.inputValues valueForKey:key];
+			// text field delegate is the node
+			input.delegate = self;
+			
+			objc_setAssociatedObject(input, kUIControlElementAssociatedInputKey, key,
+									 OBJC_ASSOCIATION_ASSIGN);
+			
+			// Add button for file browser opening
+			NSButton* fileBrowserButton = [[NSButton alloc] initWithFrame:NSMakeRect(margin, currentY, 40, 40)];
+			[fileBrowserButton setImage:[NSImage imageNamed:@"NSComputer"]];
+			[_filterConfigScrollView.documentView addSubview:fileBrowserButton];
+			
+			[fileBrowserButton setTarget:self];
+			[fileBrowserButton setAction:@selector(pressFileBrowseButton:)];
+			
+			objc_setAssociatedObject(fileBrowserButton, kUIControlElementAssociatedInputKey, key,
+									 OBJC_ASSOCIATION_ASSIGN);
+			
+			
+			// TODO: all of this more generically
+			
+			currentY += fileBrowserButton.frame.size.height + margin;
+		}
 		
 		else if([obj isKindOfClass:[FilterNode class]]) {} // does nothing
 		
-		// TODO: NSURL as string input
 		
 		else {
-			NSString* errorMessage = [NSString stringWithFormat:@"Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]];
+			NSString* errorMessage = [NSString stringWithFormat:@"WARNING: Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]];
 			[AppDelegate log:errorMessage];
 		}
 		
@@ -305,5 +339,30 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	return YES;
 }
 
+#pragma mark - Button
+
+- (void) pressFileBrowseButton:(NSButton*) button
+{
+	NSString* inputKey = objc_getAssociatedObject(button, kUIControlElementAssociatedInputKey);
+	id obj = [currentSelectedNode.inputValues objectForKey:inputKey];
+	
+	//NSLog(@"associated obj = %@ (%@)", obj, [obj class]); // it's an NSURL
+	
+	// TODO: load up file browser and point it at the URL
+	NSOpenPanel* fileBrowser = [NSOpenPanel openPanel];
+	[fileBrowser setDirectoryURL:obj];
+	NSInteger returnVal = [fileBrowser runModal];
+	
+	// since it was modal, it happened in sync, now we can get the result
+	if(returnVal == NSFileHandlingPanelOKButton && [[fileBrowser URLs] count] > 0)
+	{
+		// we got a new file selected. Pass it back to the selected node and do a global update.
+		[currentSelectedNode.inputValues setObject:[[fileBrowser URLs] firstObject] forKey:inputKey];
+		
+		[AppDelegate log:[NSString stringWithFormat:@"Opened new file in %@: '%@'", currentSelectedNode, [[[fileBrowser URLs] firstObject] lastPathComponent] ]];
+		
+		[self doGlobalNodeUpdate];
+	}
+}
 
 @end
