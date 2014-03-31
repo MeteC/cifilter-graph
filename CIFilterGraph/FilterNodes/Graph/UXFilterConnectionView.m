@@ -9,37 +9,59 @@
 #import "UXFilterConnectionView.h"
 #import "UXFilterConnectPointView.h"
 
+@interface UXFilterConnectionView ()
+{
+	NSPoint beginPoint, endPoint;
+}
+@end
+
 @implementation UXFilterConnectionView
 
-
-// Note - far from done, all I'm doing now is highlighting the rect that this connection will take..
-// can't see it until the rest of the prep is done.
 
 - (void) updateConnection
 {
 	// Set the frame to encompass both begin and end points
-	NSPoint beginPoint	= [self.inputGraphConnect connectEndPoint];
-	NSPoint endPoint	= [self.outputGraphConnect connectEndPoint];
+	beginPoint	= NSMakePoint(NSMidX(self.inputConnectPoint.frame), NSMidY(self.inputConnectPoint.frame));
+	endPoint	= NSMakePoint(NSMidX(self.outputConnectPoint.frame), NSMidY(self.outputConnectPoint.frame));
 	
-	// AAAAAAGH. Might be better to have connect points responsible for giving a superview friendly location
+	const int margin = 5;
 	
 	int beginX	= MIN(beginPoint.x, endPoint.x);
 	int endX	= MAX(beginPoint.x, endPoint.x);
 	int beginY	= MIN(beginPoint.y, endPoint.y);
 	int endY	= MAX(beginPoint.y, endPoint.y);
 	
-	NSRect encompassingRect = NSMakeRect(beginX, beginY, endX - beginX, endY - beginY);
+	NSRect encompassingRect = NSMakeRect(beginX-margin, beginY-margin, endX - beginX + margin*2, endY - beginY + margin*2);
 	self.frame = encompassingRect;
 	
-	NSLog(@"updating connection view.");
-	NSLog(@"new frame: %f,%f  %fx%f", self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+	// ensure beginPoint and endPoint are relative to my frame now
+	beginPoint.x -= self.frame.origin.x;
+	beginPoint.y -= self.frame.origin.y;
+	endPoint.x	 -= self.frame.origin.x;
+	endPoint.y -=	self.frame.origin.y;
+	
+//	NSLog(@"updating connection view.");
+//	NSLog(@"new frame: %f,%f  %fx%f", self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+	
+	[self setNeedsDisplay:YES];
 }
 
 - (void) drawRect:(NSRect)dirtyRect
 {
-	NSLog(@"redrawing connection view!");
-	[[NSColor magentaColor] set];
+//	NSLog(@"redrawing connection view!");
+	
+	// Testing
+	/*
+	NSColor* bob = [[NSColor magentaColor] colorWithAlphaComponent:0.5];
+	[bob set];
 	[NSBezierPath fillRect:self.bounds];
+	 */
+	
+	NSBezierPath* linePath = [NSBezierPath bezierPath];
+	[linePath moveToPoint:beginPoint];
+	[linePath lineToPoint:endPoint];
+	
+	[linePath stroke];
 }
 
 @end

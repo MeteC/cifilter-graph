@@ -18,9 +18,9 @@
 @interface UXFilterConnectionView : NSView
 
 
-// Graph views connected. strong retention by each graph view, weak pointers from here.
-@property (weak) UXFilterConnectPointView* outputGraphConnect;
-@property (weak) UXFilterConnectPointView* inputGraphConnect; 
+// Graph views connected. weak pointers to input and output connect points here.
+@property (weak) UXFilterConnectPointView* outputConnectPoint;
+@property (weak) UXFilterConnectPointView* inputConnectPoint; 
 
 /**
  * When a related filter graph redraws itself, this is called to ensure the connection is updated too.

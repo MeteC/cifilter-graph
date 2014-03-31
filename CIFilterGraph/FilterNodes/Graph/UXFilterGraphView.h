@@ -34,8 +34,10 @@
 
 /**
  * (Re)set up connect points. call this after the node has been configured with its actual connections.
+ * Since we want graph connect points and connection views to be on the same view layer as the GraphView
+ * to avoid clipping (or the need to remove clipping), pass it in here please.
  */
-- (void) resetGraphConnects;
+- (void) resetGraphConnectsOnSuperview:(NSView*) superview;
 
 /**
  * Dictionary of output connect points, keyed the same as the parent node's outputValues (FilterNodes only)
@@ -50,13 +52,13 @@
 
 /**
  * Provide a frame for my output connector box. At the moment only supporting the one output.
- * This frame is relative to the graph view coord system.
+ * This frame is relative to the superview coord system.
  */
 - (NSRect) outputConnectionFrame;
 
 /**
  * Create the frame for the connection box for a given input index. Better not overflow mInputCount!
- * This frame is relative to the graph view coord system.
+ * This frame is relative to the superview coord system.
  */
 - (NSRect) inputConnectionFrame:(int) index;
 

@@ -11,12 +11,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class UXFilterConnectionView;
+
 @interface UXFilterConnectPointView : NSView
 
-/**
- * Gives you a friendly end point you can use, relative to the superview of this connect point's
- * graph view.
- */
-- (NSPoint) connectEndPoint;
+// Both connect points on either side of a connection view can have a strong pointer to it.
+// Only when both connect points let go of a connection view, will it be released.
+@property (strong) UXFilterConnectionView* connectionView;
+
 
 @end

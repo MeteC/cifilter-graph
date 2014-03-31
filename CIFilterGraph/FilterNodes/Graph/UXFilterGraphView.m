@@ -19,13 +19,10 @@
 	// Determined on init, how many connection points do we need to graphically represent?
 	int mInputCount, mOutputCount;
 	
+	// connect points. note at present outputConnectPoints only has one entry, but it's easy enough to keep
+	// in a dictionary for now anyway.
 	NSMutableDictionary* _inputConnectPoints;
 	NSMutableDictionary* _outputConnectPoints;
-	
-	// array of input connections. the output connection would be owned and presented by the downstream graph
-	
-	// !!!: Starting to think that FilterGraphView should know nothing about connections, just connect points!
-	//NSArray* inputConnections;
 	
 	NSPoint mousePointerAtDragStart;
 	NSPoint originAtStart;
@@ -75,26 +72,32 @@
 }
 
 
-- (void) resetGraphConnects
+- (void) resetGraphConnectsOnSuperview:(NSView*) superview
 {
 	// clear old ones
 	[_outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[obj removeFromSuperview];
 	}];
 	
-	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) 
+	{
+		[[obj connectionView] removeFromSuperview];
 		[obj removeFromSuperview];
 	}];
 	
 	
 	// Set up the connect point views...
+	
+	// I'll set up connection views when I set up input connect points, rather than output connect points.
 	_outputConnectPoints = [NSMutableDictionary dictionary];
-	UXFilterConnectPointView* outputConnectPoint = [[UXFilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
-	[self addSubview:outputConnectPoint];
+	UXFilterConnectPointView* outputConnectPointView = 
+	[[UXFilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
+	
+	[superview addSubview:outputConnectPointView];
 	
 	// just the one entry for now, using the one "image" output key
 	// ???: Is this the right key to use?? It actually corresponds to a CIImage, not a FilterNode.
-	[_outputConnectPoints setValue:outputConnectPoint forKey:kFilterOutputKeyImage];
+	[_outputConnectPoints setValue:outputConnectPointView forKey:kFilterOutputKeyImage];
 	mOutputCount = 1;
 	
 	
@@ -119,21 +122,39 @@
 		
 		if([obj isKindOfClass:[FilterNode class]])
 		{
-			UXFilterConnectPointView* inputConnectPoint = [[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i++]];
-			[self addSubview:inputConnectPoint];
+			UXFilterConnectPointView* inputConnectPointView = 
+			[[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i++]];
 			
-			[_inputConnectPoints setValue:inputConnectPoint forKey:key];
+			// create a connection view and assign it to the input connect point, two-way pointers.
+			inputConnectPointView.connectionView = [[UXFilterConnectionView alloc] init];
+			inputConnectPointView.connectionView.outputConnectPoint = inputConnectPointView;
+			
+			[superview addSubview:inputConnectPointView];
+			
+			[_inputConnectPoints setValue:inputConnectPointView forKey:key];
 			NSLog(@"Added input point for %@, that's at key '%@'", self.parentNode.class, key);
-		
-			/*
-			// TESTING: Remove this!!
-			// adding a connection to each output connect point.. just to see something
-			FilterConnectionView* connection = [[FilterConnectionView alloc] initWithFrame:NSZeroRect];
-			connection.outputGraphConnect = inputConnectPoint;
-			connection.inputGraphConnect = [self.parentNode.inputImageNode.graphView.outputConnectPoints valueForKey:kFilterOutputKeyImage]; // blimey!
 			
-			[connection updateConnection];
-			[self.superview addSubview:connection];*/
+			// now we'll introduce the connection view with the output connect point
+			UXFilterGraphView* connectedGraphView = [self.parentNode.inputImageNode graphView];
+			
+			if(!connectedGraphView)
+			{
+				[AppDelegate log:@"ERROR: trying to reset graph UI connections, but a corresponding input FilterGraphView does not exist"];
+			}
+			else 
+			{
+				UXFilterConnectPointView* otherConnectingPoint = [connectedGraphView.outputConnectPoints valueForKey:kFilterOutputKeyImage];
+				
+				// introduce the output connect point of the connected node to the connection...
+				inputConnectPointView.connectionView.inputConnectPoint = otherConnectingPoint;
+				otherConnectingPoint.connectionView = inputConnectPointView.connectionView;
+				
+				// now we can update the connection view and add it to the UI
+				[inputConnectPointView.connectionView updateConnection];
+				
+				// Add to the same view layer
+				[superview addSubview:inputConnectPointView.connectionView];
+			}
 		}
 	}];
 	
@@ -180,6 +201,20 @@
 
 #pragma mark - Drawing
 
+- (void) setNeedsDisplay:(BOOL)flag
+{
+	[super setNeedsDisplay:flag];
+	
+	// Also call on all connect points to update their connections
+	[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[[obj connectionView] updateConnection];
+	}];
+	
+	[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[[obj connectionView] updateConnection];
+	}];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
@@ -203,91 +238,8 @@
 	// write its filter node name in the middle
 	NSString* outputName = [NSString stringWithFormat:@"%@", self.parentNode.class];
 	[outputName drawInRect:mainFillRect withAttributes:nil];
-
-	// Check connections
-///	[self updateConnections];
 }
 
-// NOPE: no longer have connections owned by FilterGraphView, rather by FilterConnectPoints.
-- (void) updateConnections
-{
-	// Just dealing with the 1 input case for now, to see how things sit together.
-	/*
-	FilterNode* inputNode = [self.parentNode inputImageNode];
-	FilterConnectionView* connect = inputConnections[0];
-	
-	if(inputNode)
-	{
-		connect.inputGraphConnect = inputNode.graphView.out;
-		[connect updateConnection];
-	}
-	else // no input node! better hide the connection
-	{
-		[connect setHidden:YES];
-	}*/
-	
-	
-	/*
-	// TODO: Case with more than 1 input!
-	// loop all node inputs, to make a list of inputs that are FilterNodes (and therefore need arrows)
-	
-	// loop all input connections..
-	
-	for(int i = 0; i < inputConnections.count; i++)
-	{
-		FilterConnectionView* connection = inputConnections[i];
-		self.parentNode.inputValues... urp
-		
-		if(connection.inputGraphView)
-		{
-			// we got a full connection
-			
-		}
-		else 
-		{
-			[connection setHidden:YES];
-		}
-	}*/
-}
-
-/**
- * Draw all input connections, as black arrows. NOPE DONE BY FilterConnectionView
- */
-/*
-- (void) drawInputConnections
-{
-	[[NSColor redColor] set];
-	
-	int inputConnectionIndex = 0;
-	
-	for(id inputVal in self.parentNode.inputValues.allValues)
-	{
-		if([inputVal isKindOfClass:[FilterNode class]])
-		{
-			FilterNode* inputNode = inputVal;
-			
-			// For the input node, get it's output location. Only one is supported for now.
-			NSRect outputConnectorFrame = inputNode.graphView.outputConnectionFrame; 
-			
-			// Get the correct input connection. Has the same index as the filter node.
-			int myIndex = inputConnectionIndex++;
-			NSRect inputConnectorFrame = [self inputConnectionFrame:myIndex];
-			
-			CGPoint startPoint = CGPointMake(CGRectGetMidX(outputConnectorFrame) - self.frame.origin.x,
-											 CGRectGetMidY(outputConnectorFrame) - self.frame.origin.y);
-			
-			CGPoint endPoint = CGPointMake(CGRectGetMidX(inputConnectorFrame) - self.frame.origin.x,
-										   CGRectGetMidY(inputConnectorFrame) - self.frame.origin.y);
-			
-			// Now draw the line
-			NSBezierPath* linePath = [NSBezierPath bezierPath];
-			[linePath moveToPoint:endPoint];
-			[linePath lineToPoint:startPoint];
-			
-			[linePath stroke];
-		}
-	}
-}*/
 
 
 - (NSRect) inputConnectionFrame:(int) index
@@ -296,8 +248,8 @@
 	
 	// located along left side, spaced evenly according to mInputCount
 	float centroidSpacing = self.frame.size.height / (mInputCount + 1);
-	float xPos = 0;
-	float yPos = ((index+1) * centroidSpacing) - defaultConnectionSize.height/2;
+	float xPos = self.frame.origin.x;
+	float yPos = self.frame.origin.y + ((index+1) * centroidSpacing) - defaultConnectionSize.height/2;
 	
 	return NSMakeRect(xPos, yPos, defaultConnectionSize.width, defaultConnectionSize.height);
 }
@@ -305,8 +257,8 @@
 - (NSRect) outputConnectionFrame
 {
 	// centered halfway down the right-hand side..
-	return NSMakeRect(self.frame.size.width - defaultConnectionSize.width, 
-					  self.frame.size.height/2 - defaultConnectionSize.height/2, 
+	return NSMakeRect(self.frame.origin.x + self.frame.size.width - defaultConnectionSize.width, 
+					  self.frame.origin.y + self.frame.size.height/2 - defaultConnectionSize.height/2, 
 					  defaultConnectionSize.width, 
 					  defaultConnectionSize.height);
 }
@@ -393,8 +345,21 @@
 		thisOrigin.x = MAX(0, thisOrigin.x);
 		thisOrigin.y = MAX(0, thisOrigin.y);
 		
+		NSPoint delta = NSMakePoint(thisOrigin.x - self.frame.origin.x, thisOrigin.y - self.frame.origin.y);
+		
+		// update my frame
 		[self setFrameOrigin:thisOrigin];
 		
+		// update connect point frames too, as they're attached to superview
+		[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+			[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
+											[obj frame].origin.y + delta.y)];
+		}];
+		
+		[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+			[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
+											[obj frame].origin.y + delta.y)];
+		}];
 		// *
 	}
 }

@@ -85,9 +85,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[_outputPaneScrollView autoResizeContentView];
 	
 	// changed node connections so we need to update the graphs manually
-	[testNodeIn.graphView resetGraphConnects];
-	[testModNode.graphView resetGraphConnects];
-	[testNodeOut.graphView resetGraphConnects];
+	[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+	[testModNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+	[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 	
 	[self doGlobalNodeUpdate];
 }
@@ -139,16 +139,20 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	__block float currentY = margin; // keep track of vertical layout.
 	
 	// TODO: Add controlView method to FilterNode that constructs this? Rather than doing it here?
+	
+	// Note I'm using defaults to set up controls. It's important that all FilterNodes have full inputValue
+	// defaults set up on initialisation!
 	[currentSelectedNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		
-		if([obj isKindOfClass:[NSNumber class]])
+		if([obj isKindOfClass:[NSNumber class]] || [obj isKindOfClass:[NSURL class]])
 		{
 			// add a number field, with title
 			NSTextField* label = [self makeLabelWithText:key];
 			[label setFrameOrigin:CGPointMake(margin, currentY)];
 			[_filterConfigScrollView.documentView addSubview:label];
 			
-			// add text field with number formatter
+			// add text field 
+			// TODO: add number formatter?
 			float currentX = margin + label.frame.size.width + margin;
 			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(currentX, currentY, 100, label.frame.size.height*1.2)];
 			[_filterConfigScrollView.documentView addSubview:input];
@@ -168,7 +172,15 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			currentY += 50;
 		}
 		
+	//	else if([obj isKindOfClass:[NSURL class]])
+	//	{
+			// add a string field
+			
+	//	}
+		
 		else if([obj isKindOfClass:[FilterNode class]]) {} // does nothing
+		
+		// TODO: NSURL as string input
 		
 		else {
 			NSString* errorMessage = [NSString stringWithFormat:@"Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]];
@@ -271,6 +283,12 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			{
 				NSNumber* num = [NSNumber numberWithDouble:fieldEditor.string.doubleValue];
 				[[currentSelectedNode inputValues] setValue:num forKey:inputKey];
+			}
+			
+			else if([obj isKindOfClass:[NSURL class]])
+			{
+				NSURL* url = [NSURL URLWithString:fieldEditor.string];
+				[[currentSelectedNode inputValues] setValue:url forKey:inputKey];
 			}
 			
 			else // catchall - just pass the string
