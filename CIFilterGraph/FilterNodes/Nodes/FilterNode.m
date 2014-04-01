@@ -18,6 +18,7 @@ NSString* const kFilterInputKeyFileURL			= @"imageFileURLInput";
 
 NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
+
 #pragma mark - Filter Node
 
 @implementation FilterNode
@@ -30,6 +31,9 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 		_outputValues	= [[NSMutableDictionary alloc] init];
 
 		self.verboseUpdate = UPDATE_VERBOSE_DEFAULT;
+		
+		// default for all filter nodes to have the input image node key
+		self.filterNodeTypeInputKeys = @[kFilterInputKeyInputImageNode];
     }
     return self;
 }
@@ -148,3 +152,19 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
  */
 
 @end
+
+
+/*
+#pragma mark - Inner Class for "null" FilterNode
+
+@interface NullFilterNode : FilterNode
+@end
+
+@implementation NullFilterNode
+
+-(id) init
+{
+	
+}
+
+@end*/

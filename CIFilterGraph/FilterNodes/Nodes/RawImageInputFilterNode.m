@@ -10,6 +10,17 @@
 
 @implementation RawImageInputFilterNode
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.filterNodeTypeInputKeys = @[]; // no input nodes!
+		
+		// default URL
+		[[self inputValues] setValue:[NSURL URLWithString:@""] forKey:kFilterInputKeyFileURL];
+    }
+    return self;
+}
 
 /**
  * RII Filter Node update takes the input file URL, loads a valid CIImage representation of it, and

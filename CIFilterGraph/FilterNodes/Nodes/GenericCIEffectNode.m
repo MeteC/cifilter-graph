@@ -33,6 +33,7 @@
 			assert(filter != nil);
 		}
 		
+		// defaults
 		[filter setDefaults];
 		
 		[mConfigKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

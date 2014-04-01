@@ -90,6 +90,8 @@
 	
 	// I'll set up connection views when I set up input connect points, rather than output connect points.
 	_outputConnectPoints = [NSMutableDictionary dictionary];
+	mOutputCount = 1;
+	
 	UXFilterConnectPointView* outputConnectPointView = 
 	[[UXFilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
 	
@@ -98,51 +100,40 @@
 	// just the one entry for now, using the one "image" output key
 	// ???: Is this the right key to use?? It actually corresponds to a CIImage, not a FilterNode.
 	[_outputConnectPoints setValue:outputConnectPointView forKey:kFilterOutputKeyImage];
-	mOutputCount = 1;
 	
 	
 	
 	// For inputs, go through the parent node's input values, and make a connect point for each
 	// FilterNode found there
 	_inputConnectPoints = [NSMutableDictionary dictionary];
+	mInputCount = (int)self.parentNode.filterNodeTypeInputKeys.count;
 	
-	// first pass to count up all FilterNode input values
-	mInputCount = 0;
-	[self.parentNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[self.parentNode.filterNodeTypeInputKeys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
+		UXFilterConnectPointView* inputConnectPointView = 
+		[[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:(int)idx]];
 		
-		if([obj isKindOfClass:[FilterNode class]])
-		{
-			mInputCount++;
-		}
-	}];
-	
-	// second pass to create connect points
-	__block int i = 0;
-	[self.parentNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[superview addSubview:inputConnectPointView];
 		
-		if([obj isKindOfClass:[FilterNode class]])
+		[_inputConnectPoints setValue:inputConnectPointView forKey:key];
+		NSLog(@"Added input point for %@, that's at key '%@'", self.parentNode.class, key);
+		
+		
+		
+		// now we'll introduce a connection view with connected node's output connect point - if it exists
+		
+		
+		FilterNode* connectedNode = [self.parentNode.inputValues objectForKey:key];
+		if(connectedNode)
 		{
-			UXFilterConnectPointView* inputConnectPointView = 
-			[[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:i++]];
+			UXFilterGraphView* connectedGraphView = connectedNode.graphView;
 			
-			// create a connection view and assign it to the input connect point, two-way pointers.
-			inputConnectPointView.connectionView = [[UXFilterConnectionView alloc] init];
-			inputConnectPointView.connectionView.outputConnectPoint = inputConnectPointView;
-			
-			[superview addSubview:inputConnectPointView];
-			
-			[_inputConnectPoints setValue:inputConnectPointView forKey:key];
-			NSLog(@"Added input point for %@, that's at key '%@'", self.parentNode.class, key);
-			
-			// now we'll introduce the connection view with the output connect point
-			UXFilterGraphView* connectedGraphView = [self.parentNode.inputImageNode graphView];
-			
-			if(!connectedGraphView)
+			if(connectedGraphView)
 			{
-				[AppDelegate log:@"ERROR: trying to reset graph UI connections, but a corresponding input FilterGraphView does not exist"];
-			}
-			else 
-			{
+				// create a connection view and assign it to the input connect point, two-way pointers.
+				inputConnectPointView.connectionView = [[UXFilterConnectionView alloc] init];
+				inputConnectPointView.connectionView.outputConnectPoint = inputConnectPointView;
+				
+				// there's only one FilterNode output for now!
 				UXFilterConnectPointView* otherConnectingPoint = [connectedGraphView.outputConnectPoints valueForKey:kFilterOutputKeyImage];
 				
 				// introduce the output connect point of the connected node to the connection...
@@ -155,9 +146,15 @@
 				// Add to the same view layer
 				[superview addSubview:inputConnectPointView.connectionView];
 			}
+			
+			else // connected node has no graph view
+			{
+				[AppDelegate log:@"ERROR: trying to reset graph UI connections, but a corresponding input FilterGraphView does not exist"];
+			}
 		}
 	}];
 	
+	NSLog(@"Reset graph connects for %@", self.parentNode.className);
 }
 
 
@@ -345,23 +342,32 @@
 		thisOrigin.x = MAX(0, thisOrigin.x);
 		thisOrigin.y = MAX(0, thisOrigin.y);
 		
-		NSPoint delta = NSMakePoint(thisOrigin.x - self.frame.origin.x, thisOrigin.y - self.frame.origin.y);
-		
 		// update my frame
 		[self setFrameOrigin:thisOrigin];
 		
-		// update connect point frames too, as they're attached to superview
-		[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-			[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
-											[obj frame].origin.y + delta.y)];
-		}];
-		
-		[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-			[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
-											[obj frame].origin.y + delta.y)];
-		}];
 		// *
 	}
+}
+
+/**
+ * Extending this to move connect points around as well!
+ */
+- (void) setFrameOrigin:(NSPoint)newOrigin
+{
+	NSPoint delta = NSMakePoint(newOrigin.x - self.frame.origin.x, newOrigin.y - self.frame.origin.y);
+	
+	[super setFrameOrigin:newOrigin];
+	
+	// update connect point frames too, as they're attached to superview
+	[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
+										[obj frame].origin.y + delta.y)];
+	}];
+	
+	[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+		[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
+										[obj frame].origin.y + delta.y)];
+	}];
 }
 
 /*

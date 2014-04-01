@@ -32,12 +32,17 @@
  */
 @property (nonatomic, weak) FilterNode* parentNode;
 
+
 /**
  * (Re)set up connect points. call this after the node has been configured with its actual connections.
  * Since we want graph connect points and connection views to be on the same view layer as the GraphView
  * to avoid clipping (or the need to remove clipping), pass it in here please.
+ *
+ * Note - I'm re-creating all connect points and connections here. 
+ * TODO: Need to test this extensively to make sure old connections are released each time.
  */
 - (void) resetGraphConnectsOnSuperview:(NSView*) superview;
+
 
 /**
  * Dictionary of output connect points, keyed the same as the parent node's outputValues (FilterNodes only)

@@ -37,6 +37,14 @@
 
 
 /**
+ * Array describing the keys (and implicitly the number) of all inputs that happen to be FilterNodes.
+ * This is because filter node inputs are the only inputs that are not required to be defaulted on 
+ * initialisation. We still need to know what the FilterNode expects though.
+ */
+@property NSArray* filterNodeTypeInputKeys;
+
+
+/**
  * Each node has a dictionary of potential output values. Image filters will have an output image,
  * data filters will have vectors, numbers, etc.
  *

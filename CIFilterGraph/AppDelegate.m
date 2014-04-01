@@ -50,7 +50,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	
 	// Testing factory
-	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[FilterNodeFactory generateNodeForNodeClassName:@"RawImageInputFilterNode"];
+	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[self createNodeForNodeClassName:@"RawImageInputFilterNode"];
 	
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/alien-app-icon-1024x1024.png"]];
@@ -58,21 +58,19 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
 	
 	// Filter Example
-	FilterNode* testModNode = [FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
+	FilterNode* testModNode = [self createNodeForNodeClassName:@"BoxBlurNode"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
 	
 	// Output
-	OutputViewingNode* testNodeOut = (OutputViewingNode*)[FilterNodeFactory generateNodeForNodeClassName:@"OutputViewingNode"];
+	OutputViewingNode* testNodeOut = (OutputViewingNode*)[self createNodeForNodeClassName:@"OutputViewingNode"];
 	
 	// connect and pass through data
 	[testModNode attachInputImageNode:testNodeIn];
 	[testNodeOut attachInputImageNode:testModNode];
 	
 	// Put graphics in right places
-	[_graphScrollView.documentView addSubview:testNodeIn.graphView];
+	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
 	[testModNode.graphView setFrameOrigin:NSMakePoint(200, 100)];
-	[_graphScrollView.documentView addSubview:testModNode.graphView];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(400, 200)];
-	[_graphScrollView.documentView addSubview:testNodeOut.graphView];
 	
 	// output panes..
 	[_outputPaneScrollView.documentView addSubview:testNodeIn.imageOutputView];
@@ -84,7 +82,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	[_outputPaneScrollView autoResizeContentView];
 	
-	// changed node connections so we need to update the graphs manually
+	
+	// We've connected them, so reset the connect points
 	[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 	[testModNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 	[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
@@ -230,7 +229,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 /**
  * Create a node from it's class name, put it in the scene unattached to anything.
  */
-- (void) createNodeForNodeClassName:(NSString*) nodeClassName
+- (FilterNode*) createNodeForNodeClassName:(NSString*) nodeClassName
 {
 	FilterNode* newNode = [FilterNodeFactory generateNodeForNodeClassName:nodeClassName];
 	
@@ -238,11 +237,16 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	{
 		[currentFilterList addObject:newNode];
 		
+		// add to graph scroll view
 		[_graphScrollView.documentView addSubview:newNode.graphView];
 		
-		// TODO: find a smart place to put the new node
-		[newNode.graphView setFrameOrigin:NSMakePoint(_graphScrollView.frame.size.width/2, _graphScrollView.frame.size.height/2)];
+		// Set up the connect points the first time. (If this looks wrong for a FilterNode,
+		// ensure you have ALL inputs and outputs with default values on generation)
+		[newNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+		
 	}
+	
+	return newNode;
 }
 
 /**
