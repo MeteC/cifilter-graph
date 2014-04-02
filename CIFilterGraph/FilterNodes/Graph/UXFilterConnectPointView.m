@@ -117,7 +117,7 @@
 
 - (void) mouseExited:(NSEvent *)theEvent
 {
-	if(!isDragging)
+//	if(!isDragging)
 	{
 		// hover off
 		[self highlightMe:NO];

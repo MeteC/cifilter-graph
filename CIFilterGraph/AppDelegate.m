@@ -55,8 +55,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/alien-app-icon-1024x1024.png"]];
 	
-	NSLog(@"Test input dict: %@", testNodeIn.inputValues);
-	
 	// Filter Example
 	FilterNode* testModNode = [self createNodeForNodeClassName:@"BoxBlurNode"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
 	
@@ -71,12 +69,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
 	[testModNode.graphView setFrameOrigin:NSMakePoint(200, 100)];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(400, 200)];
-	
-	// output panes..
-	[_outputPaneScrollView.documentView addSubview:testNodeIn.imageOutputView];
-	float xPos = testNodeIn.imageOutputView.frame.size.width + 20;
-	[testNodeOut.imageOutputView setFrame:NSOffsetRect(testNodeOut.imageOutputView.frame, xPos, 0)];
-	[_outputPaneScrollView.documentView addSubview:testNodeOut.imageOutputView];
 	
 	outputNode = testNodeOut; // keep reference to root. Since it's a pull-graph, that's the output
 	
@@ -244,6 +236,21 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		// ensure you have ALL inputs and outputs with default values on generation)
 		[newNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 		
+		if([newNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
+		{
+			static const float margin = 20; // margin between image views
+			
+			// it needs an output image pane!
+			NSUInteger currentPaneCount = [_outputPaneScrollView.documentView subviews].count;
+			
+			NSImageView* outputPane = [(id<FilterNodeSeenInOutputPane>)newNode imageOutputView];
+			[_outputPaneScrollView.documentView addSubview:outputPane];
+			
+			float xPos = (outputPane.frame.size.width + margin) * currentPaneCount;
+			[outputPane setFrame:NSOffsetRect(outputPane.frame, xPos, 0)];
+			
+			[_outputPaneScrollView autoResizeContentView];
+		}
 	}
 	
 	return newNode;
