@@ -8,6 +8,7 @@
 
 #import "UXFilterConnectPointView.h"
 #import "NSPointProvider.h"
+#import "UXFilterGraphManager.h"
 
 
 @interface UXFilterConnectPointView ()
@@ -18,7 +19,7 @@
 	NSTrackingArea* trackingArea;
 }
 
-@property BOOL highlighted;
+@property (readwrite) BOOL highlighted;
 @property NSColor* backgroundColour;
 
 @end
@@ -100,6 +101,9 @@
 	else
 		self.backgroundColour = [NSColor grayColor];
 	
+	// Register the highlighting with the graph manager
+	[[UXFilterGraphManager sharedInstance] registerConnectPoint:self asHighlighted:highlight];
+	
 	[self setNeedsDisplay:YES];
 }
 
@@ -159,7 +163,7 @@
 	[self.connectionView.inputPointProvider setConnectionView:nil];
 	[self.connectionView.outputPointProvider setConnectionView:nil];
 	
-	// TODO: kill underlying FilterNode connection too.
+	// TODO: kill underlying FilterNode connection too and update the graph
 }
 
 - (void)mouseDown:(NSEvent *) e 
@@ -179,19 +183,20 @@
 
 - (void) mouseUp:(NSEvent *)theEvent
 {
-	/*
-	if(self.highlighted)
-	{
-		NSLog(@"Mouse up from connect point drag");
-		isDragging = NO;
-		[self highlightMe:NO];
-	}*/
+	// Establish whether we are hovering over another connect point or not...
+	UXFilterConnectPointView* hoveringConnectPoint = [[[UXFilterGraphManager sharedInstance] highlightedConnectPoints] anyObject];
 	
-	BOOL hoveringOverOther = NO;
+	// Are we hovering over a different connect point?
+	BOOL hoveringOverOther = (hoveringConnectPoint != nil) && (hoveringConnectPoint != self);
 	
-	if(hoveringOverOther)
+	// Is that connect point unconnected to others?
+	BOOL hoveringOverSignificantOther = hoveringOverOther && (!hoveringConnectPoint.connectionView);
+	
+	if(hoveringOverSignificantOther)
 	{
-		// TODO: Hovering!
+		// connecting self with other - make the connection and get the underlying FilterNodes to connect too
+		NSLog(@"Hovering over %@", hoveringConnectPoint);
+		[self destroyMyConnectionView];
 	}
 	else // hovering over empty space, kill the connection view
 	{
@@ -211,7 +216,11 @@
 	// if the opposite point was a connect point view, remove it's grasp on the connection first
 	id opposite = [self.connectionView oppositeConnectPointFrom:self];
 	if([opposite isKindOfClass:[UXFilterConnectPointView class]])
+	{
 		[opposite setConnectionView:nil];
+		
+		// TODO: Kill the underlying filternode connection and update the graph
+	}
 	
 	// now set the opposite point to be our mouse pointer
 	[self.connectionView setOppositeConnectPointFrom:self toBe:outputPoint]; // weak so only valid in this scope

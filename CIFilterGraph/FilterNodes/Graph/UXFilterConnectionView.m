@@ -110,7 +110,7 @@ static int debugCounter = 0;
 
 - (void) drawRect:(NSRect)dirtyRect
 {
-	NSLog(@"redrawing connection view!");
+	//NSLog(@"redrawing connection view!");
 	
 	// Testing
 	/*

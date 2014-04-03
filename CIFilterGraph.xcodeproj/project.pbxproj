@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* UXFilterGraphView.m */; };
+		CA2E31FC18EE296400E9B5BA /* UXFilterGraphManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */; };
 		CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */; };
 		CA8BA40718ED04A200DC0BCC /* NSPointProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8BA40618ED04A200DC0BCC /* NSPointProvider.m */; };
 		CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */; };
@@ -34,6 +35,8 @@
 		CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeSeenInOutputPane.h; sourceTree = "<group>"; };
 		CA2861FB1787057D0024346C /* UXFilterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterGraphView.h; sourceTree = "<group>"; };
 		CA2861FC1787057D0024346C /* UXFilterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterGraphView.m; sourceTree = "<group>"; };
+		CA2E31FA18EE296400E9B5BA /* UXFilterGraphManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterGraphManager.h; sourceTree = "<group>"; };
+		CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterGraphManager.m; sourceTree = "<group>"; };
 		CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCIEffectNode.h; sourceTree = "<group>"; };
 		CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCIEffectNode.m; sourceTree = "<group>"; };
 		CA8BA40518ED04A200DC0BCC /* NSPointProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPointProvider.h; sourceTree = "<group>"; };
@@ -109,6 +112,8 @@
 				CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */,
 				CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */,
 				CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */,
+				CA2E31FA18EE296400E9B5BA /* UXFilterGraphManager.h */,
+				CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */,
 				CA9461B6179D5D72002A0BF5 /* CustomisedScrollView.h */,
 				CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */,
 				CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */,
@@ -276,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAF14CA517843411008DC169 /* main.m in Sources */,
+				CA2E31FC18EE296400E9B5BA /* UXFilterGraphManager.m in Sources */,
 				CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */,
 				CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */,
 				CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */,

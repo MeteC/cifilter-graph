@@ -19,5 +19,7 @@
 // Only when both connect points let go of a connection view, will it be released.
 @property (strong) UXFilterConnectionView* connectionView;
 
+// Are we highlighted now (i.e. mouse is registered as being over us?)
+@property (readonly) BOOL highlighted;
 
 @end

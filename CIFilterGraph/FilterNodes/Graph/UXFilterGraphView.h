@@ -9,7 +9,6 @@
 //	Extending NSView to have a pointer back to it's FilterNode parent
 //	Using FilterGraphView by itself will provide a default (crappy) graph view, good enough for development at least.
 
-//	!!!: Connections: Each node resposible to draw only its input connections...
 
 #import <Cocoa/Cocoa.h>
 #import "FilterNode.h"
