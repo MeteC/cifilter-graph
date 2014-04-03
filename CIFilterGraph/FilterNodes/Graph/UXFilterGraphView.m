@@ -131,13 +131,13 @@
 			{
 				// create a connection view and assign it to the input connect point, two-way pointers.
 				inputConnectPointView.connectionView = [[UXFilterConnectionView alloc] init];
-				inputConnectPointView.connectionView.outputConnectPoint = inputConnectPointView;
+				inputConnectPointView.connectionView.outputPointProvider = inputConnectPointView;
 				
 				// there's only one FilterNode output for now!
 				UXFilterConnectPointView* otherConnectingPoint = [connectedGraphView.outputConnectPoints valueForKey:kFilterOutputKeyImage];
 				
 				// introduce the output connect point of the connected node to the connection...
-				inputConnectPointView.connectionView.inputConnectPoint = otherConnectingPoint;
+				inputConnectPointView.connectionView.inputPointProvider = otherConnectingPoint;
 				otherConnectingPoint.connectionView = inputConnectPointView.connectionView;
 				
 				// now we can update the connection view and add it to the UI
@@ -152,6 +152,7 @@
 				[AppDelegate log:@"ERROR: trying to reset graph UI connections, but a corresponding input FilterGraphView does not exist"];
 			}
 		}
+		
 	}];
 	
 	NSLog(@"Reset graph connects for %@", self.parentNode.className);
@@ -201,7 +202,7 @@
 - (void) setNeedsDisplay:(BOOL)flag
 {
 	[super setNeedsDisplay:flag];
-	
+
 	// Also call on all connect points to update their connections
 	[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[[obj connectionView] updateConnection];
@@ -210,6 +211,7 @@
 	[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[[obj connectionView] updateConnection];
 	}];
+ 
 }
 
 - (void)drawRect:(NSRect)dirtyRect

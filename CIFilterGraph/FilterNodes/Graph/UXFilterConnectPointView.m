@@ -7,12 +7,12 @@
 //
 
 #import "UXFilterConnectPointView.h"
-#import "UXFilterConnectionView.h"
+#import "NSPointProvider.h"
 
 
 @interface UXFilterConnectPointView ()
 {
-	BOOL isDragging;
+	BOOL isDragging; // TODO: remove this?
 	
 	// for mouse tracking
 	NSTrackingArea* trackingArea;
@@ -24,6 +24,8 @@
 @end
 
 @implementation UXFilterConnectPointView
+
+
 
 - (id) initWithFrame:(NSRect)frameRect
 {
@@ -101,6 +103,17 @@
 	[self setNeedsDisplay:YES];
 }
 
+#pragma mark - Delegate
+
+/**
+ * Return my contact point for a connection view
+ */
+- (NSPoint) endPoint
+{
+	return NSMakePoint(NSMidX(self.frame), NSMidY(self.frame));
+}
+
+
 #pragma mark - Mousey
 
 
@@ -124,25 +137,87 @@
 	}
 }
 
+
+
+/*
+ Logic for dragging:
+ 
+ - If connect point has no connectionView, create one and have it follow the mouse cursor around
+ until mouse up. Then 
+ - if you're hovering over another connect point, connect the two (if reasonable*)
+ - if you're not hovering over another connect point, release the connection view
+ 
+ - If connect point has a connectionView already, it must be attached to another connect point. 
+ Cancel out that point and do as above.
+ 
+ */
+
+- (void) destroyMyConnectionView
+{
+	// kill my connection view completely
+	[self.connectionView removeFromSuperview];
+	[self.connectionView.inputPointProvider setConnectionView:nil];
+	[self.connectionView.outputPointProvider setConnectionView:nil];
+	
+	// TODO: kill underlying FilterNode connection too.
+}
+
 - (void)mouseDown:(NSEvent *) e 
 { 	
 	isDragging = YES;
+	
+	
+	if(!self.connectionView)
+	{
+		// make one and have it follow the mouse
+		NSLog(@"Creating new connection view");
+		self.connectionView = [UXFilterConnectionView new];
+		self.connectionView.inputPointProvider = self;
+		[self.superview addSubview:self.connectionView];
+	}
 }
 
 - (void) mouseUp:(NSEvent *)theEvent
 {
+	/*
 	if(self.highlighted)
 	{
 		NSLog(@"Mouse up from connect point drag");
 		isDragging = NO;
 		[self highlightMe:NO];
-		
+	}*/
+	
+	BOOL hoveringOverOther = NO;
+	
+	if(hoveringOverOther)
+	{
+		// TODO: Hovering!
+	}
+	else // hovering over empty space, kill the connection view
+	{
+		NSLog(@"Killing connection view");
+		[self destroyMyConnectionView];
 	}
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent 
 {
+	//NSLog(@"Dragging connection view %p", self);
 	
+	NSPoint mousePoint = [self.superview convertPoint:[theEvent locationInWindow] fromView:nil];
+	
+	NSPointProvider* outputPoint = [NSPointProvider pointProvider:mousePoint];
+	
+	// if the opposite point was a connect point view, remove it's grasp on the connection first
+	id opposite = [self.connectionView oppositeConnectPointFrom:self];
+	if([opposite isKindOfClass:[UXFilterConnectPointView class]])
+		[opposite setConnectionView:nil];
+	
+	// now set the opposite point to be our mouse pointer
+	[self.connectionView setOppositeConnectPointFrom:self toBe:outputPoint]; // weak so only valid in this scope
+	
+	// get the connection to update it's drawing
+	[self.connectionView updateConnection];
 }
 
 

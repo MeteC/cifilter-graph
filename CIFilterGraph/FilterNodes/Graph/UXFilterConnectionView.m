@@ -9,6 +9,12 @@
 #import "UXFilterConnectionView.h"
 #import "UXFilterConnectPointView.h"
 
+
+
+// Set to 1 to see class object count on init/dealloc. Use this to test for leaks..
+#define MEMORY_TEST_CONNECTIONS 0
+
+
 @interface UXFilterConnectionView ()
 {
 	NSPoint beginPoint, endPoint;
@@ -17,12 +23,68 @@
 
 @implementation UXFilterConnectionView
 
+#if MEMORY_TEST_CONNECTIONS
+
+static int debugCounter = 0;
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        NSLog(@"%d: ConnectionView ALLOCED", ++debugCounter);
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    NSLog(@"%d: ConnectionView DEALLOCED", --debugCounter);
+}
+
+#endif
+
+/**
+ * Absolutely VITAL to ensure my drags on the connectPointViews below are all good.
+ */
+- (NSView*) hitTest:(NSPoint)aPoint
+{
+	return nil;
+}
+
+
+
+- (id<UXConnectionEndPointProvider>) oppositeConnectPointFrom:(id<UXConnectionEndPointProvider>) connectPointProvider
+{
+	if(self.inputPointProvider == connectPointProvider) return self.outputPointProvider;
+	if(self.outputPointProvider == connectPointProvider) return self.inputPointProvider;
+	
+	NSAssert(false, @"You asked to GET the opposite connect point to a point that's not valid for a connection. Better debug here..");
+	
+	return nil;
+}
+
+- (void) setOppositeConnectPointFrom:(id<UXConnectionEndPointProvider>) connectPointProvider 
+								toBe:(id<UXConnectionEndPointProvider>) newConnectPointProvider
+{
+	if(self.inputPointProvider == connectPointProvider) 
+		self.outputPointProvider = newConnectPointProvider;
+	
+	else if(self.outputPointProvider == connectPointProvider)
+		self.inputPointProvider = newConnectPointProvider;
+	
+	else NSAssert(false, @"You asked to SET the opposite connect point to a point that's not valid for a connection. Better debug here..");
+}
+
+
+
 
 - (void) updateConnection
 {
 	// Set the frame to encompass both begin and end points
-	beginPoint	= NSMakePoint(NSMidX(self.inputConnectPoint.frame), NSMidY(self.inputConnectPoint.frame));
-	endPoint	= NSMakePoint(NSMidX(self.outputConnectPoint.frame), NSMidY(self.outputConnectPoint.frame));
+	beginPoint	= [self.inputPointProvider endPoint];
+	endPoint	= [self.outputPointProvider endPoint];
+	
+//	NSLog(@"%p: begin %f,%f .. end %@: %f,%f", self, beginPoint.x, beginPoint.y, self.outputPointProvider, endPoint.x, endPoint.y);
 	
 	const int margin = 5;
 	
@@ -48,7 +110,7 @@
 
 - (void) drawRect:(NSRect)dirtyRect
 {
-//	NSLog(@"redrawing connection view!");
+	NSLog(@"redrawing connection view!");
 	
 	// Testing
 	/*

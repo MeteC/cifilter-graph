@@ -54,32 +54,46 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/alien-app-icon-1024x1024.png"]];
-	
-	// Filter Example
-	FilterNode* testModNode = [self createNodeForNodeClassName:@"BoxBlurNode"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
+	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
 	
 	// Output
 	OutputViewingNode* testNodeOut = (OutputViewingNode*)[self createNodeForNodeClassName:@"OutputViewingNode"];
-	
-	// connect and pass through data
-	[testModNode attachInputImageNode:testNodeIn];
-	[testNodeOut attachInputImageNode:testModNode];
-	
-	// Put graphics in right places
-	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
-	[testModNode.graphView setFrameOrigin:NSMakePoint(200, 100)];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(400, 200)];
+	
 	
 	outputNode = testNodeOut; // keep reference to root. Since it's a pull-graph, that's the output
 	
-	[_outputPaneScrollView autoResizeContentView];
 	
+	BOOL useFilter = YES;
 	
-	// We've connected them, so reset the connect points
-	[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
-	[testModNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
-	[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
-	
+	if(useFilter)
+	{
+		// Filter Example
+		FilterNode* testModNode = [self createNodeForNodeClassName:@"BoxBlurNode"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
+		
+		// connect and pass through data
+		[testModNode attachInputImageNode:testNodeIn];
+		[testNodeOut attachInputImageNode:testModNode];
+		
+		// Put graphics in right places
+		[testModNode.graphView setFrameOrigin:NSMakePoint(200, 100)];
+		
+		//[_outputPaneScrollView autoResizeContentView];
+		
+		
+		// We've connected them, so reset the connect points
+		[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+		[testModNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+		[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+	}
+	else
+	{
+		// Just a passthrough please
+		[testNodeOut attachInputImageNode:testNodeIn];
+		
+		[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+		[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+	}
 	[self doGlobalNodeUpdate];
 }
 

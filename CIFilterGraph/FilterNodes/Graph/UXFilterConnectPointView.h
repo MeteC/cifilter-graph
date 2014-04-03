@@ -10,10 +10,10 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "UXFilterConnectionView.h"
 
-@class UXFilterConnectionView;
 
-@interface UXFilterConnectPointView : NSView
+@interface UXFilterConnectPointView : NSView <UXConnectionEndPointProvider>
 
 // Both connect points on either side of a connection view can have a strong pointer to it.
 // Only when both connect points let go of a connection view, will it be released.
