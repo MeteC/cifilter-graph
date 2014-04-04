@@ -10,7 +10,7 @@
 #import "NSPointProvider.h"
 #import "UXFilterGraphManager.h"
 #import "UXFilterGraphView.h"
-
+#import "FilterNodeContext.h"
 
 
 @interface UXFilterConnectPointView ()
@@ -161,6 +161,7 @@
 		[downstreamNode.inputValues removeObjectForKey:downstreamInputKey];
 		
 		// TODO: Update filter node context
+		[[FilterNodeContext sharedInstance] smartUpdate];
 	}
 	
 	else
@@ -226,6 +227,7 @@
 	[downstreamNode.inputValues setObject:upstreamNode forKey:downstreamInputKey];
 	
 	// TODO: and finally we need to update the entire graph!
+	[[FilterNodeContext sharedInstance] smartUpdate];
 }
 
 #pragma mark - Mousey

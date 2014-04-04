@@ -75,6 +75,7 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	if(self.verboseUpdate) NSLog(@"%@ called updateSelf", self);
 }
 
+// TODO: remove this if not beig used (FilterNodeContext replaces the need??)
 - (void) update
 {
 	NSLog(@"recursive update called with %@", self);

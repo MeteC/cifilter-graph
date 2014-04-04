@@ -10,6 +10,7 @@
 #import "FilterNodeFactory.h"
 #import "NSScrollView+AutosizeContent.h"
 
+#import "FilterNodeContext.h"
 #import "FilterNode.h"
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
@@ -25,7 +26,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 @interface AppDelegate ()
 {
-	FilterNode* outputNode; // TODO: what about multiple outputs?
+	FilterNodeContext* sharedContext;
 	FilterNode* currentSelectedNode;
 	
 	NSMutableArray* currentFilterList;
@@ -45,7 +46,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[_filterConfigTitle setStringValue:@""];
 	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
 	
-	
+	sharedContext = [FilterNodeContext sharedInstance];
 	
 	
 	
@@ -60,8 +61,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	OutputViewingNode* testNodeOut = (OutputViewingNode*)[self createNodeForNodeClassName:@"OutputViewingNode"];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(400, 200)];
 	
-	
-	outputNode = testNodeOut; // keep reference to root. Since it's a pull-graph, that's the output
 	
 	
 	BOOL useFilter = YES;
@@ -243,6 +242,10 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	{
 		[currentFilterList addObject:newNode];
 		
+		// allow context to pull smartly. It may not be an output node but smart update will still
+		// do dependencies correctly.
+		[sharedContext registerOutputNode:newNode]; 
+		
 		// add to graph scroll view
 		[_graphScrollView.documentView addSubview:newNode.graphView];
 		
@@ -291,7 +294,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 - (void) doGlobalNodeUpdate
 {
 	[AppDelegate log:@"Updating Filter Graph!"];
-	[outputNode update];
+	[sharedContext smartUpdate];
 }
 
 
