@@ -7,7 +7,6 @@
 //
 
 #import "UXFilterConnectionView.h"
-#import "UXFilterConnectPointView.h"
 
 
 

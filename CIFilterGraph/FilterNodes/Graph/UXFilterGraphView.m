@@ -38,15 +38,7 @@
 @implementation UXFilterGraphView
 
 
-- (NSDictionary*) outputConnectPoints
-{
-	return _outputConnectPoints;
-}
-
-- (NSDictionary*) inputConnectPoints
-{
-	return _inputConnectPoints;
-}
+#pragma mark - Setup
 
 
 - (instancetype) init
@@ -72,6 +64,82 @@
 }
 
 
+/**
+ * Make a tracking area for mouseovers
+ */
+- (void) createTrackingArea
+{
+    int opts = (NSTrackingMouseEnteredAndExited | /*NSTrackingMouseMoved | NSTrackingEnabledDuringMouseDrag |*/ NSTrackingActiveAlways);
+	
+    trackingArea = [ [NSTrackingArea alloc] initWithRect:[self bounds]
+												 options:opts
+												   owner:self
+												userInfo:nil];
+    [self addTrackingArea:trackingArea];
+	
+    NSPoint mouseLocation = [[self window] mouseLocationOutsideOfEventStream];
+    mouseLocation = [self convertPoint: mouseLocation
+                              fromView: nil];
+	
+    if (NSPointInRect(mouseLocation, [self bounds]))
+	{
+		[self mouseEntered: nil];
+	}
+	else
+	{
+		[self mouseExited: nil];
+	}
+}
+
+// called when scrolling etc
+- (void) updateTrackingAreas
+{
+	// Happens a lot when dragging...
+	
+    [self removeTrackingArea:trackingArea];
+    [self createTrackingArea];
+	
+    [super updateTrackingAreas]; // Needed, according to the NSView documentation
+}
+
+
+#pragma mark - Connection Points & Connections
+
+
+- (NSDictionary*) outputConnectPoints
+{
+	return _outputConnectPoints;
+}
+
+- (NSDictionary*) inputConnectPoints
+{
+	return _inputConnectPoints;
+}
+
+
+- (NSString*) findKeyForConnectPoint:(UXFilterConnectPointView*) connectPoint
+{
+	// determine best order to search dictionaries based on connectPoint type
+	NSArray* searchOrder = connectPoint.type == UXFilterConnectPointTypeInput ? @[_inputConnectPoints, _outputConnectPoints] : @[_outputConnectPoints, _inputConnectPoints];
+	
+	__block NSString* retVal = nil;
+	
+	[searchOrder enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL *iStop) {
+		
+		[obj enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *jStop) 
+		{
+			if(obj == connectPoint)
+			{
+				retVal = key;
+				*jStop = YES;
+				*iStop = YES;
+			}
+		}];
+	}];
+	
+	return retVal;
+}
+
 - (void) resetGraphConnectsOnSuperview:(NSView*) superview
 {
 	// clear old ones
@@ -95,6 +163,9 @@
 	UXFilterConnectPointView* outputConnectPointView = 
 	[[UXFilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
 	
+	// set type and pointer back to self
+	outputConnectPointView.type = UXFilterConnectPointTypeOutput;
+	outputConnectPointView.parentGraphView = self;
 	[superview addSubview:outputConnectPointView];
 	
 	// just the one entry for now, using the one "image" output key
@@ -112,6 +183,9 @@
 		UXFilterConnectPointView* inputConnectPointView = 
 		[[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:(int)idx]];
 		
+		// set type and pointer back to self
+		inputConnectPointView.type = UXFilterConnectPointTypeInput;
+		inputConnectPointView.parentGraphView = self;
 		[superview addSubview:inputConnectPointView];
 		
 		[_inputConnectPoints setValue:inputConnectPointView forKey:key];
@@ -159,43 +233,6 @@
 }
 
 
-/**
- * Make a tracking area for mouseovers
- */
-- (void) createTrackingArea
-{
-    int opts = (NSTrackingMouseEnteredAndExited | /*NSTrackingMouseMoved | NSTrackingEnabledDuringMouseDrag |*/ NSTrackingActiveAlways);
-
-    trackingArea = [ [NSTrackingArea alloc] initWithRect:[self bounds]
-												 options:opts
-												   owner:self
-												userInfo:nil];
-    [self addTrackingArea:trackingArea];
-	
-    NSPoint mouseLocation = [[self window] mouseLocationOutsideOfEventStream];
-    mouseLocation = [self convertPoint: mouseLocation
-                              fromView: nil];
-	
-    if (NSPointInRect(mouseLocation, [self bounds]))
-	{
-		[self mouseEntered: nil];
-	}
-	else
-	{
-		[self mouseExited: nil];
-	}
-}
-
-// called when scrolling etc
-- (void) updateTrackingAreas
-{
-	// Happens a lot when dragging...
-	
-    [self removeTrackingArea:trackingArea];
-    [self createTrackingArea];
-	
-    [super updateTrackingAreas]; // Needed, according to the NSView documentation
-}
 
 #pragma mark - Drawing
 
@@ -204,11 +241,11 @@
 	[super setNeedsDisplay:flag];
 
 	// Also call on all connect points to update their connections
-	[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[[obj connectionView] updateConnection];
 	}];
 	
-	[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[[obj connectionView] updateConnection];
 	}];
  
@@ -361,12 +398,12 @@
 	[super setFrameOrigin:newOrigin];
 	
 	// update connect point frames too, as they're attached to superview
-	[self.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
 										[obj frame].origin.y + delta.y)];
 	}];
 	
-	[self.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		[obj setFrameOrigin:NSMakePoint([obj frame].origin.x + delta.x, 
 										[obj frame].origin.y + delta.y)];
 	}];

@@ -36,6 +36,8 @@
 		// load the image to a CIImage
 		CIImage* theImage = [CIImage imageWithContentsOfURL:fileURL];
 		
+		// TODO: test what happens for non-image urls?
+		
 		// store it
 		if(theImage)
 		{

@@ -35,6 +35,7 @@
 		
 		[self.imageOutputView setImage:nsImage];
 	}
+	else [self.imageOutputView setImage:nil];
 }
 
 

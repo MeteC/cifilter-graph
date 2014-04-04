@@ -12,7 +12,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class UXFilterConnectPointView;
+
 @class UXFilterConnectionView;
 
 /**

@@ -77,6 +77,7 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
 - (void) update
 {
+	NSLog(@"recursive update called with %@", self);
 	// recurse up the tree to ensure all dependencies update first
 	for(id input in self.inputValues.allValues)
 	{

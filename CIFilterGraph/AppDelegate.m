@@ -323,6 +323,11 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 				[self createNodeForNodeClassName:nodeClassName];
 			}
 			
+			// 2. update nodes
+			else if([command isEqualToString:@"update"])
+			{
+				[self doGlobalNodeUpdate];
+			}
 			
 			// clear and return
 			fieldEditor.string = @"";

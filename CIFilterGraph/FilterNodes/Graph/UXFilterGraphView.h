@@ -15,7 +15,7 @@
 #import "FilterGraphViewDelegate.h"
 
 
-@class FilterGraphViewConnection;
+@class UXFilterConnectPointView;
 
 
 @interface UXFilterGraphView : NSView
@@ -52,6 +52,15 @@
  * Dictionary of input connect points, keyed the same as the parent node's inputValues (FilterNodes only)
  */
 - (NSDictionary*) inputConnectPoints;
+
+/**
+ * Search function - given a connect point that belongs to this graph view, find it in either
+ * inputConnectPoints or outputConnectPoints, and return its key. Rather than storing this key
+ * value against the ConnectPoint as well, which would double up on POData.
+ * ConnectPoint.type helps out here.
+ * If the connectPoint doesn't belong to the graph view, return nil.
+ */
+- (NSString*) findKeyForConnectPoint:(UXFilterConnectPointView*) connectPoint;
 
 
 /**
