@@ -74,8 +74,8 @@
 	NSMutableArray* orderedDependencies = [NSMutableArray array];
 	
 	[downstreamNodes enumerateObjectsUsingBlock:^(FilterNode* node, BOOL *stop) {
-		
-		[self unravelRecurse:node intoOrderedArray:orderedDependencies];
+		int guardCounter = 0;
+		[self unravelRecurse:node intoOrderedArray:orderedDependencies guardCounter:&guardCounter];
 	}];
 	
 	// now we've unravelled everything from all downstream nodes into an ordered dependency list
@@ -93,17 +93,34 @@
 /** 
  * Travel recursively up a node's dependencies, putting them into an array that show the order
  * in which you need to update them.
+ *
+ * implementing basic infinite loop protection - a loop limiter. Not very sophisticated but
+ * does the job with a minimum of fuss.
  */
-- (void) unravelRecurse:(FilterNode*) node intoOrderedArray:(NSMutableArray*) inputArray
+- (void) unravelRecurse:(FilterNode*) node intoOrderedArray:(NSMutableArray*) inputArray guardCounter:(int*) guardCounter
 {
+	static const int kMaxGuardCount = 256; // will never have even close to this number of nodes
+	
 	[inputArray insertObject:node atIndex:0];
 	
 	for(id input in node.inputValues.allValues)
 	{
 		if([input isKindOfClass:[FilterNode class]])
 		{
-			[self unravelRecurse:input intoOrderedArray:inputArray];
+			if(*guardCounter > kMaxGuardCount)
+			{
+				[AppDelegate log:@"ERROR: Infinite loop detected! Can't safely determine dependencies, aborting."];
+				break;
+			}
+			
+			else 
+			{ 
+				*guardCounter = *guardCounter + 1;
+				[self unravelRecurse:input intoOrderedArray:inputArray guardCounter:guardCounter];
+			}
 		}
+		
+		
 	}
 }
 
