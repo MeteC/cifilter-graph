@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "CustomisedScrollView.h"
 #import "FilterGraphViewDelegate.h"
 
 // UI elements have associated input key NSStrings, so that FilterNodes can respond directly

@@ -70,26 +70,9 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 	return [self.inputValues valueForKey:kFilterInputKeyInputImageNode];
 }
 
-- (void) updateSelf
+- (void) updateNode
 {
-	if(self.verboseUpdate) NSLog(@"%@ called updateSelf", self);
-}
-
-// TODO: remove this if not beig used (FilterNodeContext replaces the need??)
-- (void) update
-{
-	NSLog(@"recursive update called with %@", self);
-	// recurse up the tree to ensure all dependencies update first
-	for(id input in self.inputValues.allValues)
-	{
-		if([input isKindOfClass:[FilterNode class]])
-		{
-			[input update];
-		}
-	}
-	
-	// once all dependencies are updated, I can do my actual update
-	[self updateSelf];
+	if(self.verboseUpdate) NSLog(@"%@ called updateNode", self);
 }
 
 /**

@@ -16,9 +16,9 @@
 }
 
 /*
-- (void) updateSelf
+- (void) updateNode
 {
-	[super updateSelf];
+	[super updateNode];
 	
 	FilterNode* inputNode = [_inputValues valueForKey:kFilterInputKeyInputImageNode];
 	CIImage* inputImage = [[inputNode outputValues] valueForKey:kFilterOutputKeyImage];

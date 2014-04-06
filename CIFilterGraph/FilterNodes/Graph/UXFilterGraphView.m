@@ -7,7 +7,6 @@
 //
 
 #import "UXFilterGraphView.h"
-#import "CustomisedScrollView.h"
 #import "FilterNodeSeenInOutputPane.h"
 #import "NSScrollView+AutosizeContent.h"
 
@@ -362,7 +361,7 @@
 	while(parentScroller != nil)
 	{
 		parentScroller = [parentScroller superview];
-		if([parentScroller isKindOfClass:[CustomisedScrollView class]])
+		if([parentScroller isKindOfClass:[NSScrollView class]])
 		{
 			[parentScroller autoResizeContentView];
 			break;

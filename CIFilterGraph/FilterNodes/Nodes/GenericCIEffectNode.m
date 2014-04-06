@@ -45,9 +45,9 @@
 }
 
 
-- (void) updateSelf
+- (void) updateNode
 {
-	[super updateSelf];
+	[super updateNode];
 	
 	// Make the corresponding CIFilter
 	CIFilter* filter = [CIFilter filterWithName:_filterName];

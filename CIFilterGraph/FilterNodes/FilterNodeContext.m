@@ -84,7 +84,7 @@
 		// use the updated set to ensure a node is not updated more than once
 		if(![updatedSet containsObject:node]) 
 		{
-			[node updateSelf];
+			[node updateNode];
 			[updatedSet addObject:node];
 		}
 	}];
