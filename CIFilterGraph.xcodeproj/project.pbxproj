@@ -10,7 +10,6 @@
 		CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* UXFilterGraphView.m */; };
 		CA2E31FC18EE296400E9B5BA /* UXFilterGraphManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */; };
 		CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */; };
-		CA8BA40718ED04A200DC0BCC /* NSPointProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8BA40618ED04A200DC0BCC /* NSPointProvider.m */; };
 		CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */; };
 		CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */; };
 		CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */; };
@@ -22,6 +21,8 @@
 		CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CE179EBA37002A0BF5 /* LICENSE */; };
 		CA9461D1179EBA38002A0BF5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CF179EBA38002A0BF5 /* README.md */; };
 		CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */; };
+		CA961D6718F13CCF00FA58E0 /* UXFilterInputPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA961D6618F13CCF00FA58E0 /* UXFilterInputPointView.m */; };
+		CA961D6A18F13CDC00FA58E0 /* UXFilterOutputPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA961D6918F13CDC00FA58E0 /* UXFilterOutputPointView.m */; };
 		CAA3953C17A7C7FE009690A9 /* BoxBlurNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA3953B17A7C7FE009690A9 /* BoxBlurNode.m */; };
 		CACB5AFB18EEBD2300123715 /* FilterNodeContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CACB5AFA18EEBD2300123715 /* FilterNodeContext.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
@@ -40,8 +41,6 @@
 		CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterGraphManager.m; sourceTree = "<group>"; };
 		CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCIEffectNode.h; sourceTree = "<group>"; };
 		CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCIEffectNode.m; sourceTree = "<group>"; };
-		CA8BA40518ED04A200DC0BCC /* NSPointProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPointProvider.h; sourceTree = "<group>"; };
-		CA8BA40618ED04A200DC0BCC /* NSPointProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPointProvider.m; sourceTree = "<group>"; };
 		CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectionView.h; sourceTree = "<group>"; };
 		CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterConnectionView.m; sourceTree = "<group>"; };
 		CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectPointView.h; sourceTree = "<group>"; };
@@ -62,6 +61,10 @@
 		CA9461CF179EBA38002A0BF5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+AutosizeContent.h"; sourceTree = "<group>"; };
 		CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+AutosizeContent.m"; sourceTree = "<group>"; };
+		CA961D6518F13CCF00FA58E0 /* UXFilterInputPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterInputPointView.h; sourceTree = "<group>"; };
+		CA961D6618F13CCF00FA58E0 /* UXFilterInputPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterInputPointView.m; sourceTree = "<group>"; };
+		CA961D6818F13CDC00FA58E0 /* UXFilterOutputPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterOutputPointView.h; sourceTree = "<group>"; };
+		CA961D6918F13CDC00FA58E0 /* UXFilterOutputPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterOutputPointView.m; sourceTree = "<group>"; };
 		CAA3953A17A7C7FE009690A9 /* BoxBlurNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxBlurNode.h; sourceTree = "<group>"; };
 		CAA3953B17A7C7FE009690A9 /* BoxBlurNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxBlurNode.m; sourceTree = "<group>"; };
 		CAA3953D17A7CC4E009690A9 /* FilterGraphViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterGraphViewDelegate.h; sourceTree = "<group>"; };
@@ -106,17 +109,12 @@
 		CA2861FA178704960024346C /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				CA2E31FA18EE296400E9B5BA /* UXFilterGraphManager.h */,
+				CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */,
 				CA2861FB1787057D0024346C /* UXFilterGraphView.h */,
 				CA2861FC1787057D0024346C /* UXFilterGraphView.m */,
 				CAA3953D17A7CC4E009690A9 /* FilterGraphViewDelegate.h */,
-				CA8BA40518ED04A200DC0BCC /* NSPointProvider.h */,
-				CA8BA40618ED04A200DC0BCC /* NSPointProvider.m */,
-				CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */,
-				CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */,
-				CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */,
-				CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */,
-				CA2E31FA18EE296400E9B5BA /* UXFilterGraphManager.h */,
-				CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */,
+				CA961D6B18F13CE800FA58E0 /* Connections */,
 				CA9461B6179D5D72002A0BF5 /* CustomisedScrollView.h */,
 				CA9461B7179D5D72002A0BF5 /* CustomisedScrollView.m */,
 				CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */,
@@ -142,6 +140,21 @@
 				CAA3953B17A7C7FE009690A9 /* BoxBlurNode.m */,
 			);
 			path = Nodes;
+			sourceTree = "<group>";
+		};
+		CA961D6B18F13CE800FA58E0 /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */,
+				CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */,
+				CA961D6518F13CCF00FA58E0 /* UXFilterInputPointView.h */,
+				CA961D6618F13CCF00FA58E0 /* UXFilterInputPointView.m */,
+				CA961D6818F13CDC00FA58E0 /* UXFilterOutputPointView.h */,
+				CA961D6918F13CDC00FA58E0 /* UXFilterOutputPointView.m */,
+				CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */,
+				CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */,
+			);
+			name = Connections;
 			sourceTree = "<group>";
 		};
 		CAF14C8C17843410008DC169 = {
@@ -290,16 +303,17 @@
 				CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */,
 				CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */,
 				CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */,
-				CA8BA40718ED04A200DC0BCC /* NSPointProvider.m in Sources */,
 				CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */,
 				CA9461B8179D5D72002A0BF5 /* CustomisedScrollView.m in Sources */,
 				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
 				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,
 				CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */,
+				CA961D6718F13CCF00FA58E0 /* UXFilterInputPointView.m in Sources */,
 				CACB5AFB18EEBD2300123715 /* FilterNodeContext.m in Sources */,
 				CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */,
 				CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */,
 				CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */,
+				CA961D6A18F13CDC00FA58E0 /* UXFilterOutputPointView.m in Sources */,
 				CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */,
 				CAA3953C17A7C7FE009690A9 /* BoxBlurNode.m in Sources */,
 			);

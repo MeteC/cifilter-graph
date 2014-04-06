@@ -7,11 +7,12 @@
 //
 
 #import "UXFilterConnectionView.h"
-
+#import "UXFilterInputPointView.h"
+#import "UXFilterOutputPointView.h"
 
 
 // Set to 1 to see class object count on init/dealloc. Use this to test for leaks..
-#define MEMORY_TEST_CONNECTIONS 0
+#define MEMORY_TEST_CONNECTIONS 1
 
 
 @interface UXFilterConnectionView ()
@@ -52,36 +53,11 @@ static int debugCounter = 0;
 
 
 
-- (id<UXConnectionEndPointProvider>) oppositeConnectPointFrom:(id<UXConnectionEndPointProvider>) connectPointProvider
-{
-	if(self.inputPointProvider == connectPointProvider) return self.outputPointProvider;
-	if(self.outputPointProvider == connectPointProvider) return self.inputPointProvider;
-	
-	NSAssert(false, @"You asked to GET the opposite connect point to a point that's not valid for a connection. Better debug here..");
-	
-	return nil;
-}
-
-- (void) setOppositeConnectPointFrom:(id<UXConnectionEndPointProvider>) connectPointProvider 
-								toBe:(id<UXConnectionEndPointProvider>) newConnectPointProvider
-{
-	if(self.inputPointProvider == connectPointProvider) 
-		self.outputPointProvider = newConnectPointProvider;
-	
-	else if(self.outputPointProvider == connectPointProvider)
-		self.inputPointProvider = newConnectPointProvider;
-	
-	else NSAssert(false, @"You asked to SET the opposite connect point to a point that's not valid for a connection. Better debug here..");
-}
-
-
-
-
 - (void) updateConnection
 {
 	// Set the frame to encompass both begin and end points
 	beginPoint	= [self.inputPointProvider endPoint];
-	endPoint	= [self.outputPointProvider endPoint];
+	endPoint	= self.isDragging ? self.currentDragOutputPoint : [self.outputPointProvider endPoint];
 	
 //	NSLog(@"%p: begin %f,%f .. end %@: %f,%f", self, beginPoint.x, beginPoint.y, self.outputPointProvider, endPoint.x, endPoint.y);
 	

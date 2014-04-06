@@ -6,25 +6,24 @@
 //  Copyright (c) 2014 Mete Cakman. All rights reserved.
 //
 
-//	A graphical link between FilterGraphViews. Dynamically rearranges it's frame and drawn content
-//	as graph views move about.
+/**
 
+ A graphical link between FilterGraphViews. Dynamically rearranges it's frame and drawn content
+	as graph views move about.
+
+ Note: connections are always made with the mouse from an input point to an output point, because
+	inputs only have one connection, but outputs can have multiple. This means the connection always
+	has a UXFilterInputPointView as its first point provider, and its second is either a 
+	UX..OutputPointView or an overriding NSEvent (mouse event) which provides the end point during
+	dragging.
+
+ **/
 
 #import <Cocoa/Cocoa.h>
 
 
-@class UXFilterConnectionView;
-
-/**
- * Connections use two end point providers to get their end points.
- */
-@protocol UXConnectionEndPointProvider <NSObject>
-
-- (NSPoint) endPoint;
-@property (strong) UXFilterConnectionView* connectionView; // an end point retains a hold on it's connection
-
-@end
-
+@class UXFilterInputPointView;
+@class UXFilterOutputPointView;
 
 
 /**
@@ -34,25 +33,16 @@
 
 
 // Graph views connected. weak pointers to input and output providers
-@property (weak) id<UXConnectionEndPointProvider> outputPointProvider;
-@property (weak) id<UXConnectionEndPointProvider> inputPointProvider; 
+@property (weak) UXFilterOutputPointView*	outputPointProvider;
+@property (weak) UXFilterInputPointView*	inputPointProvider;
+
+// used to override outputPointProvider during dragging
+@property NSPoint	currentDragOutputPoint;
+@property BOOL		isDragging;
 
 /**
  * When a related filter graph redraws itself, this is called to ensure the connection is updated too.
  */
 - (void) updateConnection;
-
-/**
- * Provide one of the end points, this will give you the other one, or nil if there isn't another one.
- * If you give an end point that doesn't belong here, you'll also get nil, but in debug mode it will
- * crash.
- */
-- (id<UXConnectionEndPointProvider>) oppositeConnectPointFrom:(id<UXConnectionEndPointProvider>) connectPointProvider;
-
-/**
- * Similarly helpful setter method
- */
-- (void) setOppositeConnectPointFrom:(id<UXConnectionEndPointProvider>) connectPointProvider 
-								toBe:(id<UXConnectionEndPointProvider>) newConnectPointProvider;
 
 @end

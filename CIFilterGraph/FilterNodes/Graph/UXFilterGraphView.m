@@ -10,7 +10,9 @@
 #import "CustomisedScrollView.h"
 #import "FilterNodeSeenInOutputPane.h"
 #import "NSScrollView+AutosizeContent.h"
-#import "UXFilterConnectPointView.h"
+
+#import "UXFilterInputPointView.h"
+#import "UXFilterOutputPointView.h"
 #import "UXFilterConnectionView.h"
 
 
@@ -119,22 +121,23 @@
 
 - (NSString*) findKeyForConnectPoint:(UXFilterConnectPointView*) connectPoint
 {
+	// Now that we have two distinct classes for input and output, we can figure out which
+	// array to search in
+	// TODO: does this mean we can squash the two connect point dicts into one??
+	
 	// determine best order to search dictionaries based on connectPoint type
-	NSArray* searchOrder = connectPoint.type == UXFilterConnectPointTypeInput ? @[_inputConnectPoints, _outputConnectPoints] : @[_outputConnectPoints, _inputConnectPoints];
+	BOOL isInput = [connectPoint isKindOfClass:[UXFilterInputPointView class]];
+	NSDictionary* searchDict = isInput ? self.inputConnectPoints : self.outputConnectPoints;
 	
 	__block NSString* retVal = nil;
 	
-	[searchOrder enumerateObjectsUsingBlock:^(NSDictionary* obj, NSUInteger idx, BOOL *iStop) {
-		
-		[obj enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *jStop) 
+	[searchDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) 
+	{
+		if(obj == connectPoint)
 		{
-			if(obj == connectPoint)
-			{
-				retVal = key;
-				*jStop = YES;
-				*iStop = YES;
-			}
-		}];
+			retVal = key;
+			*stop = YES;
+		}
 	}];
 	
 	return retVal;
@@ -160,11 +163,10 @@
 	_outputConnectPoints = [NSMutableDictionary dictionary];
 	mOutputCount = 1;
 	
-	UXFilterConnectPointView* outputConnectPointView = 
-	[[UXFilterConnectPointView alloc] initWithFrame:self.outputConnectionFrame];
+	UXFilterOutputPointView* outputConnectPointView = 
+	[[UXFilterOutputPointView alloc] initWithFrame:self.outputConnectionFrame];
 	
-	// set type and pointer back to self
-	outputConnectPointView.type = UXFilterConnectPointTypeOutput;
+	// set pointer back to self
 	outputConnectPointView.parentGraphView = self;
 	[superview addSubview:outputConnectPointView];
 	
@@ -180,11 +182,10 @@
 	mInputCount = (int)self.parentNode.filterNodeTypeInputKeys.count;
 	
 	[self.parentNode.filterNodeTypeInputKeys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
-		UXFilterConnectPointView* inputConnectPointView = 
-		[[UXFilterConnectPointView alloc] initWithFrame:[self inputConnectionFrame:(int)idx]];
+		UXFilterInputPointView* inputConnectPointView = 
+		[[UXFilterInputPointView alloc] initWithFrame:[self inputConnectionFrame:(int)idx]];
 		
-		// set type and pointer back to self
-		inputConnectPointView.type = UXFilterConnectPointTypeInput;
+		// set pointer back to self
 		inputConnectPointView.parentGraphView = self;
 		[superview addSubview:inputConnectPointView];
 		
@@ -205,14 +206,14 @@
 			{
 				// create a connection view and assign it to the input connect point, two-way pointers.
 				inputConnectPointView.connectionView = [[UXFilterConnectionView alloc] init];
-				inputConnectPointView.connectionView.outputPointProvider = inputConnectPointView;
+				inputConnectPointView.connectionView.inputPointProvider = inputConnectPointView;
 				
 				// there's only one FilterNode output for now!
-				UXFilterConnectPointView* otherConnectingPoint = [connectedGraphView.outputConnectPoints valueForKey:kFilterOutputKeyImage];
+				UXFilterOutputPointView* otherConnectingPoint = [connectedGraphView.outputConnectPoints valueForKey:kFilterOutputKeyImage];
 				
 				// introduce the output connect point of the connected node to the connection...
-				inputConnectPointView.connectionView.inputPointProvider = otherConnectingPoint;
-				otherConnectingPoint.connectionView = inputConnectPointView.connectionView;
+				inputConnectPointView.connectionView.outputPointProvider = otherConnectingPoint;
+				[otherConnectingPoint.connectionViews addObject:inputConnectPointView.connectionView];
 				
 				// now we can update the connection view and add it to the UI
 				[inputConnectPointView.connectionView updateConnection];
@@ -241,12 +242,12 @@
 	[super setNeedsDisplay:flag];
 
 	// Also call on all connect points to update their connections
-	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+	[_inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, UXFilterInputPointView* obj, BOOL *stop) {
 		[[obj connectionView] updateConnection];
 	}];
 	
-	[_outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		[[obj connectionView] updateConnection];
+	[_outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, UXFilterOutputPointView* obj, BOOL *stop) {
+		[[obj connectionViews] makeObjectsPerformSelector:@selector(updateConnection)];
 	}];
  
 }

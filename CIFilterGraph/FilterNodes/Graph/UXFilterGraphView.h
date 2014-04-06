@@ -38,7 +38,6 @@
  * to avoid clipping (or the need to remove clipping), pass it in here please.
  *
  * Note - I'm re-creating all connect points and connections here. 
- * TODO: Need to test this extensively to make sure old connections are released each time.
  */
 - (void) resetGraphConnectsOnSuperview:(NSView*) superview;
 

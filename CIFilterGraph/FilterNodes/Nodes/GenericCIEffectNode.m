@@ -53,6 +53,8 @@
 	CIFilter* filter = [CIFilter filterWithName:_filterName];
 	[filter setDefaults];
 	
+	__block BOOL gotInputImage = NO;
+	
 	// other configuration setup
 	[self.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 		
@@ -61,6 +63,7 @@
 			// it's a FilterNode, so the CIFilter will want it's output CIImage
 			[filter setValue:[[obj outputValues] valueForKey:kFilterOutputKeyImage] 
 				  forKeyPath:@"inputImage"];
+			gotInputImage = YES;
 		}
 		
 		else 
@@ -70,8 +73,12 @@
 		}
 	}];
 	
-	// pass on the outputImage
-	[[self outputValues] setValue:[filter valueForKey:@"outputImage"] forKey:kFilterOutputKeyImage];
+	// pass on the outputImage if we got it
+	if(gotInputImage)
+		[_outputValues setValue:[filter valueForKey:@"outputImage"] forKey:kFilterOutputKeyImage];
+	
+	else // no work done
+		[_outputValues removeObjectForKey:kFilterOutputKeyImage];
 }
 
 @end
