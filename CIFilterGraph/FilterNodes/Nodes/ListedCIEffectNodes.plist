@@ -7,7 +7,7 @@
 		<key>CIBoxBlur</key>
 		<dict>
 			<key>subcategory</key>
-			<string>General</string>
+			<string>Blur</string>
 			<key>filter_name</key>
 			<string>CIBoxBlur</string>
 			<key>config_options</key>
@@ -15,10 +15,79 @@
 				<string>inputRadius</string>
 			</array>
 		</dict>
+		<key>CIDiscBlur</key>
+		<dict>
+			<key>subcategory</key>
+			<string>Blur</string>
+			<key>filter_name</key>
+			<string>CIDiscBlur</string>
+			<key>config_options</key>
+			<array>
+				<string>inputRadius</string>
+			</array>
+		</dict>
+		<key>CIGaussianBlur</key>
+		<dict>
+			<key>subcategory</key>
+			<string>Blur</string>
+			<key>filter_name</key>
+			<string>CIGaussianBlur</string>
+			<key>config_options</key>
+			<array>
+				<string>inputRadius</string>
+			</array>
+		</dict>
+		<key>CIMedianFilter</key>
+		<dict>
+			<key>subcategory</key>
+			<string>Blur</string>
+			<key>filter_name</key>
+			<string>CIMedianFilter</string>
+			<key>config_options</key>
+			<array/>
+		</dict>
+		<key>CIMotionBlur</key>
+		<dict>
+			<key>subcategory</key>
+			<string>Blur</string>
+			<key>filter_name</key>
+			<string>CIMotionBlur</string>
+			<key>config_options</key>
+			<array>
+				<string>inputRadius</string>
+				<string>inputAngle</string>
+			</array>
+		</dict>
+		<key>CINoiseReduction</key>
+		<dict>
+			<key>subcategory</key>
+			<string>Blur</string>
+			<key>filter_name</key>
+			<string>CINoiseReduction</string>
+			<key>config_options</key>
+			<array>
+				<string>inputNoiseLevel</string>
+				<string>inputSharpness</string>
+			</array>
+		</dict>
+		<key>CIZoomBlur</key>
+		<dict>
+			<key>subcategory</key>
+			<string>Blur</string>
+			<key>filter_name</key>
+			<string>CIZoomBlur</string>
+			<key>config_options</key>
+			<array>
+				<string>inputCenter</string>
+				<string>inputAmount</string>
+			</array>
+		</dict>
+		
+		
 		<key>CIColorInvert</key>
 		<dict>
 			<key>subcategory</key>
-			<string>General</string>
+			<string>Colour Effect</string>
 			<key>filter_name</key>
 			<string>CIColorInvert</string>
 			<key>config_options</key>

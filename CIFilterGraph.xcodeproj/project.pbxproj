@@ -94,6 +94,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA1944FC18F264870062AE44 /* CI Effects */ = {
+			isa = PBXGroup;
+			children = (
+				CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */,
+				CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */,
+				CA1944F718F2532E0062AE44 /* ListedCIEffectNodes.plist */,
+			);
+			name = "CI Effects";
+			sourceTree = "<group>";
+		};
+		CA1944FD18F2649D0062AE44 /* I/O */ = {
+			isa = PBXGroup;
+			children = (
+				CA9461C0179EA906002A0BF5 /* OutputViewingNode.h */,
+				CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */,
+				CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */,
+				CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */,
+			);
+			name = I/O;
+			sourceTree = "<group>";
+		};
 		CA2861F81787022C0024346C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,15 +143,10 @@
 			children = (
 				CA9461C6179EA924002A0BF5 /* FilterNode.h */,
 				CA9461C7179EA924002A0BF5 /* FilterNode.m */,
-				CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */,
-				CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */,
 				CA1944F918F255670062AE44 /* ListedNodeManager.h */,
 				CA1944FA18F255670062AE44 /* ListedNodeManager.m */,
-				CA1944F718F2532E0062AE44 /* ListedCIEffectNodes.plist */,
-				CA9461C0179EA906002A0BF5 /* OutputViewingNode.h */,
-				CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */,
-				CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */,
-				CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */,
+				CA1944FC18F264870062AE44 /* CI Effects */,
+				CA1944FD18F2649D0062AE44 /* I/O */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";

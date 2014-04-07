@@ -84,7 +84,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	if(useFilter)
 	{
 		// Filter Example
-		FilterNode* testModNode = [self createNodeForNodeClassName:@"CIColorInvert"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
+		FilterNode* testModNode = [self createNodeForNodeClassName:@"CIColorInvert"];
 		
 		// connect and pass through data
 		[testModNode attachInputImageNode:testNodeIn];

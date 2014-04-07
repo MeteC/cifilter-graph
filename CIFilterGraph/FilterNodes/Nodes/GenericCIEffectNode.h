@@ -8,6 +8,8 @@
 
 //	The base class of most CI effect filters - refactors out code replication and allows for node "classes" to be set up using a plist (i.e. runtime setup), which can also be used to set up GUI menus etc.
 
+//	TODO: add availability to listed CI Effect Nodes. e.g. a dictionary with {'iOS' : '6.0', 'OSX' : '10.4'}
+
 #import "FilterNode.h"
 #import "ListedNodeManager.h"
 
