@@ -15,6 +15,11 @@
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
 #import "UXFilterGraphView.h"
+#import "ListedNodeManager.h"
+
+// Generic nodes (listed nodes)
+#import "GenericCIEffectNode.h"
+
 
 #import <objc/runtime.h> // using "associated objects"
 
@@ -26,11 +31,13 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 @interface AppDelegate ()
 {
-	FilterNodeContext* sharedContext;
-	FilterNode* currentSelectedNode;
+	FilterNodeContext* sharedContext;	// the filter update context
+	FilterNode* currentSelectedNode;	// currently selected node pointer
 	
-	NSMutableArray* currentFilterList;
+	NSMutableArray* currentFilterList;	// a loose list of all filters
 }
+@property NSMutableArray* mListedNodeManagers; // all the "listed node" managers
+
 @end
 
 @implementation AppDelegate
@@ -46,7 +53,16 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[_filterConfigTitle setStringValue:@""];
 	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
 	
+	// Grab the filter update context
 	sharedContext = [FilterNodeContext sharedInstance];
+	
+	// set up listed node managers here!
+	_mListedNodeManagers = [NSMutableArray array];
+	[_mListedNodeManagers addObject:[[ListedNodeManager alloc] initWithPlist:@"ListedCIEffectNodes.plist" ownedDelegate:[GenericCIEffectNode new]]];
+	
+	
+	
+	
 	
 	
 	
@@ -68,7 +84,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	if(useFilter)
 	{
 		// Filter Example
-		FilterNode* testModNode = [self createNodeForNodeClassName:@"BoxBlurNode"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
+		FilterNode* testModNode = [self createNodeForNodeClassName:@"CIColorInvert"]; //[FilterNodeFactory generateNodeForNodeClassName:@"BoxBlurNode"];
 		
 		// connect and pass through data
 		[testModNode attachInputImageNode:testNodeIn];
@@ -106,6 +122,16 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	printf("GUI-LOG: %s\n", string.UTF8String);
 }
 
+/**
+ * Make the array of PlistNodeManagers accessible globally & direct from the AppDelegate class. 
+ * There's only one after all.
+ * Any node directories set up with plists will be accessible here.
+ */
++ (NSArray*) listedNodeManagers
+{
+	AppDelegate* this = (AppDelegate*)[[NSApplication sharedApplication] delegate];
+	return this.mListedNodeManagers;
+}
 
 
 #pragma mark - Delegate Methods

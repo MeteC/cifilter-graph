@@ -272,7 +272,7 @@
     [NSBezierPath fillRect:mainFillRect];
 	
 	// write its filter node name in the middle
-	NSString* outputName = [NSString stringWithFormat:@"%@", self.parentNode.class];
+	NSString* outputName = [NSString stringWithFormat:@"%@", self.parentNode.description];
 	[outputName drawInRect:mainFillRect withAttributes:nil];
 }
 

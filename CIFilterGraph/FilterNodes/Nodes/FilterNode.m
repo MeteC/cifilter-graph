@@ -77,6 +77,7 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
 /**
  * Should be overridden by each FilterNode subclass else they'll all end up with default FilterGraph
+ TODO: Remove this from FilterNode completely so it's graphics agnostic.
  */
 - (void) setupDefaultGraphView
 {
@@ -138,18 +139,3 @@ NSString* const kFilterOutputKeyImage			= @"imageOutput";
 
 @end
 
-
-/*
-#pragma mark - Inner Class for "null" FilterNode
-
-@interface NullFilterNode : FilterNode
-@end
-
-@implementation NullFilterNode
-
--(id) init
-{
-	
-}
-
-@end*/

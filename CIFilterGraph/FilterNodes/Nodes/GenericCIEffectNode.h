@@ -6,13 +6,16 @@
 //  Copyright (c) 2014 Mete Cakman. All rights reserved.
 //
 
-//	The superclass of most effect filters - mostly just refactors out code replication
+//	The base class of most CI effect filters - refactors out code replication and allows for node "classes" to be set up using a plist (i.e. runtime setup), which can also be used to set up GUI menus etc.
 
 #import "FilterNode.h"
+#import "ListedNodeManager.h"
 
-@interface GenericCIEffectNode : FilterNode
+
+@interface GenericCIEffectNode : FilterNode <ListedNodeManagerDelegate>
 
 @property (readonly) NSString* filterName;
+@property NSString* displayName; // if different from filterName
 
 /**
  * Common CI Effects can use this to initialise themselves very simply, by providing their filter

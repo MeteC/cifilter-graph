@@ -9,6 +9,7 @@
 #import "FilterNodeFactory.h"
 #import "FilterNode.h"
 #import "FilterNodeSeenInOutputPane.h"
+#import "ListedNodeManager.h"
 
 
 static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in points) for output panes
@@ -19,9 +20,26 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 
 + (FilterNode*) generateNodeForNodeClassName:(NSString*) nodeClassName
 {
-	Class nodeClass = NSClassFromString(nodeClassName);
-	id newNode = [[nodeClass alloc] init];
 	NSMutableString* msg = [NSMutableString stringWithFormat:@"Generate: %@.", nodeClassName];
+	Class nodeClass = NSClassFromString(nodeClassName);
+	__block id newNode = nil;
+	
+	// Got an actual FilterNode class?
+	if(nodeClass && [nodeClass isSubclassOfClass:[FilterNode class]])
+		newNode = [[nodeClass alloc] init];
+	
+	else 
+	{
+		// not an actual class, so it might be a FilterNode registered in a ListedNodeManager
+		NSArray* allListedNodeMgrs = [AppDelegate listedNodeManagers];
+		
+		[allListedNodeMgrs enumerateObjectsUsingBlock:^(ListedNodeManager* mgr, NSUInteger idx, BOOL *stop) {
+			
+			newNode = [mgr createFilterNodeForNameKey:nodeClassName];
+			
+			if(newNode) *stop = YES;
+		}];
+	}
 	
 	if([newNode isKindOfClass:[FilterNode class]])
 	{
@@ -44,7 +62,7 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 	else
 	{
 		newNode = nil;
-		[msg setString:[NSString stringWithFormat:@"ERROR: %@ is not a FilterNode class", nodeClassName]];
+		[msg setString:[NSString stringWithFormat:@"ERROR: %@ is not a FilterNode class or a listed node", nodeClassName]];
 	}
 		 
 	[AppDelegate log:msg];

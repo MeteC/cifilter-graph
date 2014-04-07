@@ -12,7 +12,7 @@
 
 
 // Set to 1 to see class object count on init/dealloc. Use this to test for leaks..
-#define MEMORY_TEST_CONNECTIONS 1
+#define MEMORY_TEST_CONNECTIONS 0
 
 
 @interface UXFilterConnectionView ()

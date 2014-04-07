@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA1944F818F2532E0062AE44 /* ListedCIEffectNodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA1944F718F2532E0062AE44 /* ListedCIEffectNodes.plist */; };
+		CA1944FB18F255670062AE44 /* ListedNodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1944FA18F255670062AE44 /* ListedNodeManager.m */; };
 		CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* UXFilterGraphView.m */; };
 		CA2E31FC18EE296400E9B5BA /* UXFilterGraphManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */; };
 		CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */; };
@@ -16,13 +18,11 @@
 		CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */; };
 		CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */; };
 		CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461C7179EA924002A0BF5 /* FilterNode.m */; };
-		CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */; };
 		CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CE179EBA37002A0BF5 /* LICENSE */; };
 		CA9461D1179EBA38002A0BF5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CA9461CF179EBA38002A0BF5 /* README.md */; };
 		CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */; };
 		CA961D6718F13CCF00FA58E0 /* UXFilterInputPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA961D6618F13CCF00FA58E0 /* UXFilterInputPointView.m */; };
 		CA961D6A18F13CDC00FA58E0 /* UXFilterOutputPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA961D6918F13CDC00FA58E0 /* UXFilterOutputPointView.m */; };
-		CAA3953C17A7C7FE009690A9 /* BoxBlurNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA3953B17A7C7FE009690A9 /* BoxBlurNode.m */; };
 		CACB5AFB18EEBD2300123715 /* FilterNodeContext.m in Sources */ = {isa = PBXBuildFile; fileRef = CACB5AFA18EEBD2300123715 /* FilterNodeContext.m */; };
 		CAF14C9917843411008DC169 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF14C9817843411008DC169 /* Cocoa.framework */; };
 		CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAF14CA117843411008DC169 /* InfoPlist.strings */; };
@@ -33,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA1944F718F2532E0062AE44 /* ListedCIEffectNodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ListedCIEffectNodes.plist; sourceTree = "<group>"; };
+		CA1944F918F255670062AE44 /* ListedNodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListedNodeManager.h; sourceTree = "<group>"; };
+		CA1944FA18F255670062AE44 /* ListedNodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListedNodeManager.m; sourceTree = "<group>"; };
 		CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeSeenInOutputPane.h; sourceTree = "<group>"; };
 		CA2861FB1787057D0024346C /* UXFilterGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterGraphView.h; sourceTree = "<group>"; };
 		CA2861FC1787057D0024346C /* UXFilterGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterGraphView.m; sourceTree = "<group>"; };
@@ -52,8 +55,6 @@
 		CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawImageInputFilterNode.m; sourceTree = "<group>"; };
 		CA9461C6179EA924002A0BF5 /* FilterNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNode.h; sourceTree = "<group>"; };
 		CA9461C7179EA924002A0BF5 /* FilterNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNode.m; sourceTree = "<group>"; };
-		CA9461C9179EA964002A0BF5 /* ColorInvertNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorInvertNode.h; sourceTree = "<group>"; };
-		CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorInvertNode.m; sourceTree = "<group>"; };
 		CA9461CE179EBA37002A0BF5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CA9461CF179EBA38002A0BF5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+AutosizeContent.h"; sourceTree = "<group>"; };
@@ -62,8 +63,6 @@
 		CA961D6618F13CCF00FA58E0 /* UXFilterInputPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterInputPointView.m; sourceTree = "<group>"; };
 		CA961D6818F13CDC00FA58E0 /* UXFilterOutputPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterOutputPointView.h; sourceTree = "<group>"; };
 		CA961D6918F13CDC00FA58E0 /* UXFilterOutputPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterOutputPointView.m; sourceTree = "<group>"; };
-		CAA3953A17A7C7FE009690A9 /* BoxBlurNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxBlurNode.h; sourceTree = "<group>"; };
-		CAA3953B17A7C7FE009690A9 /* BoxBlurNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxBlurNode.m; sourceTree = "<group>"; };
 		CAA3953D17A7CC4E009690A9 /* FilterGraphViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterGraphViewDelegate.h; sourceTree = "<group>"; };
 		CACB5AF918EEBD2300123715 /* FilterNodeContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeContext.h; sourceTree = "<group>"; };
 		CACB5AFA18EEBD2300123715 /* FilterNodeContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNodeContext.m; sourceTree = "<group>"; };
@@ -125,14 +124,13 @@
 				CA9461C7179EA924002A0BF5 /* FilterNode.m */,
 				CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */,
 				CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */,
+				CA1944F918F255670062AE44 /* ListedNodeManager.h */,
+				CA1944FA18F255670062AE44 /* ListedNodeManager.m */,
+				CA1944F718F2532E0062AE44 /* ListedCIEffectNodes.plist */,
 				CA9461C0179EA906002A0BF5 /* OutputViewingNode.h */,
 				CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */,
 				CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */,
 				CA9461C3179EA906002A0BF5 /* RawImageInputFilterNode.m */,
-				CA9461C9179EA964002A0BF5 /* ColorInvertNode.h */,
-				CA9461CA179EA964002A0BF5 /* ColorInvertNode.m */,
-				CAA3953A17A7C7FE009690A9 /* BoxBlurNode.h */,
-				CAA3953B17A7C7FE009690A9 /* BoxBlurNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -279,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1944F818F2532E0062AE44 /* ListedCIEffectNodes.plist in Resources */,
 				CAF14CA317843411008DC169 /* InfoPlist.strings in Resources */,
 				CAF14CAF17843411008DC169 /* MainMenu.xib in Resources */,
 				CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */,
@@ -301,15 +300,14 @@
 				CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */,
 				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
 				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,
+				CA1944FB18F255670062AE44 /* ListedNodeManager.m in Sources */,
 				CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */,
 				CA961D6718F13CCF00FA58E0 /* UXFilterInputPointView.m in Sources */,
 				CACB5AFB18EEBD2300123715 /* FilterNodeContext.m in Sources */,
 				CA9461C8179EA924002A0BF5 /* FilterNode.m in Sources */,
-				CA9461CB179EA964002A0BF5 /* ColorInvertNode.m in Sources */,
 				CA9461D4179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m in Sources */,
 				CA961D6A18F13CDC00FA58E0 /* UXFilterOutputPointView.m in Sources */,
 				CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */,
-				CAA3953C17A7C7FE009690A9 /* BoxBlurNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

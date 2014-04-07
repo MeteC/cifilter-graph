@@ -34,4 +34,11 @@
  */
 + (void) log:(NSString*) string;
 
+/**
+ * Make the array of PlistNodeManagers accessible globally & direct from the AppDelegate class. 
+ * There's only one after all.
+ * Any node directories set up with plists will be accessible here.
+ */
++ (NSArray*) listedNodeManagers;
+
 @end

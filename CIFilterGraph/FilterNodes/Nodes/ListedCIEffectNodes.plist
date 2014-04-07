@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>nodes</key>
+	<dict>
+		<key>CIBoxBlur</key>
+		<dict>
+			<key>subcategory</key>
+			<string>General</string>
+			<key>filter_name</key>
+			<string>CIBoxBlur</string>
+			<key>config_options</key>
+			<array>
+				<string>inputRadius</string>
+			</array>
+		</dict>
+		<key>CIColorInvert</key>
+		<dict>
+			<key>subcategory</key>
+			<string>General</string>
+			<key>filter_name</key>
+			<string>CIColorInvert</string>
+			<key>config_options</key>
+			<array/>
+		</dict>
+	</dict>
+	<key>meta</key>
+	<dict>
+		<key>display_name</key>
+		<string>CIFilter Effects</string>
+	</dict>
+</dict>
+</plist>

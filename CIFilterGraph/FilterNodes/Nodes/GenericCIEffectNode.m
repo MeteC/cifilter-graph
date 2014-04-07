@@ -11,7 +11,11 @@
 
 @implementation GenericCIEffectNode
 
-
+- (NSString*) description
+{
+	// return display name or filter name if no display name attached
+	return self.displayName ?: self.filterName;
+}
 
 /**
  * Common CI Effects can use this to initialise themselves very simply, by providing their filter
@@ -79,6 +83,29 @@
 	
 	else // no work done
 		[_outputValues removeObjectForKey:kFilterOutputKeyImage];
+}
+
+
+#pragma mark - ListedNodeManager Delegate
+
+
+/**
+ * Create a filter node given the parameters in the listing.
+ */
+- (FilterNode*) createNodeWithName:(NSString*) name params:(NSDictionary*) params
+{
+	GenericCIEffectNode* node = nil;
+	
+	// expecting to find filter_name string and config_options array
+	NSString* filterName	= params[@"filter_name"];
+	NSArray* configOpts		= params[@"config_options"];
+	
+	if(filterName)
+	{
+		node = [[GenericCIEffectNode alloc] initWithCIFilterName:filterName configOptions:configOpts];
+		node.displayName = name;
+	}
+	return node;
 }
 
 @end
