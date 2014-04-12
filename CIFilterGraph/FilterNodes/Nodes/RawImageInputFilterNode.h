@@ -10,14 +10,12 @@
 //	It's node view shows a thumbnail of that image. RII Filter Node conforms to the empty 
 //	FilterNodeSeenInOutputPane protocol, which tags it for being shown in the output pane of the GUI.
 
-#import "FilterNode.h"
-#import "FilterNodeSeenInOutputPane.h"
+#import "GenericIONode.h"
 
-@interface RawImageInputFilterNode : FilterNode <FilterNodeSeenInOutputPane>
+@interface RawImageInputFilterNode : GenericIONode
 {
 	
 }
-@property (nonatomic, strong) NSImageView *imageOutputView;
 
 // convenience methods
 

@@ -19,6 +19,7 @@
 
 // Generic nodes (listed nodes)
 #import "GenericCIEffectNode.h"
+#import "GenericIONode.h"
 
 
 #import <objc/runtime.h> // using "associated objects"
@@ -58,7 +59,10 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	// set up listed node managers here!
 	_mListedNodeManagers = [NSMutableArray array];
+	
 	[_mListedNodeManagers addObject:[[ListedNodeManager alloc] initWithPlist:@"ListedCIEffectNodes.plist" ownedDelegate:[GenericCIEffectNode new]]];
+	
+	[_mListedNodeManagers addObject:[[ListedNodeManager alloc] initWithPlist:@"ListedIONodes.plist" ownedDelegate:[GenericIONode new]]];
 	
 	
 	// Construct node menu
@@ -67,7 +71,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		// Create the submenu
 		NSMenuItem* listMenu = [[NSMenuItem alloc] initWithTitle:mgr.plistDisplayName action:nil keyEquivalent:@""];
 		[_nodeMenuItem.submenu addItem:listMenu];
-		[listMenu setSubmenu:[NSMenu new]];
+		[listMenu setSubmenu:[[NSMenu alloc] initWithTitle:mgr.plistDisplayName]];
 		
 		// Grab the list structure
 		NSDictionary* menuStruct = [mgr availableFilterNames];
@@ -92,7 +96,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 																	 action:nil 
 															  keyEquivalent:@""];
 				[listMenu.submenu addItem:subcategory];
-				[subcategory setSubmenu:[NSMenu new]];
+				[subcategory setSubmenu:[[NSMenu alloc] initWithTitle:key]];
 				
 				// done, create the list
 				[list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
@@ -107,29 +111,38 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		
 	}];
 	
+	// done!
 	
+	// test
+	[self testSetupForFilter:@"CIColorInvert"];
 	
-	
-	
+	[self doGlobalNodeUpdate];
+}
+
+
+/**
+ * A test setup, using 1 input, 1 output, and a filter.
+ * TODO: Bring out to a testing setup
+ */
+- (void) testSetupForFilter:(NSString*) filterName
+{
 	// Testing factory
-	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[self createNodeForNodeClassName:@"RawImageInputFilterNode"];
+	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[self createNodeForNodeName:@"File Input"];
 	
 	// add image file and update
 	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/DPP_0013.JPG"]];
 	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
 	
 	// Output
-	OutputViewingNode* testNodeOut = (OutputViewingNode*)[self createNodeForNodeClassName:@"OutputViewingNode"];
+	OutputViewingNode* testNodeOut = (OutputViewingNode*)[self createNodeForNodeName:@"Image Output"];
 	[testNodeOut.graphView setFrameOrigin:NSMakePoint(400, 200)];
 	
 	
 	
-	BOOL useFilter = YES;
-	
-	if(useFilter)
+	if(filterName)
 	{
 		// Filter Example
-		FilterNode* testModNode = [self createNodeForNodeClassName:@"CIColorInvert"];
+		FilterNode* testModNode = [self createNodeForNodeName:filterName];
 		
 		// connect and pass through data
 		[testModNode attachInputImageNode:testNodeIn];
@@ -154,7 +167,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 		[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 	}
-	[self doGlobalNodeUpdate];
+	
 }
 
 /**
@@ -213,7 +226,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	const float margin = 10; // margin value
 	__block float currentY = margin; // keep track of vertical layout.
 	
-	// TODO: Add controlView method to FilterNode that constructs this? Rather than doing it here?
+	// TODO: Add controlView method to FilterGraph that constructs this? Rather than doing it here?
 	
 	// Note I'm using defaults to set up controls. It's important that all FilterNodes have full inputValue
 	// defaults set up on initialisation!
@@ -249,7 +262,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			currentY += input.frame.size.height + margin;
 		}
 		
-		// TODO: NSURL as string input but with button for opening File Selector
+		// NSURL as string, but with button for opening File Selector
 		else if([obj isKindOfClass:[NSURL class]])
 		{
 			// add a string field
@@ -264,7 +277,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			[_filterConfigScrollView.documentView addSubview:input];
 			currentY += input.frame.size.height + margin;
 			
-			input.stringValue = [[currentSelectedNode.inputValues valueForKey:key] lastPathComponent];
+			input.stringValue = [currentSelectedNode.inputValues valueForKey:key];
 			// text field delegate is the node
 			input.delegate = self;
 			
@@ -307,16 +320,16 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 {
 	NSLog(@"Menu Item Selected: %@", item);
 	
-	[self createNodeForNodeClassName:item.title];
+	[self createNodeForNodeName:item.title];
 }
 
 
 #pragma mark - Helpers
 
 /**
- * Create a node from it's class name, put it in the scene unattached to anything.
+ * Create a node from it's listing display name or class, put it in the scene unattached to anything.
  */
-- (FilterNode*) createNodeForNodeClassName:(NSString*) nodeClassName
+- (FilterNode*) createNodeForNodeName:(NSString*) nodeClassName
 {
 	FilterNode* newNode = [FilterNodeFactory generateNodeForNodeClassName:nodeClassName];
 	
@@ -405,7 +418,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			if([command hasPrefix:@"create "])
 			{
 				NSString* nodeClassName = [command substringFromIndex:@"create ".length];
-				[self createNodeForNodeClassName:nodeClassName];
+				[self createNodeForNodeName:nodeClassName];
 			}
 			
 			// 2. update nodes

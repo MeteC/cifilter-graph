@@ -9,15 +9,12 @@
 //	This node does nothing but allow viewing of an image it picks up from a single input node. It conforms to
 //	the FilterNodeSeenInOutputPane protocol, which tags it for being shown in the output pane of the GUI.
 
-#import "FilterNode.h"
-#import "FilterNodeSeenInOutputPane.h"
+#import "GenericIONode.h"
 
 
-@interface OutputViewingNode : FilterNode <FilterNodeSeenInOutputPane>
+@interface OutputViewingNode : GenericIONode
 {
 	
 }
-@property (nonatomic, strong) NSImageView *imageOutputView;
-
 
 @end

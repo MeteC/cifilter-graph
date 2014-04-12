@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>nodes</key>
+		<dict>
+			<key>File Input</key>
+			<dict>
+				<key>class_name</key>
+				<string>RawImageInputFilterNode</string>
+			</dict>
+			<key>Image Output</key>
+			<dict>
+				<key>class_name</key>
+				<string>OutputViewingNode</string>
+			</dict>
+		</dict>
+		<key>meta</key>
+		<dict>
+			<key>display_name</key>
+			<string>I/O Nodes</string>
+		</dict>
+	</dict>
+</plist>

@@ -12,6 +12,8 @@
 		CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2861FC1787057D0024346C /* UXFilterGraphView.m */; };
 		CA2E31FC18EE296400E9B5BA /* UXFilterGraphManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */; };
 		CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */; };
+		CA86EBFE18F8EB5A00F80A49 /* GenericIONode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA86EBFD18F8EB5A00F80A49 /* GenericIONode.m */; };
+		CA86EC0018F8EC9500F80A49 /* ListedIONodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA86EBFF18F8EC9500F80A49 /* ListedIONodes.plist */; };
 		CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */; };
 		CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */; };
 		CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */; };
@@ -43,6 +45,9 @@
 		CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterGraphManager.m; sourceTree = "<group>"; };
 		CA7FF3A018DC1EE6000EAFA7 /* GenericCIEffectNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericCIEffectNode.h; sourceTree = "<group>"; };
 		CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericCIEffectNode.m; sourceTree = "<group>"; };
+		CA86EBFC18F8EB5A00F80A49 /* GenericIONode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericIONode.h; sourceTree = "<group>"; };
+		CA86EBFD18F8EB5A00F80A49 /* GenericIONode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericIONode.m; sourceTree = "<group>"; };
+		CA86EBFF18F8EC9500F80A49 /* ListedIONodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ListedIONodes.plist; sourceTree = "<group>"; };
 		CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectionView.h; sourceTree = "<group>"; };
 		CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterConnectionView.m; sourceTree = "<group>"; };
 		CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectPointView.h; sourceTree = "<group>"; };
@@ -107,6 +112,9 @@
 		CA1944FD18F2649D0062AE44 /* I/O */ = {
 			isa = PBXGroup;
 			children = (
+				CA86EBFC18F8EB5A00F80A49 /* GenericIONode.h */,
+				CA86EBFD18F8EB5A00F80A49 /* GenericIONode.m */,
+				CA86EBFF18F8EC9500F80A49 /* ListedIONodes.plist */,
 				CA9461C0179EA906002A0BF5 /* OutputViewingNode.h */,
 				CA9461C1179EA906002A0BF5 /* OutputViewingNode.m */,
 				CA9461C2179EA906002A0BF5 /* RawImageInputFilterNode.h */,
@@ -298,6 +306,7 @@
 				CAF14CAF17843411008DC169 /* MainMenu.xib in Resources */,
 				CA9461D0179EBA38002A0BF5 /* LICENSE in Resources */,
 				CA9461D1179EBA38002A0BF5 /* README.md in Resources */,
+				CA86EC0018F8EC9500F80A49 /* ListedIONodes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +326,7 @@
 				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
 				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,
 				CA1944FB18F255670062AE44 /* ListedNodeManager.m in Sources */,
+				CA86EBFE18F8EB5A00F80A49 /* GenericIONode.m in Sources */,
 				CA9461C5179EA906002A0BF5 /* RawImageInputFilterNode.m in Sources */,
 				CA961D6718F13CCF00FA58E0 /* UXFilterInputPointView.m in Sources */,
 				CACB5AFB18EEBD2300123715 /* FilterNodeContext.m in Sources */,
