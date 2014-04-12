@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h> // using "associated objects"
 
-@class UXFilterGraphView;
 
 #define UPDATE_VERBOSE_DEFAULT YES // change this to NO eventually
 
@@ -30,10 +29,10 @@
  * If a subclass doesn't have it's own custom one, this will default to a basic rectangle with textual info. 
  * This is also set by the setupDefaultGraphView method.
  *
- * Remember - you need to set parentNode on the graphView you're assigning! Tried syncing automatically,
- * but this brings complexity in that might not be immediately obvious in case of bugs.
+ * Note: This ties in the filter node layer with a graph layer, however only in the abstract. You could
+ * attach anything to this, as long as the code using the graph layers knows what to expect.
  */
-@property (nonatomic, strong) UXFilterGraphView *graphView;
+@property (nonatomic, strong) id graphView;
 
 
 /**

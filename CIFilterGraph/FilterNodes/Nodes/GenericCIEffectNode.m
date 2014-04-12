@@ -108,4 +108,34 @@
 	return node;
 }
 
+
+
+/**
+ * Provide a menu of all the filter name arrays in the listing, keyed by their subcategories
+ * Entries that don't belong in a subcategory must be keyed against "root"
+ */
+- (NSDictionary*) provideAvailableFilterNamesForMgr:(ListedNodeManager*) listMgr
+{
+	NSMutableDictionary* retVal = [NSMutableDictionary new];
+	
+	[listMgr.plistDict[@"nodes"] enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary* node, BOOL *stop) 
+	{
+		// subcategory..
+		NSString* subcategoryString = node[@"subcategory"];
+		NSMutableArray* subcategoryList = [retVal objectForKey:subcategoryString];
+		
+		// first entry in the list - create a new list!
+		if(!subcategoryList) {
+			[retVal setObject:[NSMutableArray new] forKey:subcategoryString];
+			subcategoryList = [retVal objectForKey:subcategoryString];
+		}
+		
+		[subcategoryList addObject:node[@"filter_name"]];
+	}];
+	
+	
+	return retVal;
+}
+
+
 @end

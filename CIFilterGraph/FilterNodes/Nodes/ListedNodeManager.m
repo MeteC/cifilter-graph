@@ -57,4 +57,9 @@
 	return retVal;
 }
 
+- (NSDictionary*) availableFilterNames
+{
+	return [self.delegate provideAvailableFilterNamesForMgr:self];
+}
+
 @end

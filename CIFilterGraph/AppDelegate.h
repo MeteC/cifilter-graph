@@ -17,6 +17,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate, UXFilterGraphViewDelegate>
 
 @property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSMenuItem *nodeMenuItem;
 
 @property (weak) IBOutlet NSScrollView *graphScrollView;
 @property (weak) IBOutlet NSScrollView *outputPaneScrollView;

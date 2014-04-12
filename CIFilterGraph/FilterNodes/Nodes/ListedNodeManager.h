@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 
 @class FilterNode;
+@class ListedNodeManager;
 
 
 /**
@@ -27,6 +28,12 @@
  * Create a filter node given a name and the parameters in the listing.
  */
 - (FilterNode*) createNodeWithName:(NSString*) name params:(NSDictionary*) params;
+
+/**
+ * Provide a menu of all the filter name arrays in the listing, keyed by their subcategories
+ * Entries that don't belong in a subcategory must be keyed against "root"
+ */
+- (NSDictionary*) provideAvailableFilterNamesForMgr:(ListedNodeManager*) listMgr;
 
 @end
 
@@ -52,5 +59,11 @@
  * Attempt to make a FilterNode from the directory with a given nodes key.
  */
 - (FilterNode*) createFilterNodeForNameKey:(NSString*) nodeName;
+
+/**
+ * Provide a menu of filter name arrays, keyed by their subcategory
+ * Entries that don't sit in a subcategory (rather in the top level) are keyed against "root"
+ */
+- (NSDictionary*) availableFilterNames;
 
 @end

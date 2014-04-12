@@ -61,6 +61,51 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[_mListedNodeManagers addObject:[[ListedNodeManager alloc] initWithPlist:@"ListedCIEffectNodes.plist" ownedDelegate:[GenericCIEffectNode new]]];
 	
 	
+	// Construct node menu
+	[_mListedNodeManagers enumerateObjectsUsingBlock:^(ListedNodeManager* mgr, NSUInteger idx, BOOL *stop) {
+		
+		// Create the submenu
+		NSMenuItem* listMenu = [[NSMenuItem alloc] initWithTitle:mgr.plistDisplayName action:nil keyEquivalent:@""];
+		[_nodeMenuItem.submenu addItem:listMenu];
+		[listMenu setSubmenu:[NSMenu new]];
+		
+		// Grab the list structure
+		NSDictionary* menuStruct = [mgr availableFilterNames];
+		[menuStruct enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSArray* list, BOOL *stop) 
+		{
+			// subcategory, or "root" if no subcategory
+			if([key isEqualToString:@"root"])
+			{
+				// directly in the root menu, create the list
+				[list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+				{
+					[listMenu.submenu addItemWithTitle:obj 
+												action:@selector(selectNodeMenuItem:) 
+										 keyEquivalent:@""];
+				}];
+				
+			}
+			else
+			{
+				// got a subcategory - make another submenu for it
+				NSMenuItem* subcategory = [[NSMenuItem alloc] initWithTitle:key 
+																	 action:nil 
+															  keyEquivalent:@""];
+				[listMenu.submenu addItem:subcategory];
+				[subcategory setSubmenu:[NSMenu new]];
+				
+				// done, create the list
+				[list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+				 {
+					 [subcategory.submenu addItemWithTitle:obj 
+													action:@selector(selectNodeMenuItem:) 
+											 keyEquivalent:@""];
+				 }];
+			}
+		}];
+		
+		
+	}];
 	
 	
 	
@@ -70,7 +115,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[self createNodeForNodeClassName:@"RawImageInputFilterNode"];
 	
 	// add image file and update
-	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/Screenshot Dumps & Photos/alien-app-icon-1024x1024.png"]];
+	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/DPP_0013.JPG"]];
 	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
 	
 	// Output
@@ -219,7 +264,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			[_filterConfigScrollView.documentView addSubview:input];
 			currentY += input.frame.size.height + margin;
 			
-			input.stringValue = [currentSelectedNode.inputValues valueForKey:key];
+			input.stringValue = [[currentSelectedNode.inputValues valueForKey:key] lastPathComponent];
 			// text field delegate is the node
 			input.delegate = self;
 			
@@ -254,6 +299,17 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	}];
 	
 }
+
+#pragma mark - Menu Items
+
+
+- (void) selectNodeMenuItem:(NSMenuItem*) item
+{
+	NSLog(@"Menu Item Selected: %@", item);
+	
+	[self createNodeForNodeClassName:item.title];
+}
+
 
 #pragma mark - Helpers
 
@@ -407,7 +463,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	//NSLog(@"associated obj = %@ (%@)", obj, [obj class]); // it's an NSURL
 	
-	// TODO: load up file browser and point it at the URL
+	// Load up file browser and point it at the URL
 	NSOpenPanel* fileBrowser = [NSOpenPanel openPanel];
 	[fileBrowser setDirectoryURL:obj];
 	NSInteger returnVal = [fileBrowser runModal];
@@ -417,6 +473,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	{
 		// we got a new file selected. Pass it back to the selected node and do a global update.
 		[currentSelectedNode.inputValues setObject:[[fileBrowser URLs] firstObject] forKey:inputKey];
+		
+		// update the on-screen input..
+		[self setupFilterConfigPanelForCurrentSelection];
 		
 		[AppDelegate log:[NSString stringWithFormat:@"Opened new file in %@: '%@'", currentSelectedNode, [[[fileBrowser URLs] firstObject] lastPathComponent] ]];
 		
