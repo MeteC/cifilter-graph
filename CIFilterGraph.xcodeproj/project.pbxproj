@@ -14,6 +14,7 @@
 		CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA7FF3A118DC1EE6000EAFA7 /* GenericCIEffectNode.m */; };
 		CA86EBFE18F8EB5A00F80A49 /* GenericIONode.m in Sources */ = {isa = PBXBuildFile; fileRef = CA86EBFD18F8EB5A00F80A49 /* GenericIONode.m */; };
 		CA86EC0018F8EC9500F80A49 /* ListedIONodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA86EBFF18F8EC9500F80A49 /* ListedIONodes.plist */; };
+		CA8A89FB18FA8E25002E197C /* UXHighlightingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */; };
 		CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */; };
 		CA8C9D7B18E50BA9005B682A /* UXFilterConnectPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8C9D7A18E50BA9005B682A /* UXFilterConnectPointView.m */; };
 		CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9461BD179E94C6002A0BF5 /* FilterNodeFactory.m */; };
@@ -48,6 +49,8 @@
 		CA86EBFC18F8EB5A00F80A49 /* GenericIONode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericIONode.h; sourceTree = "<group>"; };
 		CA86EBFD18F8EB5A00F80A49 /* GenericIONode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericIONode.m; sourceTree = "<group>"; };
 		CA86EBFF18F8EC9500F80A49 /* ListedIONodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ListedIONodes.plist; sourceTree = "<group>"; };
+		CA8A89F918FA8E25002E197C /* UXHighlightingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXHighlightingImageView.h; path = ../Graph/UXHighlightingImageView.h; sourceTree = "<group>"; };
+		CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UXHighlightingImageView.m; path = ../Graph/UXHighlightingImageView.m; sourceTree = "<group>"; };
 		CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectionView.h; sourceTree = "<group>"; };
 		CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterConnectionView.m; sourceTree = "<group>"; };
 		CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectPointView.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */,
+				CA8A89F918FA8E25002E197C /* UXHighlightingImageView.h */,
+				CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				CAF14CAC17843411008DC169 /* AppDelegate.m in Sources */,
 				CA8C9D7818E4DF11005B682A /* UXFilterConnectionView.m in Sources */,
 				CA7FF3A218DC1EE6000EAFA7 /* GenericCIEffectNode.m in Sources */,
+				CA8A89FB18FA8E25002E197C /* UXHighlightingImageView.m in Sources */,
 				CA2861FD1787057D0024346C /* UXFilterGraphView.m in Sources */,
 				CA9461BE179E94C6002A0BF5 /* FilterNodeFactory.m in Sources */,
 				CA9461C4179EA906002A0BF5 /* OutputViewingNode.m in Sources */,

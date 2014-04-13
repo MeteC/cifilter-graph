@@ -13,6 +13,7 @@
 #import "UXFilterInputPointView.h"
 #import "UXFilterOutputPointView.h"
 #import "UXFilterConnectionView.h"
+#import "UXHighlightingImageView.h"
 
 
 @interface UXFilterGraphView ()
@@ -254,7 +255,7 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     // Drawing code here.
-	//NSLog(@"Drawing %@ (%@)", self, self.parentNode.class);
+	//NSLog(@"Drawing %@ (%@)", self, self.parentNode);
 
 	// fill it with a colour
 	[self.backgroundColour set];
@@ -311,14 +312,18 @@
 {
 	// indicating hover
 	self.backgroundColour = [NSColor cyanColor];
-	
+
 	if([self.parentNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
 	{
 		// indicating which photo frame it owns
-		NSImageView* pane = [(id<FilterNodeSeenInOutputPane>)self.parentNode imageOutputView];
+		UXHighlightingImageView* pane = [(id<FilterNodeSeenInOutputPane>)self.parentNode imageOutputView];
 		
-		// !!!: deprectaed frame styles
-		[pane setImageFrameStyle:NSImageFrameButton];
+		// This was extremely slow for complex filter chains, because CIFilter is lazy - it only
+		// performs operations when something (like NSImageView) asks to use the image.
+		// so setting the frame was getting NSImageView to ask to redraw the image, and filter
+		// processing was being done again (image wasn't being cached, so to speak)
+		//[pane setImageFrameStyle:NSImageFrameGrayBezel];
+		[pane setHighlight:YES];
 	}
 	
 	[self setNeedsDisplay:YES];
@@ -331,8 +336,12 @@
 	if([self.parentNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
 	{
 		// indicating which photo frame it owns
-		NSImageView* pane = [(id<FilterNodeSeenInOutputPane>)self.parentNode imageOutputView];
-		[pane setImageFrameStyle:NSImageFramePhoto];
+		UXHighlightingImageView* pane = [(id<FilterNodeSeenInOutputPane>)self.parentNode imageOutputView];
+		
+		// Setting frame style can be very slow! Why??
+		//[pane setImageFrameStyle:NSImageFrameNone];
+		[pane setHighlight:NO];
+		
 	}
 	
 	[self setNeedsDisplay:YES];

@@ -11,12 +11,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class UXHighlightingImageView;
+
 @protocol FilterNodeSeenInOutputPane <NSObject>
 
 @required
 - (NSMutableDictionary*) outputValues; // ensure it's a FilterNode
 
 // does it's own updates.
-@property (nonatomic, retain) NSImageView *imageOutputView;
+@property (nonatomic, retain) UXHighlightingImageView *imageOutputView;
 
 @end

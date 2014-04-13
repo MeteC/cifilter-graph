@@ -15,6 +15,7 @@
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
 #import "UXFilterGraphView.h"
+#import "UXHighlightingImageView.h"
 #import "ListedNodeManager.h"
 
 // Generic nodes (listed nodes)
@@ -114,7 +115,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	// done!
 	
 	// test
-	[self testSetupForFilter:@"CIColorInvert"];
+	[self testSetupForFilter:@"CIDiscBlur"];
 	
 	[self doGlobalNodeUpdate];
 }
@@ -355,7 +356,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			// it needs an output image pane!
 			NSUInteger currentPaneCount = [_outputPaneScrollView.documentView subviews].count;
 			
-			NSImageView* outputPane = [(id<FilterNodeSeenInOutputPane>)newNode imageOutputView];
+			UXHighlightingImageView* outputPane = [(id<FilterNodeSeenInOutputPane>)newNode imageOutputView];
 			[_outputPaneScrollView.documentView addSubview:outputPane];
 			
 			float xPos = (outputPane.frame.size.width + margin) * currentPaneCount;

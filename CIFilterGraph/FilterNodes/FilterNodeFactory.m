@@ -10,6 +10,7 @@
 #import "FilterNode.h"
 #import "FilterNodeSeenInOutputPane.h"
 #import "ListedNodeManager.h"
+#import "UXHighlightingImageView.h"
 
 
 static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in points) for output panes
@@ -49,9 +50,10 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 		if([newNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
 		{
 			// set up the output "pane"
-			NSImageView* pane = [[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, 
-																			  kDefaultImageViewDim, 
-																			  kDefaultImageViewDim)];
+			UXHighlightingImageView* pane = [[UXHighlightingImageView alloc] initWithFrame:
+											 NSMakeRect(0, 0, 
+														kDefaultImageViewDim, 
+														kDefaultImageViewDim)];
 			
 			[pane setImageFrameStyle:NSImageFrameNone];
 			[newNode setImageOutputView:pane];

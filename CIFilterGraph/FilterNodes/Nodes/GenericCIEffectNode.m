@@ -79,8 +79,9 @@
 	
 	// pass on the outputImage if we got it
 	if(gotInputImage)
+	{
 		[_outputValues setValue:[filter valueForKey:@"outputImage"] forKey:kFilterOutputKeyImage];
-	
+	}
 	else // no work done
 		[_outputValues removeObjectForKey:kFilterOutputKeyImage];
 }

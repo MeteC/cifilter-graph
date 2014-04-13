@@ -12,9 +12,13 @@
 #import "FilterNode.h"
 #import "FilterNodeSeenInOutputPane.h"
 #import "ListedNodeManager.h"
+#import "UXHighlightingImageView.h"
+
 
 @interface GenericIONode : FilterNode <FilterNodeSeenInOutputPane,ListedNodeManagerDelegate>
 
-@property (nonatomic, strong) NSImageView *imageOutputView;
+
+// Note: connection between node layer and graphics layer here (weak spot in regards to modularity)
+@property (nonatomic, strong) UXHighlightingImageView *imageOutputView;
 
 @end
