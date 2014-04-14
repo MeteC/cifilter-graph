@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "FilterNodeFactory.h"
 #import "NSScrollView+AutosizeContent.h"
+
+#import "FilterNodeFactory.h"
+#import "UXFilterControlsFactory.h"
 
 #import "FilterNodeContext.h"
 #import "FilterNode.h"
@@ -51,6 +53,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 @end
 
 @implementation AppDelegate
+
+
+#pragma mark - Startup
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -218,6 +223,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[sharedContext smartUpdate];
 }
 
+#pragma mark - Class Methods
+
 /**
  * Append a string to GUI log. Can be class method as there's only one AppDelegate instance per app.
  */
@@ -240,21 +247,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 }
 
 
-/**
- * Create standard right-click pop-up menu for a graph view
- */
-- (NSMenu*) popupMenuForGraphView:(UXFilterGraphView*) graphView
-{
-	NSMenu *theMenu = [[NSMenu alloc] initWithTitle:graphView.parentNode.description];
-	
-    [theMenu insertItemWithTitle:theMenu.title action:nil keyEquivalent:@"" atIndex:0];
-    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
-	
-    [theMenu insertItemWithTitle:@"Remove" action:@selector(selectPopupMenuItem:) keyEquivalent:@"" atIndex:2];
-    
-	return theMenu;
-}
-
 #pragma mark - Delegate Methods
 
 - (void) clickedFilterGraph:(UXFilterGraphView*) graphView wasLeftClick:(BOOL)wasLeftClick
@@ -271,16 +263,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	// read ID to log so you can delete with command line
 	UXLog(@"Selected %@ node ID %p", graphView.parentNode, graphView.parentNode);
 	
-	
-	/*
-	 // memory test
-	 double delayInSeconds = 0.0001;
-	 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-	 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-	 [self clickedFilterGraph:graphView];
-	 });*/
-	
-	
 	if(!wasLeftClick) // right click
 	{
 		NSLog(@"right clicked %@", graphView.parentNode);
@@ -289,6 +271,15 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		NSMenu* popup = [self popupMenuForGraphView:graphView];
 		[popup popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
 	}
+	
+	
+	/*
+	 // memory test
+	 double delayInSeconds = 0.0001;
+	 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+	 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+	 [self clickedFilterGraph:graphView];
+	 });*/
 }
 
 /**
@@ -298,93 +289,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 {
 	[[_filterConfigScrollView.documentView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 	
-	const float margin = 10; // margin value
-	__block float currentY = margin; // keep track of vertical layout.
-	
-	// TODO: Add controlView method to FilterGraph that constructs this? Rather than doing it here?
-	
-	// Note I'm using defaults to set up controls. It's important that all FilterNodes have full inputValue
-	// defaults set up on initialisation!
-	[currentSelectedNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-		
-		if([obj isKindOfClass:[NSNumber class]])
-		{
-			// add a number field, with title
-			NSTextField* label = [self makeLabelWithText:key];
-			[label setFrameOrigin:CGPointMake(margin, currentY)];
-			[_filterConfigScrollView.documentView addSubview:label];
-			
-			// add text field 
-			// TODO: add number formatter?
-			float currentX = margin + label.frame.size.width + margin;
-			
-			// !!!: Yucky magic numbers that don't move with the GUI!
-			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(currentX, currentY, 100, label.frame.size.height*1.2)];
-			[_filterConfigScrollView.documentView addSubview:input];
-			
-			input.stringValue = [currentSelectedNode.inputValues valueForKey:key];
-			// text field delegate is the node
-			input.delegate = self;
-			
-			// associate the input key value with the input, so the FilterNode can look it up
-			// Note: using weak references to avoid any memory loops. If there are strange crashes, try
-			// OBJC_ASSOCIATION_RETAIN.. Or use a mutable association dictionary somewhere..
-			objc_setAssociatedObject(input, kUIControlElementAssociatedInputKey, key,
-									 OBJC_ASSOCIATION_ASSIGN);
-			
-			// TODO: all of this more generically
-			
-			currentY += input.frame.size.height + margin;
-		}
-		
-		// NSURL as string, but with button for opening File Selector
-		else if([obj isKindOfClass:[NSURL class]])
-		{
-			// add a string field
-			NSTextField* label = [self makeLabelWithText:key];
-			[label setFrameOrigin:CGPointMake(margin, currentY)];
-			[_filterConfigScrollView.documentView addSubview:label];
-			currentY += label.frame.size.height;
-			
-			// add text field 
-			// !!!: Yucky magic numbers that don't move with the GUI!
-			NSTextField* input = [[NSTextField alloc] initWithFrame:CGRectMake(margin, currentY, 300, label.frame.size.height*1.2)];
-			[_filterConfigScrollView.documentView addSubview:input];
-			currentY += input.frame.size.height + margin;
-			
-			input.stringValue = [currentSelectedNode.inputValues valueForKey:key];
-			// text field delegate is the node
-			input.delegate = self;
-			
-			objc_setAssociatedObject(input, kUIControlElementAssociatedInputKey, key,
-									 OBJC_ASSOCIATION_ASSIGN);
-			
-			// Add button for file browser opening
-			NSButton* fileBrowserButton = [[NSButton alloc] initWithFrame:NSMakeRect(margin, currentY, 40, 40)];
-			[fileBrowserButton setImage:[NSImage imageNamed:@"NSComputer"]];
-			[_filterConfigScrollView.documentView addSubview:fileBrowserButton];
-			
-			[fileBrowserButton setTarget:self];
-			[fileBrowserButton setAction:@selector(pressFileBrowseButton:)];
-			
-			objc_setAssociatedObject(fileBrowserButton, kUIControlElementAssociatedInputKey, key,
-									 OBJC_ASSOCIATION_ASSIGN);
-			
-			
-			// TODO: all of this more generically
-			
-			currentY += fileBrowserButton.frame.size.height + margin;
-		}
-		
-		else if([obj isKindOfClass:[FilterNode class]]) {} // does nothing
-		
-		
-		else {
-			UXLog(@"WARNING: Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]);
-		}
-		
-	}];
-	
+	[UXFilterControlsFactory createControlPanelFor:currentSelectedNode 
+									addToSuperview:_filterConfigScrollView.documentView 
+								  controlsDelegate:self];
 }
 
 #pragma mark - Menu Items
@@ -523,20 +430,19 @@ static const float scrollerPaneMargin = 20; // margin between image views
 }
 
 /**
- * Code sugar to make a simple label, like a UILabel on iOS.
+ * Create standard right-click pop-up menu for a graph view
  */
-- (NSTextField*) makeLabelWithText:(NSString*) text
+- (NSMenu*) popupMenuForGraphView:(UXFilterGraphView*) graphView
 {
-	NSTextField* label = [[NSTextField alloc] init];
-	[label setBordered:NO];
-	[label setEditable:NO];
-	[label setBackgroundColor:[NSColor clearColor]];
-	[label setStringValue:text];
-	[label sizeToFit];
+	NSMenu *theMenu = [[NSMenu alloc] initWithTitle:graphView.parentNode.description];
 	
-	return label;
+    [theMenu insertItemWithTitle:theMenu.title action:nil keyEquivalent:@"" atIndex:0];
+    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
+	
+    [theMenu insertItemWithTitle:@"Remove" action:@selector(selectPopupMenuItem:) keyEquivalent:@"" atIndex:2];
+    
+	return theMenu;
 }
-
 
 #pragma mark - Text Field
 
@@ -555,7 +461,7 @@ static const float scrollerPaneMargin = 20; // margin between image views
 		if([[fieldEditor string] length] != 0)
 		{
 			NSString* command = fieldEditor.string;
-			NSLog(@"Entered command: '%@'", command);
+			UXLog(@"Entered command: '%@'", command);
 			
 			// Can do what I like with those commands now
 			
@@ -590,15 +496,9 @@ static const float scrollerPaneMargin = 20; // margin between image views
 					}
 				}];
 				
+				if(gotIt)	UXLog(@"Removed node '%@'",nodeAddress);
+				else		UXLog(@"Could not remove node '%@'..",nodeAddress);
 				
-				if(gotIt)
-				{
-					UXLog(@"Removed node '%@'",nodeAddress);
-				}
-				else
-				{
-					UXLog(@"Could not remove node '%@'..",nodeAddress);
-				}
 			}
 			
 			
@@ -611,7 +511,7 @@ static const float scrollerPaneMargin = 20; // margin between image views
 		}
 	}
 	
-	else // it's a node input
+	else // the text editor is a node's control
 	{
 		NSString* inputKey = objc_getAssociatedObject(control, kUIControlElementAssociatedInputKey);
 		id obj = [currentSelectedNode.inputValues objectForKey:inputKey];

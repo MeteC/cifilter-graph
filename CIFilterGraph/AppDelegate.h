@@ -11,7 +11,7 @@
 
 // UI elements have associated input key NSStrings, so that FilterNodes can respond directly
 // to UI delegation methods (e.g. NSTextFieldDelegate). This is the key to look up the association
-//extern const char* const kUIControlElementAssociatedInputKey;
+extern const char* const kUIControlElementAssociatedInputKey;
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSTextFieldDelegate, UXFilterGraphViewDelegate>
