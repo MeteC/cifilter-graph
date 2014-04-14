@@ -50,6 +50,11 @@
     return [self initWithFrame:NSMakeRect(0, 0, defaultSize.width, defaultSize.height)];
 }
 
+- (void)dealloc
+{
+    NSLog(@"Deallocing UXFilterGraphView %@", self);
+}
+
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
@@ -224,7 +229,7 @@
 			
 			else // connected node has no graph view
 			{
-				[AppDelegate log:@"ERROR: trying to reset graph UI connections, but a corresponding input FilterGraphView does not exist"];
+				UXLog(@"ERROR: trying to reset graph UI connections, but a corresponding input FilterGraphView does not exist");
 			}
 		}
 		
@@ -355,8 +360,15 @@
 	
 	isDragging = YES;
 	
-	// Indicate that configuration options should be set up for this node
-	[_delegate clickedFilterGraph:self];
+	// Tell delegate of left mouse click
+	[_delegate clickedFilterGraph:self wasLeftClick:YES];
+}
+
+- (void) rightMouseDown:(NSEvent *)theEvent
+{
+	
+	// Tell delegate of right mouse click
+	[_delegate clickedFilterGraph:self wasLeftClick:NO];
 }
 
 - (void) mouseUp:(NSEvent *)theEvent

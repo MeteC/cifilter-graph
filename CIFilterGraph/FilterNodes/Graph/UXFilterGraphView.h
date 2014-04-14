@@ -12,7 +12,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "FilterNode.h"
-#import "FilterGraphViewDelegate.h"
+#import "UXFilterGraphViewDelegate.h"
 
 
 @class UXFilterConnectPointView;

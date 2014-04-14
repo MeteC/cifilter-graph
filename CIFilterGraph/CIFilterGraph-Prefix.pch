@@ -9,4 +9,10 @@
 
 #define APP_DELEGATE ((AppDelegate*)[[NSApplication sharedApplication] delegate])
 
+// Note - I use UXLog everywhere to log to my GUI. You could simply redefine this to point to NSLog
+// in order to remove code that uses it from the project. Like this:
+//#define UXLog(__FORMAT__,...) NSLog(__FORMAT__, ##__VA_ARGS__)
+
+#define UXLog(__FORMAT__,...) ([AppDelegate log:[NSString stringWithFormat:__FORMAT__, ##__VA_ARGS__]])
+
 #endif

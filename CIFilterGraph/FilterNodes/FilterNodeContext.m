@@ -11,7 +11,7 @@
 
 @interface FilterNodeContext ()
 {
-	NSMutableSet* downstreamNodes;
+	NSMutableSet* mNodes;
 }
 @end
 
@@ -37,46 +37,54 @@
 {
     self = [super init];
     if (self) {
-        downstreamNodes = [NSMutableSet set];
+        mNodes = [NSMutableSet set];
     }
     return self;
 }
 
 
-#pragma mark - Methods
+#pragma mark - Registration
 
 
 /**
- * Register a downstream node to be pulled from
+ * Register a node
  */
 - (void) registerOutputNode:(FilterNode*) outputNode
 {
-	[downstreamNodes addObject:outputNode];
+	[mNodes addObject:outputNode];
 }
 
 /**
- * Deregister a downstream node, if it's in the set.
+ * Deregister a node, if it's in the set.
  */
 - (void) deregisterOutputNode:(FilterNode*) outputNode
 {
-	[downstreamNodes removeObject:outputNode];
+	[mNodes removeObject:outputNode];
 }
+
+- (NSSet*) registeredNodes
+{
+	return mNodes;
+}
+
+#pragma mark - Updates
 
 /**
  * Update the entire scene (providing all downstream nodes are registered)
  */
 - (void) smartUpdate
 {
-	// mark updated nodes as we go
-	NSMutableSet* updatedSet = [NSMutableSet set];
 	
 	// pull dependencies, update them in order if required
 	NSMutableArray* orderedDependencies = [NSMutableArray array];
 	
-	[downstreamNodes enumerateObjectsUsingBlock:^(FilterNode* node, BOOL *stop) {
+	[mNodes enumerateObjectsUsingBlock:^(FilterNode* node, BOOL *stop) {
 		int guardCounter = 0;
 		[self unravelRecurse:node intoOrderedArray:orderedDependencies guardCounter:&guardCounter];
 	}];
+	
+	// mark updated nodes as we go
+	NSMutableSet* updatedSet = [NSMutableSet set];
 	
 	// now we've unravelled everything from all downstream nodes into an ordered dependency list
 	[orderedDependencies enumerateObjectsUsingBlock:^(FilterNode* node, NSUInteger idx, BOOL *stop) {
@@ -88,6 +96,8 @@
 			[updatedSet addObject:node];
 		}
 	}];
+	
+	UXLog(@"Updating Filter Graph!");
 }
 
 /** 
@@ -109,7 +119,7 @@
 		{
 			if(*guardCounter > kMaxGuardCount)
 			{
-				[AppDelegate log:@"ERROR: Infinite loop detected! Can't safely determine dependencies, aborting."];
+				UXLog(@"ERROR: Infinite loop detected! Can't safely determine dependencies, aborting.");
 				break;
 			}
 			
@@ -122,6 +132,52 @@
 		
 		
 	}
+}
+
+#pragma mark - Removal
+
+/**
+ * Removes a node from the scene, including all references to it by downstream nodes.
+ * Does nothing to graphics, just FilterNode layer stuff!
+ */
+- (void) removeNodeFromScene:(FilterNode*) deadNode
+{
+	// traverse the scene and find any nodes that have node as input
+	
+	// pull dependencies as with updates...
+	NSMutableArray* orderedDependencies = [NSMutableArray array];
+	
+	[mNodes enumerateObjectsUsingBlock:^(FilterNode* aNode, BOOL *stop) {
+		int guardCounter = 0;
+		[self unravelRecurse:aNode intoOrderedArray:orderedDependencies guardCounter:&guardCounter];
+	}];
+	
+	// mark updated nodes as we go
+	NSMutableSet* updatedSet = [NSMutableSet set];
+	
+	// ... now we just traverse the list and remove node from inputValues
+	[orderedDependencies enumerateObjectsUsingBlock:^(FilterNode* aNode, NSUInteger idx, BOOL *stop) {
+		
+		// as in update, no need to check out a node more than once
+		if(![updatedSet containsObject:aNode]) 
+		{
+			
+			[aNode.inputValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+				
+				if(obj == deadNode)
+				{
+					[aNode.inputValues removeObjectForKey:key];
+					NSLog(@"Removed node %@ from input list for node %@", deadNode, aNode);
+				}
+				
+			}];
+			
+			[updatedSet addObject:aNode];
+		}
+	}];
+	
+	// finally deregister the node and we're done
+	[self deregisterOutputNode:deadNode];
 }
 
 @end

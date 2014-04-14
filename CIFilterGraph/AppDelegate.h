@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FilterGraphViewDelegate.h"
+#import "UXFilterGraphViewDelegate.h"
 
 // UI elements have associated input key NSStrings, so that FilterNodes can respond directly
 // to UI delegation methods (e.g. NSTextFieldDelegate). This is the key to look up the association
@@ -18,6 +18,7 @@
 
 @property (weak) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSMenuItem *nodeMenuItem;
+@property (weak) IBOutlet NSMenuItem *testMenuItem;
 
 @property (weak) IBOutlet NSScrollView *graphScrollView;
 @property (weak) IBOutlet NSScrollView *outputPaneScrollView;

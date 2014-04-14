@@ -18,7 +18,8 @@
 @required
 - (NSMutableDictionary*) outputValues; // ensure it's a FilterNode
 
-// does it's own updates.
+// Note by using a graphics element here I'm weakening the FilterNode layer modularity..
+// TODO: more generic?
 @property (nonatomic, retain) UXHighlightingImageView *imageOutputView;
 
 @end

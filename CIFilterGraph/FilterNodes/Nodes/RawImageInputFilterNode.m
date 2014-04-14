@@ -31,7 +31,7 @@
 	[super updateNode];
 	
 	NSURL* fileURL = [[self inputValues] valueForKey:kFilterInputKeyFileURL];
-	if(fileURL)
+	if(fileURL && fileURL.absoluteString.length > 0)
 	{
 		// load the image to a CIImage
 		CIImage* theImage = [CIImage imageWithContentsOfURL:fileURL];

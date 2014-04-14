@@ -49,8 +49,8 @@
 		CA86EBFC18F8EB5A00F80A49 /* GenericIONode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericIONode.h; sourceTree = "<group>"; };
 		CA86EBFD18F8EB5A00F80A49 /* GenericIONode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericIONode.m; sourceTree = "<group>"; };
 		CA86EBFF18F8EC9500F80A49 /* ListedIONodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ListedIONodes.plist; sourceTree = "<group>"; };
-		CA8A89F918FA8E25002E197C /* UXHighlightingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UXHighlightingImageView.h; path = ../Graph/UXHighlightingImageView.h; sourceTree = "<group>"; };
-		CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UXHighlightingImageView.m; path = ../Graph/UXHighlightingImageView.m; sourceTree = "<group>"; };
+		CA8A89F918FA8E25002E197C /* UXHighlightingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXHighlightingImageView.h; sourceTree = "<group>"; };
+		CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXHighlightingImageView.m; sourceTree = "<group>"; };
 		CA8C9D7618E4DF11005B682A /* UXFilterConnectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectionView.h; sourceTree = "<group>"; };
 		CA8C9D7718E4DF11005B682A /* UXFilterConnectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterConnectionView.m; sourceTree = "<group>"; };
 		CA8C9D7918E50BA9005B682A /* UXFilterConnectPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterConnectPointView.h; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		CA961D6618F13CCF00FA58E0 /* UXFilterInputPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterInputPointView.m; sourceTree = "<group>"; };
 		CA961D6818F13CDC00FA58E0 /* UXFilterOutputPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UXFilterOutputPointView.h; sourceTree = "<group>"; };
 		CA961D6918F13CDC00FA58E0 /* UXFilterOutputPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UXFilterOutputPointView.m; sourceTree = "<group>"; };
-		CAA3953D17A7CC4E009690A9 /* FilterGraphViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterGraphViewDelegate.h; sourceTree = "<group>"; };
+		CAA3953D17A7CC4E009690A9 /* UXFilterGraphViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UXFilterGraphViewDelegate.h; sourceTree = "<group>"; };
 		CACB5AF918EEBD2300123715 /* FilterNodeContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterNodeContext.h; sourceTree = "<group>"; };
 		CACB5AFA18EEBD2300123715 /* FilterNodeContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterNodeContext.m; sourceTree = "<group>"; };
 		CAF14C9517843411008DC169 /* CIFilterGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CIFilterGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,8 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				CA2861F91787022C0024346C /* FilterNodeSeenInOutputPane.h */,
-				CA8A89F918FA8E25002E197C /* UXHighlightingImageView.h */,
-				CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -143,10 +141,12 @@
 				CA2E31FB18EE296400E9B5BA /* UXFilterGraphManager.m */,
 				CA2861FB1787057D0024346C /* UXFilterGraphView.h */,
 				CA2861FC1787057D0024346C /* UXFilterGraphView.m */,
-				CAA3953D17A7CC4E009690A9 /* FilterGraphViewDelegate.h */,
+				CAA3953D17A7CC4E009690A9 /* UXFilterGraphViewDelegate.h */,
 				CA961D6B18F13CE800FA58E0 /* Connections */,
 				CA9461D2179EBE69002A0BF5 /* NSScrollView+AutosizeContent.h */,
 				CA9461D3179EBE69002A0BF5 /* NSScrollView+AutosizeContent.m */,
+				CA8A89F918FA8E25002E197C /* UXHighlightingImageView.h */,
+				CA8A89FA18FA8E25002E197C /* UXHighlightingImageView.m */,
 			);
 			path = Graph;
 			sourceTree = "<group>";

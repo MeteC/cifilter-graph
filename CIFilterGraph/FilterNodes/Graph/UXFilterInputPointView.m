@@ -63,7 +63,7 @@
 	else
 	{
 		// This isn't an error, just do nothing
-		//	[AppDelegate log:@"ERROR: Trying to wipe underlying filter node connection for a connection that isn't validly linked up to two connect points! Debug here..."];
+		//	UXLog(@"ERROR: Trying to wipe underlying filter node connection for a connection that isn't validly linked up to two connect points! Debug here...");
 	}
 }
 

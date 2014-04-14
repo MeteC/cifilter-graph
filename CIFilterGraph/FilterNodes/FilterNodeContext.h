@@ -13,6 +13,10 @@
 //	v1: register output nodes. updates will mark upstream nodes as updated and if multiple output
 //	branches use the same nodes they won't need to be updated twice
 
+//	v2: Now using the context to remove nodes from the scene, because other nodes will have strong
+//	pointers to them but they won't know who does. The context can figure it out.
+
+
 #import <Foundation/Foundation.h>
 
 @class FilterNode;
@@ -30,7 +34,7 @@
 - (void) registerOutputNode:(FilterNode*) outputNode;
 
 /**
- * Deregister a downstream node, if it's in the set.
+ * Deregister a node, if it's in the set.
  */
 - (void) deregisterOutputNode:(FilterNode*) outputNode;
 
@@ -38,5 +42,16 @@
  * Update the entire scene (providing all downstream nodes are registered)
  */
 - (void) smartUpdate;
+
+/**
+ * Removes a node from the scene, including all references to it by downstream nodes.
+ * Does nothing to graphics, just FilterNode layer stuff!
+ */
+- (void) removeNodeFromScene:(FilterNode*) node;
+
+/**
+ * A view on which nodes are currently registered
+ */
+- (NSSet*) registeredNodes;
 
 @end

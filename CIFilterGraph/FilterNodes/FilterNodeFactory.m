@@ -67,7 +67,7 @@ static const CGFloat kDefaultImageViewDim = 225; // default dimension size (in p
 		[msg setString:[NSString stringWithFormat:@"ERROR: %@ is not a FilterNode class or a listed node", nodeClassName]];
 	}
 		 
-	[AppDelegate log:msg];
+	UXLog(@"%@",msg);
 	
 	return newNode;
 }

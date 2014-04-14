@@ -334,22 +334,8 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Node" id="376"/>
                 </menuItem>
-                <menuItem title="View" id="295">
-                    <menu key="submenu" title="View" id="296">
-                        <items>
-                            <menuItem title="Show Toolbar" keyEquivalent="t" id="297">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                <connections>
-                                    <action selector="toggleToolbarShown:" target="-1" id="366"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Customize Toolbar…" id="298">
-                                <connections>
-                                    <action selector="runToolbarCustomizationPalette:" target="-1" id="365"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
+                <menuItem title="Testing" id="295">
+                    <menu key="submenu" title="Testing" id="296"/>
                 </menuItem>
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
@@ -398,6 +384,7 @@
                 <outlet property="messageLog" destination="597" id="611"/>
                 <outlet property="nodeMenuItem" destination="375" id="E73-64-Yoi"/>
                 <outlet property="outputPaneScrollView" destination="612" id="619"/>
+                <outlet property="testMenuItem" destination="295" id="v9r-tw-Pje"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>

@@ -14,8 +14,13 @@
 #import "FilterNode.h"
 #import "RawImageInputFilterNode.h"
 #import "OutputViewingNode.h"
+
 #import "UXFilterGraphView.h"
+#import "UXFilterInputPointView.h"
+#import "UXFilterOutputPointView.h"
+#import "UXFilterConnectionView.h"
 #import "UXHighlightingImageView.h"
+
 #import "ListedNodeManager.h"
 
 // Generic nodes (listed nodes)
@@ -26,6 +31,11 @@
 #import <objc/runtime.h> // using "associated objects"
 
 
+// Set this to 0 for no test menu
+#define TESTING_MENU_ACCESSIBLE 1
+#define TESTING_INPUT_IMAGE_URL @"/Users/mcakman/Desktop/DPP_0013.JPG"
+
+
 // UI elements have associated input key NSStrings, so that FilterNodes can respond directly
 // to UI delegation methods (e.g. NSTextFieldDelegate). This is the key to look up the association
 const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssociatedInputKey";
@@ -33,10 +43,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 @interface AppDelegate ()
 {
-	FilterNodeContext* sharedContext;	// the filter update context
+	FilterNodeContext* sharedContext;	// the filter update context. owner of nodes.
 	FilterNode* currentSelectedNode;	// currently selected node pointer
-	
-	NSMutableArray* currentFilterList;	// a loose list of all filters
 }
 @property NSMutableArray* mListedNodeManagers; // all the "listed node" managers
 
@@ -47,10 +55,10 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {	
+	UXLog(@"Hi there");
+	
 	// Insert code here to initialize your application
 	[_messageLog setEditable:NO];
-	
-	currentFilterList = [NSMutableArray array];
 	
 	[_filterConfigTitle setStringValue:@""];
 	[_filterConfigScrollView.documentView setFlipped:YES]; // make sure filter config layout goes top down
@@ -67,71 +75,110 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	
 	// Construct node menu
+	[self setupNodeMenus];
+	
+	// And testing menu
+	[self setupTestMenus];
+	
+	
+	/*
+	// testing still...
+	[self createTestForFilter:@"CIDiscBlur"];
+	[self doGlobalNodeUpdate];
+	*/
+	// done!
+}
+
+/**
+ * Set up the node menu based on listings
+ */
+- (void) setupNodeMenus
+{
 	[_mListedNodeManagers enumerateObjectsUsingBlock:^(ListedNodeManager* mgr, NSUInteger idx, BOOL *stop) {
 		
 		// Create the submenu
-		NSMenuItem* listMenu = [[NSMenuItem alloc] initWithTitle:mgr.plistDisplayName action:nil keyEquivalent:@""];
+		NSMenuItem* listMenu = [self createMenuItemForListMgr:mgr 
+											   withItemAction:@selector(selectNodeMenuItem:)];
 		[_nodeMenuItem.submenu addItem:listMenu];
-		[listMenu setSubmenu:[[NSMenu alloc] initWithTitle:mgr.plistDisplayName]];
-		
-		// Grab the list structure
-		NSDictionary* menuStruct = [mgr availableFilterNames];
-		[menuStruct enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSArray* list, BOOL *stop) 
-		{
-			// subcategory, or "root" if no subcategory
-			if([key isEqualToString:@"root"])
-			{
-				// directly in the root menu, create the list
-				[list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
-				{
-					[listMenu.submenu addItemWithTitle:obj 
-												action:@selector(selectNodeMenuItem:) 
-										 keyEquivalent:@""];
-				}];
-				
-			}
-			else
-			{
-				// got a subcategory - make another submenu for it
-				NSMenuItem* subcategory = [[NSMenuItem alloc] initWithTitle:key 
-																	 action:nil 
-															  keyEquivalent:@""];
-				[listMenu.submenu addItem:subcategory];
-				[subcategory setSubmenu:[[NSMenu alloc] initWithTitle:key]];
-				
-				// done, create the list
-				[list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
-				 {
-					 [subcategory.submenu addItemWithTitle:obj 
-													action:@selector(selectNodeMenuItem:) 
-											 keyEquivalent:@""];
-				 }];
-			}
-		}];
-		
-		
 	}];
-	
-	// done!
-	
-	// test
-	[self testSetupForFilter:@"CIDiscBlur"];
-	
-	[self doGlobalNodeUpdate];
 }
 
+/**
+ * Set up the test menu, or kill it, depending on TESTING_MENU_ACCESSIBLE
+ */
+- (void) setupTestMenus
+{
+#if (TESTING_MENU_ACCESSIBLE == 0) // kill the test menu
+	[_testMenuItem.menu removeItem:_testMenuItem];
+#else // set up the test menu
+	
+	// Menu for testing GenericCIEffectNodes; the test cases will set up a 3 part node chain,
+	// with the test filter in the middle of an input and output
+	ListedNodeManager* genericCIList = [[ListedNodeManager alloc] initWithPlist:@"ListedCIEffectNodes.plist" ownedDelegate:[GenericCIEffectNode new]];
+	
+	NSMenuItem* genericTestsItem = [self createMenuItemForListMgr:genericCIList withItemAction:@selector(selectTestMenuItem:)];
+	[_testMenuItem.submenu addItem:genericTestsItem];
+	
+#endif
+}
+
+/**
+ * Factoring out the code for creating menus from listings, so I can use it in different places.
+ */
+- (NSMenuItem*) createMenuItemForListMgr:(ListedNodeManager*) mgr withItemAction:(SEL) selector
+{
+	// Create the submenu
+	NSMenuItem* listMenu = [[NSMenuItem alloc] initWithTitle:mgr.plistDisplayName action:nil keyEquivalent:@""];
+	[listMenu setSubmenu:[[NSMenu alloc] initWithTitle:mgr.plistDisplayName]];
+	
+	// Grab the list structure
+	NSDictionary* menuStruct = [mgr availableFilterNames];
+	[menuStruct enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSArray* list, BOOL *stop) 
+	 {
+		 // subcategory, or "root" if no subcategory
+		 if([key isEqualToString:@"root"])
+		 {
+			 // directly in the root menu, create the list
+			 [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+			  {
+				  [listMenu.submenu addItemWithTitle:obj 
+											  action:selector 
+									   keyEquivalent:@""];
+			  }];
+			 
+		 }
+		 else
+		 {
+			 // got a subcategory - make another submenu for it
+			 NSMenuItem* subcategory = [[NSMenuItem alloc] initWithTitle:key 
+																  action:nil 
+														   keyEquivalent:@""];
+			 [listMenu.submenu addItem:subcategory];
+			 [subcategory setSubmenu:[[NSMenu alloc] initWithTitle:key]];
+			 
+			 // done, create the list
+			 [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
+			  {
+				  [subcategory.submenu addItemWithTitle:obj 
+												 action:selector
+										  keyEquivalent:@""];
+			  }];
+		 }
+	 }];
+	
+	return listMenu;
+}
 
 /**
  * A test setup, using 1 input, 1 output, and a filter.
- * TODO: Bring out to a testing setup
  */
-- (void) testSetupForFilter:(NSString*) filterName
+- (void) createTestForFilter:(NSString*) filterName
 {
 	// Testing factory
 	RawImageInputFilterNode* testNodeIn = (RawImageInputFilterNode*)[self createNodeForNodeName:@"File Input"];
 	
 	// add image file and update
-	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:@"/Users/mcakman/Desktop/DPP_0013.JPG"]];
+	[testNodeIn setFileInputURL:[NSURL fileURLWithPath:TESTING_INPUT_IMAGE_URL]];
 	[testNodeIn.graphView setFrameOrigin:NSMakePoint(0, 200)];
 	
 	// Output
@@ -152,13 +199,12 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		// Put graphics in right places
 		[testModNode.graphView setFrameOrigin:NSMakePoint(200, 100)];
 		
-		//[_outputPaneScrollView autoResizeContentView];
-		
 		
 		// We've connected them, so reset the connect points
 		[testNodeIn.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 		[testModNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 		[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
+		
 	}
 	else
 	{
@@ -169,6 +215,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		[testNodeOut.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 	}
 	
+	[sharedContext smartUpdate];
 }
 
 /**
@@ -193,12 +240,25 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 }
 
 
+/**
+ * Create standard right-click pop-up menu for a graph view
+ */
+- (NSMenu*) popupMenuForGraphView:(UXFilterGraphView*) graphView
+{
+	NSMenu *theMenu = [[NSMenu alloc] initWithTitle:graphView.parentNode.description];
+	
+    [theMenu insertItemWithTitle:theMenu.title action:nil keyEquivalent:@"" atIndex:0];
+    [theMenu insertItem:[NSMenuItem separatorItem] atIndex:1];
+	
+    [theMenu insertItemWithTitle:@"Remove" action:@selector(selectPopupMenuItem:) keyEquivalent:@"" atIndex:2];
+    
+	return theMenu;
+}
+
 #pragma mark - Delegate Methods
 
-- (void) clickedFilterGraph:(UXFilterGraphView*) graphView
-{
-//	NSLog(@"Clicked filter graph %@", graphView);
-	
+- (void) clickedFilterGraph:(UXFilterGraphView*) graphView wasLeftClick:(BOOL)wasLeftClick
+{	
 	// Set up the configuration panel for the graph node
 	currentSelectedNode = graphView.parentNode;
 	
@@ -208,13 +268,27 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	// go through config options and set up edit panels
 	[self setupFilterConfigPanelForCurrentSelection];
 	
+	// read ID to log so you can delete with command line
+	UXLog(@"Selected %@ node ID %p", graphView.parentNode, graphView.parentNode);
+	
+	
 	/*
-	// memory test
-	double delayInSeconds = 0.0001;
-	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-		[self clickedFilterGraph:graphView];
-	});*/
+	 // memory test
+	 double delayInSeconds = 0.0001;
+	 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+	 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+	 [self clickedFilterGraph:graphView];
+	 });*/
+	
+	
+	if(!wasLeftClick) // right click
+	{
+		NSLog(@"right clicked %@", graphView.parentNode);
+		
+		// pop-up menu for the graph appears
+		NSMenu* popup = [self popupMenuForGraphView:graphView];
+		[popup popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
+	}
 }
 
 /**
@@ -306,8 +380,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		
 		
 		else {
-			NSString* errorMessage = [NSString stringWithFormat:@"WARNING: Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]];
-			[AppDelegate log:errorMessage];
+			UXLog(@"WARNING: Config option class '%@' found - not yet implemented in setupFilterConfigPanel... (AppDelegate). So you won't see it in the filter config panel yet.", [obj className]);
 		}
 		
 	}];
@@ -319,13 +392,97 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 
 - (void) selectNodeMenuItem:(NSMenuItem*) item
 {
-	NSLog(@"Menu Item Selected: %@", item);
+	NSLog(@"Node Menu Item Selected: %@", item);
 	
 	[self createNodeForNodeName:item.title];
 }
 
+- (void) selectTestMenuItem:(NSMenuItem*) item
+{
+	NSLog(@"Test Menu Item Selected: %@", item);
+	
+	[self createTestForFilter:item.title];
+}
+
+
+- (void) selectPopupMenuItem:(NSMenuItem*) item
+{
+	NSLog(@"Popup menu item selected: %@", item);
+	
+	if([item.title isEqualTo:@"Remove"])
+	{
+		// remove the selected node
+		[self removeNodeFromScene:currentSelectedNode];
+	}
+}
 
 #pragma mark - Helpers
+
+
+static const float scrollerPaneMargin = 20; // margin between image views
+
+
+/**
+ * Remove a node, along with all it's graphical stuff
+ */
+- (void) removeNodeFromScene:(FilterNode*) node
+{
+	// First remove associated graphics - image output, connect points, connections, graph view..
+	UXFilterGraphView* graph = [node graphView];
+	
+	// removing output image from scroller
+	if([node conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
+	{
+		// remove the image from the output pane and reshuffle the output scroller..
+		NSImageView* imgView = [(id<FilterNodeSeenInOutputPane>)node imageOutputView];
+		float xPos = imgView.frame.origin.x;
+		
+		// move all images to the right of this back by the width+margin
+		float offset = imgView.frame.size.width + scrollerPaneMargin;
+		
+		[[_outputPaneScrollView.documentView subviews] enumerateObjectsUsingBlock:^(NSView* obj, NSUInteger idx, BOOL *stop) {
+			
+			if(obj.frame.origin.x > xPos)
+			{
+				obj.frame = NSOffsetRect(obj.frame, -offset, 0);
+			}
+			
+		}];
+		
+		[imgView removeFromSuperview];
+	}
+	
+	// removing connect points and connections
+	[graph.outputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, UXFilterOutputPointView* obj, BOOL *stop) 
+	{
+		// remove connections attached to the output connect point - nullifying the other end too
+		[obj.connectionViews enumerateObjectsUsingBlock:^(UXFilterConnectionView* connection, BOOL *stop) {
+			connection.inputPointProvider.connectionView = nil;
+			[connection removeFromSuperview];
+		}];
+		
+		// remove the output connect point
+		[obj removeFromSuperview];
+	}];
+	
+	[graph.inputConnectPoints enumerateKeysAndObjectsUsingBlock:^(id key, UXFilterInputPointView* obj, BOOL *stop) {
+		
+		// nullify the other side too!
+		obj.connectionView.outputPointProvider = nil;
+		[obj.connectionView removeFromSuperview];
+		
+		[obj removeFromSuperview];
+	}];
+	
+	[node.graphView removeFromSuperview];
+	
+	
+	// Finally get context to remove the FilterNode
+	[sharedContext removeNodeFromScene:node];
+	
+	// and update!
+	[sharedContext smartUpdate];
+}
 
 /**
  * Create a node from it's listing display name or class, put it in the scene unattached to anything.
@@ -336,10 +493,8 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	
 	if(newNode)
 	{
-		[currentFilterList addObject:newNode];
-		
 		// allow context to pull smartly. It may not be an output node but smart update will still
-		// do dependencies correctly.
+		// do dependencies correctly. Note the context is now the owner of the node.
 		[sharedContext registerOutputNode:newNode]; 
 		
 		// add to graph scroll view
@@ -350,16 +505,14 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		[newNode.graphView resetGraphConnectsOnSuperview:_graphScrollView.documentView];
 		
 		if([newNode conformsToProtocol:@protocol(FilterNodeSeenInOutputPane)])
-		{
-			static const float margin = 20; // margin between image views
-			
+		{	
 			// it needs an output image pane!
 			NSUInteger currentPaneCount = [_outputPaneScrollView.documentView subviews].count;
 			
 			UXHighlightingImageView* outputPane = [(id<FilterNodeSeenInOutputPane>)newNode imageOutputView];
 			[_outputPaneScrollView.documentView addSubview:outputPane];
 			
-			float xPos = (outputPane.frame.size.width + margin) * currentPaneCount;
+			float xPos = (outputPane.frame.size.width + scrollerPaneMargin) * currentPaneCount;
 			[outputPane setFrame:NSOffsetRect(outputPane.frame, xPos, 0)];
 			
 			[_outputPaneScrollView autoResizeContentView];
@@ -382,15 +535,6 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 	[label sizeToFit];
 	
 	return label;
-}
-
-/**
- * Perform full update on node graph
- */
-- (void) doGlobalNodeUpdate
-{
-	[AppDelegate log:@"Updating Filter Graph!"];
-	[sharedContext smartUpdate];
 }
 
 
@@ -425,9 +569,43 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			// 2. update nodes
 			else if([command isEqualToString:@"update"])
 			{
-				[self doGlobalNodeUpdate];
+				[sharedContext smartUpdate];
 			}
 			
+			// 3. remove a node by pointer address
+			else if([command hasPrefix:@"remove "])
+			{
+				NSString* nodeAddress = [command substringFromIndex:@"remove ".length];
+				
+				// find that node
+				__block BOOL gotIt = NO;
+				[sharedContext.registeredNodes enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+					NSString* objAddress = [NSString stringWithFormat:@"%p", obj];
+					
+					if([objAddress isEqualToString:nodeAddress])
+					{
+						[self removeNodeFromScene:obj];
+						gotIt = YES;
+						*stop = YES;
+					}
+				}];
+				
+				
+				if(gotIt)
+				{
+					UXLog(@"Removed node '%@'",nodeAddress);
+				}
+				else
+				{
+					UXLog(@"Could not remove node '%@'..",nodeAddress);
+				}
+			}
+			
+			
+			else
+			{
+				UXLog(@"Command '%@' does nothing..",command);
+			}
 			// clear and return
 			fieldEditor.string = @"";
 		}
@@ -462,7 +640,7 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		}
 		
 		// now do an update!
-		[self doGlobalNodeUpdate];
+		[sharedContext smartUpdate];
 	}
 	
 	return YES;
@@ -491,9 +669,9 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 		// update the on-screen input..
 		[self setupFilterConfigPanelForCurrentSelection];
 		
-		[AppDelegate log:[NSString stringWithFormat:@"Opened new file in %@: '%@'", currentSelectedNode, [[[fileBrowser URLs] firstObject] lastPathComponent] ]];
+		UXLog(@"Opened new file in %@: '%@'", currentSelectedNode, [[[fileBrowser URLs] firstObject] lastPathComponent]);
 		
-		[self doGlobalNodeUpdate];
+		[sharedContext smartUpdate];
 	}
 }
 

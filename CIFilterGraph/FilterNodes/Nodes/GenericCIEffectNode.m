@@ -32,8 +32,7 @@
 		
 		if(filter == nil) 
 		{ 
-			NSString* crashMsg = [NSString stringWithFormat:@"Crash in %s - bad CIFilter name '%@', doesn't exist as a CIFilter!", __PRETTY_FUNCTION__, mFilterName];
-			[AppDelegate log:crashMsg];
+			UXLog(@"Crash in %s - bad CIFilter name '%@', doesn't exist as a CIFilter!", __PRETTY_FUNCTION__, mFilterName);
 			assert(filter != nil);
 		}
 		
@@ -64,10 +63,12 @@
 		
 		if([key isEqualToString:kFilterInputKeyInputImageNode]) // input node case
 		{
+			// TODO: Only using one input filter node for GenericCIEffectNode. Will need to extend for multiple inputs
+			
 			// it's a FilterNode, so the CIFilter will want it's output CIImage
-			[filter setValue:[[obj outputValues] valueForKey:kFilterOutputKeyImage] 
-				  forKeyPath:@"inputImage"];
-			gotInputImage = YES;
+			CIImage* inputImage = [[obj outputValues] valueForKey:kFilterOutputKeyImage];
+			[filter setValue:inputImage forKeyPath:@"inputImage"];
+			gotInputImage = (inputImage != nil);
 		}
 		
 		else 
