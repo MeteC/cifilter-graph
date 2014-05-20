@@ -16,10 +16,12 @@
 /**
  * Create a filter node given the parameters in the listing.
  */
-- (FilterNode*) createNodeWithName:(NSString*) name params:(NSDictionary*) params
+- (FilterNode*) createNodeWithTitle:(NSString *)title forList:(ListedNodeManager *)listMgr
 {
+    NSString* className = listMgr.plistDict[@"nodes"][title][@"class_name"];
+
 	// purely obj-C class based for now.
-	Class nodeClass = NSClassFromString(params[@"class_name"]);
+	Class nodeClass = NSClassFromString(className);
 	return [[nodeClass alloc] init];
 }
 
@@ -29,7 +31,7 @@
  * Provide a menu of all the filter name arrays in the listing, keyed by their subcategories
  * Entries that don't belong in a subcategory must be keyed against "root"
  */
-- (NSDictionary*) provideAvailableFilterNamesForMgr:(ListedNodeManager*) listMgr
+- (NSDictionary*) provideAvailableFilterNamesForList:(ListedNodeManager*) listMgr
 {
 	NSMutableDictionary* retVal = [NSMutableDictionary new];
 	

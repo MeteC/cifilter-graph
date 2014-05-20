@@ -25,15 +25,15 @@
 @protocol ListedNodeManagerDelegate <NSObject>
 
 /**
- * Create a filter node given a name and the parameters in the listing.
+ * Create a filter node given its title.
  */
-- (FilterNode*) createNodeWithName:(NSString*) name params:(NSDictionary*) params;
+- (FilterNode*) createNodeWithTitle:(NSString*) title forList:(ListedNodeManager*) listMgr;
 
 /**
  * Provide a menu of all the filter name arrays in the listing, keyed by their subcategories
  * Entries that don't belong in a subcategory must be keyed against "root"
  */
-- (NSDictionary*) provideAvailableFilterNamesForMgr:(ListedNodeManager*) listMgr;
+- (NSDictionary*) provideAvailableFilterNamesForList:(ListedNodeManager*) listMgr;
 
 @end
 

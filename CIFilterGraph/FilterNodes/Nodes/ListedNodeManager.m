@@ -44,22 +44,15 @@
 
 - (FilterNode*) createFilterNodeForNameKey:(NSString*) nodeName
 {
-	FilterNode* retVal = nil;
-	
-	NSDictionary* nodeDict = _plistDict[@"nodes"][nodeName];
-	
-	if(nodeDict)
-	{
-		// use delegate to create smart FilterNode
-		retVal = [self.delegate createNodeWithName:nodeName params:nodeDict];
-	}
-	
+	// use delegate to create smart FilterNode
+    FilterNode* retVal = [self.delegate createNodeWithTitle:nodeName forList:self];
+		
 	return retVal;
 }
 
 - (NSDictionary*) availableFilterNames
 {
-	return [self.delegate provideAvailableFilterNamesForMgr:self];
+	return [self.delegate provideAvailableFilterNamesForList:self];
 }
 
 @end

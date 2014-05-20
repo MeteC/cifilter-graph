@@ -94,19 +94,32 @@
 /**
  * Create a filter node given the parameters in the listing.
  */
-- (FilterNode*) createNodeWithName:(NSString*) name params:(NSDictionary*) params
+- (FilterNode*) createNodeWithTitle:(NSString*) title forList:(ListedNodeManager *)listMgr
 {
-	GenericCIEffectNode* node = nil;
+	__block GenericCIEffectNode* node = nil;
+    
+    // find the node details by traversing subcategories
+    [listMgr.plistDict[@"nodes"] enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary* subcategory, BOOL *stop) {
+        
+        NSDictionary* nodeDict = subcategory[title];
+        
+        if(nodeDict) // found it
+        {
+            
+            // expecting to find filter_name string and config_options array
+            NSString* filterName	= nodeDict[@"filter_name"];
+            NSArray* configOpts		= nodeDict[@"config_options"];
+            
+            if(filterName)
+            {
+                node = [[GenericCIEffectNode alloc] initWithCIFilterName:filterName configOptions:configOpts];
+                node.displayName = title;
+            }
+            
+            *stop = YES; // we got our node, don't enumerate further
+        }
+    }];
 	
-	// expecting to find filter_name string and config_options array
-	NSString* filterName	= params[@"filter_name"];
-	NSArray* configOpts		= params[@"config_options"];
-	
-	if(filterName)
-	{
-		node = [[GenericCIEffectNode alloc] initWithCIFilterName:filterName configOptions:configOpts];
-		node.displayName = name;
-	}
 	return node;
 }
 
@@ -116,25 +129,21 @@
  * Provide a menu of all the filter name arrays in the listing, keyed by their subcategories
  * Entries that don't belong in a subcategory must be keyed against "root"
  */
-- (NSDictionary*) provideAvailableFilterNamesForMgr:(ListedNodeManager*) listMgr
+- (NSDictionary*) provideAvailableFilterNamesForList:(ListedNodeManager*) listMgr
 {
 	NSMutableDictionary* retVal = [NSMutableDictionary new];
 	
-	[listMgr.plistDict[@"nodes"] enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary* node, BOOL *stop) 
+	[listMgr.plistDict[@"nodes"] enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary* subcategory, BOOL *stop)
 	{
-		// subcategory..
-		NSString* subcategoryString = node[@"subcategory"];
-		NSMutableArray* subcategoryList = [retVal objectForKey:subcategoryString];
-		
-		// first entry in the list - create a new list!
-		if(!subcategoryList) {
-			[retVal setObject:[NSMutableArray new] forKey:subcategoryString];
-			subcategoryList = [retVal objectForKey:subcategoryString];
-		}
-		
-		[subcategoryList addObject:node[@"filter_name"]];
+        NSMutableArray* nameList = [NSMutableArray array];
+        [retVal setObject:nameList forKey:key];
+        
+        [subcategory enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+           
+            [nameList addObject:key]; // key is the name
+            
+        }];
 	}];
-	
 	
 	return retVal;
 }

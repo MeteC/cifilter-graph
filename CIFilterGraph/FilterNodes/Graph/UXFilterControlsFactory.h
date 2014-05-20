@@ -14,6 +14,20 @@
 
 @class FilterNode;
 
+
+/**
+ * My controls delegate extends other protocols...
+ */
+@protocol UXControlsDelegate <NSTextFieldDelegate>
+
+/**
+ * Used for file-browse button clicks
+ */
+- (void) pressFileBrowseButton:(NSButton*) button;
+
+@end
+
+
 @interface UXFilterControlsFactory : NSObject
 
 
@@ -24,7 +38,7 @@
  */
 + (void) createControlPanelFor:(FilterNode*) node 
 				addToSuperview:(NSView*) superview
-			  controlsDelegate:(id<NSTextFieldDelegate>) delegate;
+			  controlsDelegate:(id<UXControlsDelegate>) delegate;
 
 
 @end

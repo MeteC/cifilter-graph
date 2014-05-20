@@ -35,7 +35,7 @@
 
 // Set this to 0 for no test menu
 #define TESTING_MENU_ACCESSIBLE 1
-#define TESTING_INPUT_IMAGE_URL @"/Users/mcakman/Desktop/DPP_0013.JPG"
+#define TESTING_INPUT_IMAGE_URL @"/Users/mete/Desktop/screenshot.png"
 
 
 // UI elements have associated input key NSStrings, so that FilterNodes can respond directly
@@ -546,7 +546,7 @@ static const float scrollerPaneMargin = 20; // margin between image views
 	return YES;
 }
 
-#pragma mark - Button
+#pragma mark - Button Responses
 
 - (void) pressFileBrowseButton:(NSButton*) button
 {
@@ -566,12 +566,17 @@ static const float scrollerPaneMargin = 20; // margin between image views
 		// we got a new file selected. Pass it back to the selected node and do a global update.
 		[currentSelectedNode.inputValues setObject:[[fileBrowser URLs] firstObject] forKey:inputKey];
 		
-		// update the on-screen input..
-		[self setupFilterConfigPanelForCurrentSelection];
+		UXLog(@"Opening new file in %@: '%@'", currentSelectedNode, [[[fileBrowser URLs] firstObject] lastPathComponent]);
 		
-		UXLog(@"Opened new file in %@: '%@'", currentSelectedNode, [[[fileBrowser URLs] firstObject] lastPathComponent]);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            // update the on-screen input and output after a tick so user isn't looking
+            // at frozen file browser dialog.
+            [self setupFilterConfigPanelForCurrentSelection];
+            [sharedContext smartUpdate];
+            
+        });
 		
-		[sharedContext smartUpdate];
 	}
 }
 

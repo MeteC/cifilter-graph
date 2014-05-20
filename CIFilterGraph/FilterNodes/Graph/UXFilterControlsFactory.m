@@ -34,7 +34,9 @@
  * Provide a controls delegate - currently just needs NSTextFieldDelegate but may add protocols
  * as time goes on.
  */
-+ (void) createControlPanelFor:(FilterNode*) node addToSuperview:(NSView*) superview controlsDelegate:(id<NSTextFieldDelegate>) delegate
++ (void) createControlPanelFor:(FilterNode*) node
+                addToSuperview:(NSView*) superview
+              controlsDelegate:(id<UXControlsDelegate>) delegate
 {
 	static const float margin = 10; // margin value
 	__block float currentY = margin; // keep track of vertical layout.
@@ -96,7 +98,7 @@
 			[fileBrowserButton setImage:[NSImage imageNamed:@"NSComputer"]];
 			[superview addSubview:fileBrowserButton];
 			
-			[fileBrowserButton setTarget:self];
+			[fileBrowserButton setTarget:delegate];
 			[fileBrowserButton setAction:@selector(pressFileBrowseButton:)];
 			
 			objc_setAssociatedObject(fileBrowserButton, kUIControlElementAssociatedInputKey, key,
