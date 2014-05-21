@@ -112,6 +112,63 @@
         
         <key>Colour Effect</key>
         <dict>
+            
+            <key>CIColorCrossPolynomial</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorCrossPolynomial</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputRedCoefficients</string>
+                    <string>inputGreenCoefficients</string>
+                    <string>inputBlueCoefficients</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIColorCube</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorCube</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputCubeDimension</string>
+                    <string>inputCubeData</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIColorCubeWithColorSpace</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorCubeWithColorSpace</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputCubeDimension</string>
+                    <string>inputCubeData</string>
+                    <string>inputColorSpace</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
             <key>CIColorInvert</key>
             <dict>
                 <key>filter_name</key>
@@ -126,6 +183,308 @@
                     <string>6.0</string>
                 </dict>
             </dict>
+            
+
+            <key>CIColorMap</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorMap</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputGradientImage</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIColorMonochrome</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorMonochrome</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputColor</string>
+                    <string>inputIntensity</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIColorPosterize</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorPosterize</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputLevels</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIFalseColor</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIFalseColor</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputColor0</string>
+                    <string>inputColor1</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIMaskToAlpha</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMaskToAlpha</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIMaximumComponent</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMaximumComponent</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIMinimumComponent</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMinimumComponent</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectChrome</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectChrome</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectFade</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectFade</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectInstant</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectInstant</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectMono</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectMono</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectNoir</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectNoir</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectProcess</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectProcess</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectTonal</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectTonal</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIPhotoEffectTransfer</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPhotoEffectTransfer</string>
+                <key>config_options</key>
+                <array>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            
+            <key>CISepiaTone</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISepiaTone</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputIntensity</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIVignette</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIVignette</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputRadius</string>
+                    <string>inputIntensity</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+            
+            <key>CIVignetteEffect</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIVignetteEffect</string>
+                <key>config_options</key>
+                <array>
+                    <string>inputCenter</string>
+                    <string>inputIntensity</string>
+                    <string>inputRadius</string>
+                </array>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+
         </dict>
         
         <key>Empty</key>
