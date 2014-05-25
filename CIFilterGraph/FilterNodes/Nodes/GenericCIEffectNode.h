@@ -20,10 +20,9 @@
 @property NSString* displayName; // if different from filterName
 
 /**
- * Common CI Effects can use this to initialise themselves very simply, by providing their filter
- * name, and the CIFilter keys required. Default values will be pulled direct from the filter,
- * so just storing an array of config keys.
+ * Common CI Effects can use this to initialise themselves very simply, by providing their filter name. 
+ * Default values & config keys will be pulled direct from the filter now.
  */
-- (id) initWithCIFilterName:(NSString*) mFilterName configOptions:(NSArray*) mConfigKeys;
+- (id) initWithCIFilterName:(NSString*) mFilterName;
 
 @end

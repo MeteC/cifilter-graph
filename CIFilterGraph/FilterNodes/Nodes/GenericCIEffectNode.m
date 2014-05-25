@@ -21,7 +21,7 @@
  * Common CI Effects can use this to initialise themselves very simply, by providing their filter
  * name, and the configuration options required.
  */
-- (id) initWithCIFilterName:(NSString*) mFilterName configOptions:(NSArray*) mConfigKeys
+- (id) initWithCIFilterName:(NSString*) mFilterName
 {
     self = [super init];
     if (self) {
@@ -38,11 +38,16 @@
 		
 		// defaults
 		[filter setDefaults];
+        
+        // my config keys are the CIFilter's input keys minus the inputImage key
+        NSMutableArray* configKeys = [NSMutableArray arrayWithArray:filter.inputKeys];
+        [configKeys removeObject:@"inputImage"];
 		
-		[mConfigKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		[configKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 			[_inputValues setValue:[filter valueForKey:obj] forKey:obj];
 		}];
 		
+        NSLog(@"Init filter %@ with inputKeys = %@", _filterName, configKeys);
     }
     return self;
 }
@@ -108,11 +113,10 @@
             
             // expecting to find filter_name string and config_options array
             NSString* filterName	= nodeDict[@"filter_name"];
-            NSArray* configOpts		= nodeDict[@"config_options"];
             
             if(filterName)
             {
-                node = [[GenericCIEffectNode alloc] initWithCIFilterName:filterName configOptions:configOpts];
+                node = [[GenericCIEffectNode alloc] initWithCIFilterName:filterName];
                 node.displayName = title;
             }
             
