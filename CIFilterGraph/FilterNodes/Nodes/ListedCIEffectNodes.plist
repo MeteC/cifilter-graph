@@ -5,12 +5,558 @@
 	<key>nodes</key>
 	<dict>
         
-        <key>Blur</key>
+        <key>CICategoryTileEffect</key>
+        <dict>
+            <key>CIAffineClamp</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAffineClamp</string>
+                <key>abstract</key>
+                <string>Performs an affine transform on a source image and then clamps the pixels at the edge of the transformed image, extending them outwards.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIAffineTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAffineTile</string>
+                <key>abstract</key>
+                <string>Applies an affine transform to an image and then tiles the transformed image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIEightfoldReflectedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIEightfoldReflectedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by applying an 8-way reflected symmetry.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIFourfoldReflectedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIFourfoldReflectedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by applying a 4-way reflected symmetry.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIFourfoldRotatedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIFourfoldRotatedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by rotating the source image at increments of 90 degrees.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIFourfoldTranslatedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIFourfoldTranslatedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by applying 4 translation operations.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIGlideReflectedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIGlideReflectedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by translating and smearing the image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIKaleidoscope</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIKaleidoscope</string>
+                <key>abstract</key>
+                <string>Produces a kaleidoscopic image from a source image by applying 12-way symmetry.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIOpTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIOpTile</string>
+                <key>abstract</key>
+                <string>Segments an image, applying any specified scaling and rotation, and then assembles the image again to give an op art appearance.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIParallelogramTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIParallelogramTile</string>
+                <key>abstract</key>
+                <string>Warps an image by reflecting it in a parallelogram, and then tiles the result.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIPerspectiveTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPerspectiveTile</string>
+                <key>abstract</key>
+                <string>Applies a perspective transform to an image and then tiles the result.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISixfoldReflectedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISixfoldReflectedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by applying a 6-way reflected symmetry.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISixfoldRotatedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISixfoldRotatedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by rotating the source image at increments of 60 degrees.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CITriangleKaleidoscope</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CITriangleKaleidoscope</string>
+                <key>abstract</key>
+                <string>Maps a triangular portion of an input image to create a kaleidoscope effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CITriangleTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CITriangleTile</string>
+                <key>abstract</key>
+                <string>Maps a triangular portion of image to a triangular area and then tiles the result.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4.</string>
+                </dict>
+            </dict>
+            <key>CITwelvefoldReflectedTile</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CITwelvefoldReflectedTile</string>
+                <key>abstract</key>
+                <string>Produces a tiled image from a source image by rotating the source image at increments of 30 degrees.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+        </dict>
+        
+        <key>CICategoryCompositeOperation</key>
+        <dict>
+            <key>CIAdditionCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAdditionCompositing</string>
+                <key>abstract</key>
+                <string>Adds color components to achieve a brightening effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIColorBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorBlendMode</string>
+                <key>abstract</key>
+                <string>Uses the luminance values of the background with the hue and saturation values of the source image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIColorBurnBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorBurnBlendMode</string>
+                <key>abstract</key>
+                <string>Darkens the background image samples to reflect the source image samples.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIColorDodgeBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColorDodgeBlendMode</string>
+                <key>abstract</key>
+                <string>Brightens the background image samples to reflect the source image samples.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIDarkenBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDarkenBlendMode</string>
+                <key>abstract</key>
+                <string>Creates composite image samples by choosing the darker samples (from either the source image or the background).</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIDifferenceBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDifferenceBlendMode</string>
+                <key>abstract</key>
+                <string>Subtracts either the source image sample color from the background image sample color, or the reverse, depending on which sample has the greater brightness value.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIExclusionBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIExclusionBlendMode</string>
+                <key>abstract</key>
+                <string>Produces an effect similar to that produced by the CIDifferenceBlendMode filter but with lower contrast.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIHardLightBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHardLightBlendMode</string>
+                <key>abstract</key>
+                <string>Either multiplies or screens colors, depending on the source image sample color.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIHueBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHueBlendMode</string>
+                <key>abstract</key>
+                <string>Uses the luminance and saturation values of the background image with the hue of the input image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CILightenBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILightenBlendMode</string>
+                <key>abstract</key>
+                <string>Creates composite image samples by choosing the lighter samples (either from the source image or the background).</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CILuminosityBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILuminosityBlendMode</string>
+                <key>abstract</key>
+                <string>Uses the hue and saturation of the background image with the luminance of the input image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIMaximumCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMaximumCompositing</string>
+                <key>abstract</key>
+                <string>Computes the maximum value, by color component, of two input images and creates an output image using the maximum values.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIMinimumCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMinimumCompositing</string>
+                <key>abstract</key>
+                <string>Computes the minimum value, by color component, of two input images and creates an output image using the minimum values.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIMultiplyBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMultiplyBlendMode</string>
+                <key>abstract</key>
+                <string>Multiplies the input image samples with the background image samples.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIMultiplyCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIMultiplyCompositing</string>
+                <key>abstract</key>
+                <string>Multiplies the color component of two input images and creates an output image using the multiplied values.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIOverlayBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIOverlayBlendMode</string>
+                <key>abstract</key>
+                <string>Either multiplies or screens the input image samples with the background image samples, depending on the background color.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISaturationBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISaturationBlendMode</string>
+                <key>abstract</key>
+                <string>Uses the luminance and hue values of the background image with the saturation of the input image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIScreenBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIScreenBlendMode</string>
+                <key>abstract</key>
+                <string>Multiplies the inverse of the input image samples with the inverse of the background image samples.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISoftLightBlendMode</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISoftLightBlendMode</string>
+                <key>abstract</key>
+                <string>Either darkens or lightens colors, depending on the input image sample color.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISourceAtopCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISourceAtopCompositing</string>
+                <key>abstract</key>
+                <string>Places the input image over the background image, then uses the luminance of the background image to determine what to show.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISourceInCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISourceInCompositing</string>
+                <key>abstract</key>
+                <string>Uses the background image to define what to leave in the input image, effectively cropping the input image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISourceOutCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISourceOutCompositing</string>
+                <key>abstract</key>
+                <string>Uses the background image to define what to take out of the input image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISourceOverCompositing</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISourceOverCompositing</string>
+                <key>abstract</key>
+                <string>Places the input image over the input background image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+        </dict>
+        
+        <key>CICategoryBlur</key>
         <dict>
             <key>CIBoxBlur</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIBoxBlur</string>
+                <key>abstract</key>
+                <string>Blurs an image using a box-shaped convolution kernel.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -21,6 +567,8 @@
             <dict>
                 <key>filter_name</key>
                 <string>CIDiscBlur</string>
+                <key>abstract</key>
+                <string>Blurs an image using a disc-shaped convolution kernel.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -31,6 +579,8 @@
             <dict>
                 <key>filter_name</key>
                 <string>CIGaussianBlur</string>
+                <key>abstract</key>
+                <string>Spreads source pixels by an amount specified by a Gaussian distribution.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -43,6 +593,8 @@
             <dict>
                 <key>filter_name</key>
                 <string>CIMedianFilter</string>
+                <key>abstract</key>
+                <string>Computes the median value for a group of neighboring pixels and replaces each pixel value with the median.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -53,6 +605,8 @@
             <dict>
                 <key>filter_name</key>
                 <string>CIMotionBlur</string>
+                <key>abstract</key>
+                <string>Blurs an image to simulate the effect of using a camera that moves a specified angle and distance while capturing the image.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -63,6 +617,8 @@
             <dict>
                 <key>filter_name</key>
                 <string>CINoiseReduction</string>
+                <key>abstract</key>
+                <string>Reduces noise using a threshold value to define what is considered noise.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -73,6 +629,8 @@
             <dict>
                 <key>filter_name</key>
                 <string>CIZoomBlur</string>
+                <key>abstract</key>
+                <string>Simulates the effect of zooming the camera while capturing the image.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -81,29 +639,584 @@
             </dict>
         </dict>
         
+        <key>CICategoryDistortionEffect</key>
+        <dict>
+            <key>CIBumpDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIBumpDistortion</string>
+                <key>abstract</key>
+                <string>Creates a bump that originates at a specified point in the image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIBumpDistortionLinear</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIBumpDistortionLinear</string>
+                <key>abstract</key>
+                <string>Creates a concave or convex distortion that originates from a line in the image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CICircleSplashDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICircleSplashDistortion</string>
+                <key>abstract</key>
+                <string>Distorts the pixels starting at the circumference of a circle and emanating outward.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CICircularWrap</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICircularWrap</string>
+                <key>abstract</key>
+                <string>Wraps an image around a transparent circle.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIDisplacementDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDisplacementDistortion</string>
+                <key>abstract</key>
+                <string>Applies the grayscale values of the second image to the first image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIDroste</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDroste</string>
+                <key>abstract</key>
+                <string>Recursively draws a portion of an image in imitation of an M. C. Escher drawing.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.6</string>
+                </dict>
+            </dict>
+            <key>CIGlassDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIGlassDistortion</string>
+                <key>abstract</key>
+                <string>Distorts an image by applying a glass-like texture.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIGlassLozenge</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIGlassLozenge</string>
+                <key>abstract</key>
+                <string>Creates a lozenge-shaped lens and distorts the portion of the image over which the lens is placed.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIHoleDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHoleDistortion</string>
+                <key>abstract</key>
+                <string>Creates a circular area that pushes the image pixels outward, distorting those pixels closest to the circle the most.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CILightTunnel</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILightTunnel</string>
+                <key>abstract</key>
+                <string>Rotates a portion of the input image specified by the center and radius parameters to give a tunneling effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIPinchDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPinchDistortion</string>
+                <key>abstract</key>
+                <string>Creates a rectangular area that pinches source pixels inward, distorting those pixels closest to the rectangle the most.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIStretchCrop</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIStretchCrop</string>
+                <key>abstract</key>
+                <string>Distorts an image by stretching and or cropping it to fit a target size.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.6</string>
+                </dict>
+            </dict>
+            <key>CITorusLensDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CITorusLensDistortion</string>
+                <key>abstract</key>
+                <string>Creates a torus-shaped lens and distorts the portion of the image over which the lens is placed.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CITwirlDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CITwirlDistortion</string>
+                <key>abstract</key>
+                <string>Rotates pixels around a point to give a twirling effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIVortexDistortion</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIVortexDistortion</string>
+                <key>abstract</key>
+                <string>Rotates pixels around a point to simulate a vortex.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+        </dict>
         
+        <key>CICategoryTransition</key>
+        <dict>
+            <key>CIBarsSwipeTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIBarsSwipeTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by passing a bar over the source image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CICopyMachineTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICopyMachineTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by simulating the effect of a copy machine.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIDisintegrateWithMaskTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDisintegrateWithMaskTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another using the shape defined by a mask.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIDissolveTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDissolveTransition</string>
+                <key>abstract</key>
+                <string>Uses a dissolve to transition from one image to another.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIFlashTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIFlashTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by creating a flash.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIModTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIModTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by revealing the target image through irregularly shaped holes.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIPageCurlTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPageCurlTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by simulating a curling page, revealing the new image as the page curls.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIPageCurlWithShadowTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPageCurlWithShadowTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by simulating a curling page, revealing the new image as the page curls.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                </dict>
+            </dict>
+            <key>CIRippleTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIRippleTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by creating a circular wave that expands from the center point, revealing the new image in the wake of the wave.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CISwipeTransition</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISwipeTransition</string>
+                <key>abstract</key>
+                <string>Transitions from one image to another by simulating a swiping action.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+        </dict>
         
+        <key>CICategoryReduction</key>
+        <dict>
+            <key>CIAreaAverage</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAreaAverage</string>
+                <key>abstract</key>
+                <string>Returns a single-pixel image  that contains the average color for the region of interest.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIAreaHistogram</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAreaHistogram</string>
+                <key>abstract</key>
+                <string>Returns a 1D image ((code)inputCount(/code) wide by one pixel high) that contains the component-wise histogram computed for the specified rectangular area.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIAreaMaximum</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAreaMaximum</string>
+                <key>abstract</key>
+                <string>Returns a single-pixel image that contains the maximum color components for the region of interest.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIAreaMaximumAlpha</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAreaMaximumAlpha</string>
+                <key>abstract</key>
+                <string>Returns a single-pixel image that contains the color vector with the maximum alpha value for the region of interest.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIAreaMinimum</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAreaMinimum</string>
+                <key>abstract</key>
+                <string>Returns a single-pixel image that contains the minimum color components for the region of interest.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIAreaMinimumAlpha</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAreaMinimumAlpha</string>
+                <key>abstract</key>
+                <string>Returns a single-pixel image that contains the color vector with the minimum alpha value for the region of interest.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIColumnAverage</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIColumnAverage</string>
+                <key>abstract</key>
+                <string>Returns a 1-pixel high image that contains the average color for each scan column.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIHistogramDisplayFilter</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHistogramDisplayFilter</string>
+                <key>abstract</key>
+                <string>Generates a histogram image from the output of the CIAreaHistogram filter.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                </dict>
+            </dict>
+            <key>CIRowAverage</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIRowAverage</string>
+                <key>abstract</key>
+                <string>Returns a 1-pixel high image that contains the average color for each scan row.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+        </dict>
         
+        <key>CICategoryGenerator</key>
+        <dict>
+            <key>CICheckerboardGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICheckerboardGenerator</string>
+                <key>abstract</key>
+                <string>Generates a checkerboard pattern.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIConstantColorGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIConstantColorGenerator</string>
+                <key>abstract</key>
+                <string>Generates a solid color.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+            <key>CILenticularHaloGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILenticularHaloGenerator</string>
+                <key>abstract</key>
+                <string>Simulates a lens flare.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIQRCodeGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIQRCodeGenerator</string>
+                <key>abstract</key>
+                <string>Generates a Quick Response code (two-dimensional barcode) from input data.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CIRandomGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIRandomGenerator</string>
+                <key>abstract</key>
+                <string>Generates an image of infinite extent whose pixel values are made up of four independent, uniformly-distributed random numbers in the 0 to 1 range.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIStarShineGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIStarShineGenerator</string>
+                <key>abstract</key>
+                <string>Generates a starburst pattern that is similar to a supernova; can be used to simulate a lens flare.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIStripesGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIStripesGenerator</string>
+                <key>abstract</key>
+                <string>Generates a stripe pattern.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISunbeamsGenerator</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISunbeamsGenerator</string>
+                <key>abstract</key>
+                <string>Generates a sun effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+        </dict>
         
-        <key>Colour Adjustment</key>
+        <key>CICategoryColorAdjustment</key>
         <dict>
             <key>CIColorClamp</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorClamp</string>
+                <key>abstract</key>
+                <string>Modifies color values to keep them within a specified range.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
                     <string>10.9</string>
                     <key>IOS</key>
-                    <string>6.0</string>
+                    <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorControls</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorControls</string>
+                <key>abstract</key>
+                <string>Adjusts saturation, brightness, and contrast values.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -112,11 +1225,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorMatrix</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorMatrix</string>
+                <key>abstract</key>
+                <string>Multiplies source color values and adds a bias factor to each color component.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -125,11 +1239,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorPolynomial</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorPolynomial</string>
+                <key>abstract</key>
+                <string>Modifies the pixel values in an image by applying a set of cubic polynomials.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -138,11 +1253,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIExposureAdjust</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIExposureAdjust</string>
+                <key>abstract</key>
+                <string>Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -151,11 +1267,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIGammaAdjust</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIGammaAdjust</string>
+                <key>abstract</key>
+                <string>Adjusts midtone brightness.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -164,11 +1281,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIHueAdjust</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIHueAdjust</string>
+                <key>abstract</key>
+                <string>Changes the overall hue, or tint, of the source pixels.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -177,33 +1295,36 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CILinearToSRGBToneCurve</key>
             <dict>
                 <key>filter_name</key>
                 <string>CILinearToSRGBToneCurve</string>
+                <key>abstract</key>
+                <string>Maps color intensity from a linear gamma curve to the sRGB color space.</string>
                 <key>available</key>
                 <dict>
                     <key>IOS</key>
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CISRGBToneCurveToLinear</key>
             <dict>
                 <key>filter_name</key>
                 <string>CISRGBToneCurveToLinear</string>
+                <key>abstract</key>
+                <string>Maps color intensity from the sRGB color space to a linear gamma curve.</string>
                 <key>available</key>
                 <dict>
                     <key>IOS</key>
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CITemperatureAndTint</key>
             <dict>
                 <key>filter_name</key>
                 <string>CITemperatureAndTint</string>
+                <key>abstract</key>
+                <string>Adapts the reference white point for an image.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -212,11 +1333,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIToneCurve</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIToneCurve</string>
+                <key>abstract</key>
+                <string>Adjusts tone response of the R, G, and B channels of an image. </string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -225,11 +1347,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIVibrance</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIVibrance</string>
+                <key>abstract</key>
+                <string>Adjusts the saturation of an image while keeping pleasing skin tones.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -238,11 +1361,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIWhitePointAdjust</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIWhitePointAdjust</string>
+                <key>abstract</key>
+                <string>Adjusts the reference white point for an image and maps all colors in the source using the new reference.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -251,20 +1375,106 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
-            
         </dict>
         
-        
-        
-        
-        <key>Colour Effect</key>
+        <key>CICategorySharpen</key>
         <dict>
-            
+            <key>CISharpenLuminance</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISharpenLuminance</string>
+                <key>abstract</key>
+                <string>Increases image detail by sharpening.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIUnsharpMask</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIUnsharpMask</string>
+                <key>abstract</key>
+                <string>Increases the contrast of the edges between pixels of different colors in an image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+        </dict>
+        
+        <key>CICategoryGradient</key>
+        <dict>
+            <key>CIGaussianGradient</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIGaussianGradient</string>
+                <key>abstract</key>
+                <string>Generates a gradient that varies from one color to another using a Gaussian distribution.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CILinearGradient</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILinearGradient</string>
+                <key>abstract</key>
+                <string>Generates a gradient that varies along a linear axis between two defined endpoints.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIRadialGradient</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIRadialGradient</string>
+                <key>abstract</key>
+                <string>Generates a gradient that varies radially between two circles having the same center.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CISmoothLinearGradient</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISmoothLinearGradient</string>
+                <key>abstract</key>
+                <string>Generates a gradient that uses an S-curve function to blend colors along a linear axis between two defined endpoints.</string>
+                <key>available</key>
+                <dict>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+        </dict>
+        
+        <key>CICategoryColorEffect</key>
+        <dict>
             <key>CIColorCrossPolynomial</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorCrossPolynomial</string>
+                <key>abstract</key>
+                <string>Modifies the pixel values in an image by applying a set of polynomial cross-products.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -273,11 +1483,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorCube</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorCube</string>
+                <key>abstract</key>
+                <string>Uses a three-dimensional color table to transform the source image pixels.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -286,11 +1497,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorCubeWithColorSpace</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorCubeWithColorSpace</string>
+                <key>abstract</key>
+                <string>Uses a three-dimensional color table to transform the source image pixels and maps the result to a specified color space.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -299,11 +1511,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorInvert</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorInvert</string>
+                <key>abstract</key>
+                <string>Inverts the colors in an image.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -312,12 +1525,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
-
             <key>CIColorMap</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorMap</string>
+                <key>abstract</key>
+                <string>Performs a nonlinear transformation of source color values using mapping values provided in a table.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -326,11 +1539,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorMonochrome</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorMonochrome</string>
+                <key>abstract</key>
+                <string>Remaps colors so they fall within shades of a single color.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -339,11 +1553,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIColorPosterize</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIColorPosterize</string>
+                <key>abstract</key>
+                <string>Remaps red, green, and blue color components to the number of brightness values you specify for each color component.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -352,11 +1567,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIFalseColor</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIFalseColor</string>
+                <key>abstract</key>
+                <string>Maps luminance to a color ramp of two colors.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -365,11 +1581,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIMaskToAlpha</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIMaskToAlpha</string>
+                <key>abstract</key>
+                <string>Converts a grayscale image to a white image that is masked by alpha.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -378,11 +1595,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIMaximumComponent</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIMaximumComponent</string>
+                <key>abstract</key>
+                <string>Returns a grayscale image from max(r,g,b).</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -391,11 +1609,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIMinimumComponent</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIMinimumComponent</string>
+                <key>abstract</key>
+                <string>Returns a grayscale image from min(r,g,b).</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -404,11 +1623,12 @@
                     <string>6.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectChrome</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectChrome</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate vintage photography film with exaggerated color.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -417,11 +1637,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectFade</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectFade</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate vintage photography film with diminished color.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -430,11 +1651,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectInstant</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectInstant</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate vintage photography film with distorted colors.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -443,11 +1665,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectMono</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectMono</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate black-and-white photography film with low contrast.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -456,11 +1679,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectNoir</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectNoir</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate black-and-white photography film with exaggerated contrast.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -469,11 +1693,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectProcess</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectProcess</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate vintage photography film with emphasized cool colors.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -482,11 +1707,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectTonal</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectTonal</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate black-and-white photography film without significantly altering contrast.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -495,11 +1721,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CIPhotoEffectTransfer</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIPhotoEffectTransfer</string>
+                <key>abstract</key>
+                <string>Applies a preconfigured set of effects that imitate vintage photography film with emphasized warm colors.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -508,11 +1735,12 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-            
             <key>CISepiaTone</key>
             <dict>
                 <key>filter_name</key>
                 <string>CISepiaTone</string>
+                <key>abstract</key>
+                <string>Maps the colors of an image to various shades of brown.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -521,11 +1749,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIVignette</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIVignette</string>
+                <key>abstract</key>
+                <string>Reduces the brightness of an image at the periphery.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -534,11 +1763,12 @@
                     <string>5.0</string>
                 </dict>
             </dict>
-            
             <key>CIVignetteEffect</key>
             <dict>
                 <key>filter_name</key>
                 <string>CIVignetteEffect</string>
+                <key>abstract</key>
+                <string>Modifies the brightness of an image around the periphery of a specified region.</string>
                 <key>available</key>
                 <dict>
                     <key>OSX</key>
@@ -547,16 +1777,473 @@
                     <string>7.0</string>
                 </dict>
             </dict>
-
         </dict>
         
-        
-        
-        <key>Empty</key>
+        <key>CICategoryHalftoneEffect</key>
         <dict>
+            <key>CICircularScreen</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICircularScreen</string>
+                <key>abstract</key>
+                <string>Simulates a circular-shaped halftone screen.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CICMYKHalftone</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICMYKHalftone</string>
+                <key>abstract</key>
+                <string>Creates a color, halftoned rendition of the source image, using cyan, magenta, yellow, and black inks over a white page.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIDotScreen</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDotScreen</string>
+                <key>abstract</key>
+                <string>Simulates the dot patterns of a halftone screen.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIHatchedScreen</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHatchedScreen</string>
+                <key>abstract</key>
+                <string>Simulates the hatched pattern of a halftone screen.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CILineScreen</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILineScreen</string>
+                <key>abstract</key>
+                <string>Simulates the line pattern of a halftone screen.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
         </dict>
         
-		
+        <key>CICategoryStylize</key>
+        <dict>
+            <key>CIBlendWithAlphaMask</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIBlendWithAlphaMask</string>
+                <key>abstract</key>
+                <string>Uses alpha values from a mask to interpolate between an image and the background.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CIBlendWithMask</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIBlendWithMask</string>
+                <key>abstract</key>
+                <string>Uses values from a grayscale mask to interpolate between an image and the background.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIBloom</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIBloom</string>
+                <key>abstract</key>
+                <string>Softens edges and applies a pleasant glow to an image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIComicEffect</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIComicEffect</string>
+                <key>abstract</key>
+                <string>Simulates a comic book drawing by outlining edges and applying a color halftone effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIConvolution3X3</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIConvolution3X3</string>
+                <key>abstract</key>
+                <string>Modifies pixel values by performing a 3x3 matrix convolution.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CIConvolution5X5</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIConvolution5X5</string>
+                <key>abstract</key>
+                <string>Modifies pixel values by performing a 5x5 matrix convolution.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CIConvolution7X7</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIConvolution7X7</string>
+                <key>abstract</key>
+                <string>Modifies pixel values by performing a 7x7 matrix convolution.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CIConvolution9Horizontal</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIConvolution9Horizontal</string>
+                <key>abstract</key>
+                <string>Modifies pixel values by performing a 9-element horizontal convolution.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CIConvolution9Vertical</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIConvolution9Vertical</string>
+                <key>abstract</key>
+                <string>Modifies pixel values by performing a 9-element vertical convolution.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.9</string>
+                    <key>IOS</key>
+                    <string>7.0</string>
+                </dict>
+            </dict>
+            <key>CICrystallize</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICrystallize</string>
+                <key>abstract</key>
+                <string>Creates polygon-shaped color blocks by aggregating source pixel-color values.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIDepthOfField</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIDepthOfField</string>
+                <key>abstract</key>
+                <string>Simulates a depth of field effect.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.6</string>
+                </dict>
+            </dict>
+            <key>CIEdges</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIEdges</string>
+                <key>abstract</key>
+                <string>Finds all edges in an image and displays them in color.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIEdgeWork</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIEdgeWork</string>
+                <key>abstract</key>
+                <string>Produces a stylized black-and-white rendition of an image that looks similar to a woodblock cutout.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIGloom</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIGloom</string>
+                <key>abstract</key>
+                <string>Dulls the highlights of an image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIHeightFieldFromMask</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHeightFieldFromMask</string>
+                <key>abstract</key>
+                <string>Produces a continuous three-dimensional, loft-shaped height field from a grayscale mask.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIHexagonalPixellate</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHexagonalPixellate</string>
+                <key>abstract</key>
+                <string>Maps an image to colored hexagons whose color is defined by the replaced pixels.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIHighlightShadowAdjust</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIHighlightShadowAdjust</string>
+                <key>abstract</key>
+                <string>Adjust the tonal mapping of an image while preserving spatial detail.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.7</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+            <key>CILineOverlay</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILineOverlay</string>
+                <key>abstract</key>
+                <string>Creates a sketch that outlines the edges of an image in black.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CIPixellate</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPixellate</string>
+                <key>abstract</key>
+                <string>Makes an image blocky by mapping the image to colored squares whose color is defined by the replaced pixels.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIPointillize</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPointillize</string>
+                <key>abstract</key>
+                <string>Renders the source image in a pointillistic style.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CIShadedMaterial</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIShadedMaterial</string>
+                <key>abstract</key>
+                <string>Produces a shaded image from a height field.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+            <key>CISpotColor</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISpotColor</string>
+                <key>abstract</key>
+                <string>Replaces one or more color ranges with spot colors.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.5</string>
+                </dict>
+            </dict>
+            <key>CISpotLight</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CISpotLight</string>
+                <key>abstract</key>
+                <string>Applies a directional spotlight effect to an image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                </dict>
+            </dict>
+        </dict>
+        
+        <key>CICategoryGeometryAdjustment</key>
+        <dict>
+            <key>CIAffineTransform</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIAffineTransform</string>
+                <key>abstract</key>
+                <string>Applies an affine transform to an image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+            <key>CICrop</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CICrop</string>
+                <key>abstract</key>
+                <string>Applies a crop to an image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+            <key>CILanczosScaleTransform</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CILanczosScaleTransform</string>
+                <key>abstract</key>
+                <string>Produces a high-quality, scaled version of a source image.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIPerspectiveTransform</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPerspectiveTransform</string>
+                <key>abstract</key>
+                <string>Alters the geometry of an image to simulate the observer changing viewing position.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.4</string>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIPerspectiveTransformWithExtent</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIPerspectiveTransformWithExtent</string>
+                <key>abstract</key>
+                <string>Alters the geometry of a portion of an image to simulate the observer changing viewing position.</string>
+                <key>available</key>
+                <dict>
+                    <key>IOS</key>
+                    <string>6.0</string>
+                </dict>
+            </dict>
+            <key>CIStraightenFilter</key>
+            <dict>
+                <key>filter_name</key>
+                <string>CIStraightenFilter</string>
+                <key>abstract</key>
+                <string>Rotates the source image by the specified angle in radians.</string>
+                <key>available</key>
+                <dict>
+                    <key>OSX</key>
+                    <string>10.7</string>
+                    <key>IOS</key>
+                    <string>5.0</string>
+                </dict>
+            </dict>
+        </dict>
+        
+
+        
+
+            
+
 	</dict>
 	<key>meta</key>
 	<dict>
