@@ -164,9 +164,15 @@ const char* const kUIControlElementAssociatedInputKey = "kUIControlElementAssoci
 			 // done, create the list
 			 [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) 
 			  {
+                  NSMenuItem* newItem =
 				  [subcategory.submenu addItemWithTitle:obj 
 												 action:selector
 										  keyEquivalent:@""];
+                  
+                  // Add abstract as tooltip for hovering
+                  NSString* abstract = [mgr abstractForFilterName:obj];
+                  if(abstract)
+                      [newItem setToolTip:abstract];
 			  }];
 		 }
 	 }];

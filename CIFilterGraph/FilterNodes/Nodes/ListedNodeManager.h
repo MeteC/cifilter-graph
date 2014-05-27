@@ -35,6 +35,13 @@
  */
 - (NSDictionary*) provideAvailableFilterNamesForList:(ListedNodeManager*) listMgr;
 
+@optional
+
+/**
+ * (Optionally) provide an abstract for a given filter name.
+ */
+- (NSString*) provideAbstractForFilterName:(NSString*) title forList:(ListedNodeManager*) listMgr;
+
 @end
 
 
@@ -65,5 +72,12 @@
  * Entries that don't sit in a subcategory (rather in the top level) are keyed against "root"
  */
 - (NSDictionary*) availableFilterNames;
+
+/**
+ * Provide an "abstract", or tooltip or description or whatever you want to call it,
+ * describing a node found with the requested title.
+ */
+- (NSString*) abstractForFilterName:(NSString*) filterName;
+
 
 @end

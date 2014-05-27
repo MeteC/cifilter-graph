@@ -55,4 +55,15 @@
 	return [self.delegate provideAvailableFilterNamesForList:self];
 }
 
+
+- (NSString*) abstractForFilterName:(NSString*) filterName
+{
+    if([self.delegate respondsToSelector:@selector(provideAbstractForFilterName:forList:)])
+    {
+        return [self.delegate provideAbstractForFilterName:filterName forList:self];
+    }
+    else return nil;
+}
+
+
 @end

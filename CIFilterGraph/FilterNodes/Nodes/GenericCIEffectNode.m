@@ -152,5 +152,23 @@
 	return retVal;
 }
 
+- (NSString*) provideAbstractForFilterName:(NSString *)title
+                                   forList:(ListedNodeManager *)listMgr
+{
+    __block NSString* retVal = nil;
+    
+    // find the node details by traversing subcategories
+    [listMgr.plistDict[@"nodes"] enumerateKeysAndObjectsUsingBlock:^(id key, NSDictionary* subcategory, BOOL *stop) {
+        
+        NSDictionary* nodeDict = subcategory[title];
+        
+        if(nodeDict) // found it
+        {
+            retVal = nodeDict[@"abstract"];
+        }
+    }];
+    
+    return retVal;
+}
 
 @end
